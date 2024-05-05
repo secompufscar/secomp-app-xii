@@ -1,5 +1,5 @@
 <h1 align="center">
-📄<br>SECOMP APP
+<br>APLICATIVO DA SECOMP
 </h1>
 
 <p  align="center">
