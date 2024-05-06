@@ -11,11 +11,12 @@ export function Button ({title, isLoading = false, ...rest}: Props){
         <TouchableOpacity 
             disabled={isLoading}
             activeOpacity={0.7}
+            className="w-full h-14 bg-white items-center justify-center rounded-lg"
             {...rest}
         >
 
-            {isLoading?(<ActivityIndicator/>):(
-            <Text> 
+            {isLoading?(<ActivityIndicator className= "text-green-800"/>):(
+            <Text className="text-green-800 text-base font-bold uppercase"> 
                 {title}
             </Text>)
             }
