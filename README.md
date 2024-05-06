@@ -45,7 +45,7 @@ Novo aplicativo da Secomp XII
   <br/>
     <div>
       <h1>SECOMP UFSCAR</h1>
-      <sub>Copyright © 2023 - <a href="https://github.com/secompufsca">secompufscar</sub></a>
+      <sub>Copyright © 2024 - <a href="https://github.com/secompufsca">secompufscar</sub></a>
     </div>
     <br/>
     <img src="https://avatars.githubusercontent.com/u/26929251?s=48&v=4" width="40" height="40"/>
