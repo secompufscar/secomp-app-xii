@@ -3,11 +3,13 @@ import SignUp from './signupScreen'
 import Home from './homeScreen'
 import Dashboard from './dashboardScreen'
 import Cronograma from './cronogramaScreen'
+import Navigator from './navigatorScreen'
 
 export {
+    Home,
     Login,
     SignUp,
-    Home,
     Dashboard,
-    Cronograma
+    Cronograma,
+    Navigator
 }

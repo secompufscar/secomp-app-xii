@@ -11,7 +11,6 @@ export default function TabRoutes() {
                 name="HOME"
                 component={Home}
             />
-
             <Tab.Screen
                 name="CRONOGRAMA"
                 component={Cronograma}

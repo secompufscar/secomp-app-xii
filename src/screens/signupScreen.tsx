@@ -10,7 +10,7 @@ import { colors } from "../styles/colors"
 import { Input } from "../components/input"
 import { Button } from "../components/button"
 
-export default function Register() {
+export default function SignUp() {
 
   const navigation = useNavigation<StackTypes>();
   const [name, setName] = useState("")
