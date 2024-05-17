@@ -12,7 +12,7 @@ module.exports = {
           400: "#B6ECD6",
           500: "#9FE6CA",
           600: "#69D8AC",
-          700: "#33C289",
+          700: "#51B68D", //Verde utilizado no figma
           800: "#2AA272",
           900: "#1F7553",
           950: "#16553C"
