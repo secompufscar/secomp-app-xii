@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, ScrollView, SafeAreaView, TouchableOpacity } from 'react-native';
-import { Calendar } from 'react-native-calendars';
 import ScheduleItemComponent from '../components/scheduleItem';
 import { useNavigation } from "@react-navigation/native";
 import { ScheduleItemProps } from '../entities/schedule-item';
