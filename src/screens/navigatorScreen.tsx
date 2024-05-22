@@ -21,6 +21,9 @@ export default function Navigator() {
                 <View className='pt-4'>
                     <Button title="Go to SIGNUP" onPress={() => {navigation.navigate("Signup")}} />
                 </View>
+                <View className='pt-4'>
+                    <Button title="Go to SCHEDULE" onPress={() => {navigation.navigate("Schedule")}} />
+                </View>
             </View>
         </ScrollView>
     );
