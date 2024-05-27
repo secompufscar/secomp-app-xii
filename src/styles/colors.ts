@@ -1,6 +1,14 @@
 export const colors = {
   white: "#ffffff",
-  
+
+  neutral: {
+    200: "#e5e5e5",
+    300: "#D4D4D4",
+    500: "#737373",
+    600: "#525252",
+    700: "#404040"
+  },
+
   green: {
     50: "#EEFCF7",
     100: "#E1F9F2",

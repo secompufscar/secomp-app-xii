@@ -4,6 +4,15 @@ module.exports = {
       colors: {
         white: "#FFFFFF",
         black: "#000000",
+
+        "neutral": {
+          200: "#E5E5E5",
+          300: "#D4D4D4",
+          500: "#737373",
+          600: "#525252",
+          700: "#404040"
+        },
+
         "green": {
           50: "#F7FDFA",
           100: "#EFFBF6",
