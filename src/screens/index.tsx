@@ -1,7 +1,8 @@
 import Login from './loginScreen'
 import SignUp from './signupScreen'
 import Home from './homeScreen'
-import Profile from './profileScreen'
+import UserProfile from './profileScreen'
+import AdminProfile from './profileScreen'
 import Cronograma from './cronogramaScreen'
 import Navigator from './navigatorScreen'
 import Gamificacao from './gamificacaoScreen'
@@ -14,7 +15,8 @@ export {
     SignUp,
     Cronograma,
     Gamificacao,
-    Profile,
+    UserProfile,
+    AdminProfile,
     Navigator,
     Schedule,
     ScheduleDetails

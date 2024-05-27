@@ -1,7 +1,8 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Entypo, MaterialIcons, Ionicons, FontAwesome6, Feather } from '@expo/vector-icons';
 
-import { Home, Cronograma, Gamificacao, Profile} from '../screens';
+import { Home, Cronograma, Gamificacao, UserProfile} from '../screens';
+import { AdminProfile } from '../screens/profileScreen';
 
 import { colors } from "../styles/colors"
 
@@ -53,7 +54,7 @@ export default function TabRoutes() {
             />
             <Tab.Screen
                 name="PERFIL"
-                component={Profile}
+                component={UserProfile}
                 options={{
                     tabBarIcon: ({ size, color }) => (
                         <Ionicons name="person" size={24} color={colors.white} />
