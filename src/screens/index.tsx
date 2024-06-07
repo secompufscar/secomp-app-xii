@@ -8,6 +8,7 @@ import Navigator from './navigatorScreen'
 import Gamificacao from './gamificacaoScreen'
 import Schedule from './scheduleScreen'
 import ScheduleDetails from './scheduleDetailsScreen'
+import MyEvents from './myEvents'
 
 export {
     Home,
@@ -19,5 +20,6 @@ export {
     AdminProfile,
     Navigator,
     Schedule,
-    ScheduleDetails
+    ScheduleDetails,
+    MyEvents,
 }
