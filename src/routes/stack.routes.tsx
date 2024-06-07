@@ -1,3 +1,5 @@
+import React from 'react';
+
 import {NativeStackNavigationProp, createNativeStackNavigator} from '@react-navigation/native-stack'
 
 import TabRoutes from './tab.routes'
@@ -7,7 +9,8 @@ import {
     SignUp,
     Navigator,
     Schedule,
-    ScheduleDetails
+    ScheduleDetails,
+    MyEvents,
 } from '../screens'
 import { ScheduleItemProps } from '../entities/schedule-item';
 
@@ -19,6 +22,7 @@ type StackNavigation = {
     SignUp: undefined;
     Navigator: undefined;
     ScheduleDetails: { item: ScheduleItemProps };
+    MyEvents: undefined;
 };
 
 export type StackTypes = NativeStackNavigationProp<StackNavigation>;
@@ -32,6 +36,7 @@ export default function StackRoutes(){
             <Stack.Screen name="SignUp" component={SignUp}/>
             <Stack.Screen name="Schedule" component={Schedule}/>
             <Stack.Screen name="ScheduleDetails" component={ScheduleDetails}/>
+            <Stack.Screen name="MyEvents" component={MyEvents}/>
         </Stack.Navigator>
     );
 }
