@@ -9,6 +9,7 @@ import Gamificacao from './gamificacaoScreen'
 import Schedule from './scheduleScreen'
 import ScheduleDetails from './scheduleDetailsScreen'
 import MyEvents from './myEvents'
+import Credential from './credentialScreen'
 
 export {
     Home,
@@ -22,4 +23,5 @@ export {
     Schedule,
     ScheduleDetails,
     MyEvents,
+    Credential,
 }

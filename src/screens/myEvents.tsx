@@ -6,7 +6,7 @@ import { ScheduleItemProps } from '../entities/schedule-item';
 import MyEvent from '../components/myEvent';
 
 const formatDate = (date: Date) => {
-    const day = date.getDate().toString().padStart(2, );
+    const day = date.getDate().toString().padStart(2,);
     return `${day}`;
 };
 
@@ -49,28 +49,28 @@ export default function MyEvents() {
                 speaker: "João Teste",
                 date: '12/06/2024',
                 location: "Auditório DC"
-            },{
+            }, {
                 title: "Teste",
                 hour: "10:00",
                 description: "Teste description",
                 speaker: "João Teste",
                 date: '12/06/2024',
                 location: "Auditório DC"
-            },{
+            }, {
                 title: "Teste",
                 hour: "10:00",
                 description: "Teste description",
                 speaker: "João Teste",
                 date: '12/06/2024',
                 location: "Auditório DC"
-            },{
+            }, {
                 title: "Teste",
                 hour: "10:00",
                 description: "Teste description",
                 speaker: "João Teste",
                 date: '12/06/2024',
                 location: "Auditório DC"
-            },{
+            }, {
                 title: "Teste2",
                 hour: "10:00",
                 description: "Teste description",
@@ -130,10 +130,14 @@ export default function MyEvents() {
                 </TouchableOpacity>
             </View>
             {searching && (
-                <Animated.View className='p-4' style={{ transform: [{ translateY: anim.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [-50, 0]
-                }) }] }}>
+                <Animated.View className='p-4' style={{
+                    transform: [{
+                        translateY: anim.interpolate({
+                            inputRange: [0, 1],
+                            outputRange: [-50, 0]
+                        })
+                    }]
+                }}>
                     <TextInput
                         className="bg-gray-200 rounded-md border p-2"
                         placeholder="Buscar eventos"
@@ -146,7 +150,7 @@ export default function MyEvents() {
                 <TouchableOpacity onPress={() => setFuture(1)}>
                     <Text className={`text-xl font-bold text-green-700 ${(future) && "underline"}`}>Futuros</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => setFuture(0)}>      
+                <TouchableOpacity onPress={() => setFuture(0)}>
                     <Text className={`text-xl font-bold text-green-700 ${(!future) && "underline"}`}>Completados</Text>
                 </TouchableOpacity>
             </View>
@@ -162,7 +166,7 @@ export default function MyEvents() {
                     <AntDesign name="filter" size={24} onPress={() => handleSearch("Teste")} />
                 </TouchableOpacity>
             </View>
-            {(future) ? 
+            {(future) ?
                 <ScrollView className="py-5 px-5">
                     <View className='flex-row flex-wrap justify-around'>
                         {items.map((item, index) => (
@@ -174,7 +178,7 @@ export default function MyEvents() {
                         ))}
                     </View>
                 </ScrollView>
-            :   <ScrollView className="py-5 px-5">
+                : <ScrollView className="py-5 px-5">
                     <View className='flex-row flex-wrap justify-around'>
                         {items.map((item, index) => (
                             <View className='pb-4' key={index}>
