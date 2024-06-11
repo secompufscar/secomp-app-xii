@@ -14,9 +14,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "strict": true
-  },
-  "include": ["src"],
-  "exclude": ["node_modules"]
+  }
 }
 
 /*fiz algumas alterações nesse arquivo, principalmente porque o compilador mostrou o

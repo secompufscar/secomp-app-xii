@@ -88,7 +88,7 @@ export default function App(){
         />
         <Stack.Screen 
         name="Notifications" 
-        component={notificationsScreen}
+        component={notificationsScreen} 
         options = {{ 
           title: 'Notificações',
           headerTitleStyle: {
