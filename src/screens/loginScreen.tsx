@@ -1,4 +1,4 @@
-import { View, TouchableOpacity, StatusBar, Alert, Text } from "react-native"
+import { View, TouchableOpacity, StatusBar, Alert, Text, Image } from "react-native"
 import { useState } from "react"
 
 import { useNavigation } from "@react-navigation/native"
@@ -26,11 +26,13 @@ export default function Login() {
 
     return (
 
-        <View className="flex-1 bg-green-800 items-center justify-center p-8">
+        <View className="flex-1 bg-green-700 items-center justify-center p-8">
 
-            <StatusBar barStyle="light-content"/>
+
+            <StatusBar barStyle="light-content" />
 
             <View className="flex-1 w-full mt-12 gap-3 text-center justify-center">
+                
                 <Input>
                     <Entypo name="email"
                         color={colors.white}

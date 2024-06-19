@@ -26,6 +26,8 @@ export const colors = {
     1000: "#0D3022",
     1050: "#0A241A"
   },
+
+  blue: "#445BE6",
 }
 
 

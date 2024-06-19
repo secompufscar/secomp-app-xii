@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Entypo, MaterialIcons, Ionicons, FontAwesome6, Feather } from '@expo/vector-icons';
 
-import { Home, Cronograma, Gamificacao, UserProfile} from '../screens';
+import { Home, Schedule, Gamificacao, UserProfile, Notifications } from '../screens';
 import { AdminProfile } from '../screens/profileScreen';
 
 import { colors } from "../styles/colors"
@@ -13,18 +13,21 @@ export default function TabRoutes() {
         <Tab.Navigator
             screenOptions={{
                 headerShown: false,
+                tabBarActiveTintColor: 'white',
                 tabBarStyle: {
                     backgroundColor: "#51B68D",
                     borderTopWidth: 0,
-                }
+                    height: 70,
+                },
+                tabBarShowLabel: false,
             }}>
 
             <Tab.Screen
                 name="HOME"
                 component={Home}
                 options={{
-                    tabBarIcon: ({ size, color }) => (
-                        <MaterialIcons name="home" size={24} color={colors.white} />
+                    tabBarIcon: ({ focused }) => (
+                        <Ionicons name={focused ? "home" : "home-outline"} size={28} color={colors.white} />
                     )
 
                 }}
@@ -33,35 +36,35 @@ export default function TabRoutes() {
 
             <Tab.Screen
                 name="CRONOGRAMA"
-                component={Cronograma}
+                component={Schedule}
                 options={{
-                    tabBarIcon: ({ size, color }) => (
-                        <Feather name="list" size={24} color={colors.white} />
-                    )
+                    tabBarIcon: ({ focused }) => (
+                        <Ionicons name={focused ? "list" : "list-outline"} size={28} color={colors.white} />
+                    ),
 
                 }}
             />
 
             <Tab.Screen
-                name="GAMIFICAÇÃO"
-                component={Gamificacao}
+                name="NOTIFICAÇÕES"
+                component={Notifications}
                 options={{
-                    tabBarIcon: ({ size, color }) => (
-                        <FontAwesome6 name="ranking-star" size={24} color={colors.white} />
+                    tabBarIcon: ({ focused }) => (
+                        <Ionicons name={focused ? "notifications" : "notifications-outline"} size={28} color={colors.white} />
                     )
-
                 }}
             />
+
             <Tab.Screen
                 name="PERFIL"
                 component={UserProfile}
                 options={{
-                    tabBarIcon: ({ size, color }) => (
-                        <Ionicons name="person" size={24} color={colors.white} />
+                    tabBarIcon: ({ focused }) => (
+                        <Ionicons name={focused ? "person" : "person-outline"} size={28} color={colors.white} />
                     )
-
                 }}
             />
+
         </Tab.Navigator>
     );
 }

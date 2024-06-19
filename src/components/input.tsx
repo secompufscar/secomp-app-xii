@@ -13,7 +13,7 @@ function Input({children}:{children: ReactNode}){
 
 function Field({...rest}: TextInputProps){
     return ( 
-        <TextInput className="flex-1 text-white text-base font-regular align-middle"
+        <TextInput className="flex-1 text-white text-base font-regular align-middle items-center"
         placeholderTextColor={colors.white}
         {...rest}
         />

@@ -3,11 +3,13 @@ import React from 'react';
 import { useState } from 'react';
 import { SafeAreaView, Text, Image, TouchableOpacity, View, ImageBackground, Modal, TouchableWithoutFeedback } from 'react-native';
 
+
 export default function Credential() {
     const [modalVisible, setModalVisible] = useState(false);
 
     return (
-        <SafeAreaView className='items-center'>
+        <SafeAreaView className='items-center bg-white flex-1'>
+
             <View className='w-96 max-w-[90%] h-screen flex-col items-center '>
                 <View className='w-full h-[15%] items-center relative z-10'>
                     <View className='w-24 h-[130%] absolute -bottom-9 bg-black' />

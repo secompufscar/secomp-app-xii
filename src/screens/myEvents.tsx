@@ -119,7 +119,7 @@ export default function MyEvents() {
     // }
 
     return (
-        <View>
+        <View className='bg-white flex-1'>
             <View className={`flex-row justify-start items-center pt-12 ${(!searching) && 'pb-10'} px-4 gap-4`}>
                 <TouchableOpacity>
                     <AntDesign name="arrowleft" size={24} color="#51B68D" onPress={() => navigation.goBack()} />

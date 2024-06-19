@@ -4,13 +4,18 @@ import { StyleSheet, Text, View, SafeAreaView, Dimensions, TouchableOpacity } fr
 
 const { width: screenWidth } = Dimensions.get('window');
 
-export default function notificationsScreen() {
+export default function Notifications() {
 	const marginHorizontal = 6;
 
 	const rectangleWidth = screenWidth - (2 * marginHorizontal);
 
 	return (
 		<SafeAreaView style={styles.container}>
+
+			<View className='flex-row justify-start items-center pt-16 pb-2 px-6 gap-4'>
+				<Text className='text-3xl font-bold text-green-700'>Notficações</Text>
+			</View>
+
 			<View style={styles.rectangles}>
 				<TouchableOpacity>
 					<View style={[styles.rectangle, { width: rectangleWidth }]}>
@@ -53,12 +58,12 @@ const styles = StyleSheet.create({
 		marginTop: 62,
 	},
 	texto1: {
-		color: 'black',
+		color: 'white',
 		fontSize: 14,
 		fontWeight: 'bold',
 	},
 	texto2: {
-		color: 'black',
+		color: 'white',
 		fontSize: 8,
 		fontWeight: 'medium',
 	},

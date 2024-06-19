@@ -9,12 +9,12 @@ export default function UserProfile() {
 	const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
 
 	return (
-		<SafeAreaView>
+		<SafeAreaView className='bg-white flex-1'>
 			<View className='flex-row justify-start items-center pt-16 pb-2 px-6 gap-4'>
 				<Text className='text-3xl font-bold text-green-700'>Perfil</Text>
 			</View>
 
-			<View className='h-44 mx-6 mb-2 py-6 flex-row items-center justify-start space-x-4 border-b-2 border-neutral-200'>
+			<View className='h-44 mx-6 mb-2 py-6 flex-row items-center justify-start space-x-4 border-b-2 border-green-700'>
 				<View className='w-32 h-full rounded-full'>
 					<Image source={require("../../assets/default-user.png")} className='w-full h-32 max-w-full max-h-full object-cover object-center rounded-full' />
 				</View>

@@ -16,7 +16,6 @@ export default function SignUp() {
 	const [name, setName] = useState("")
 	const [email, setEmail] = useState("")
 	const [senha, setSenha] = useState("")
-	const [ra, setRA] = useState("")
 
 	function handleRegister() {
 		if (!name.trim() || !email.trim()) {
@@ -27,7 +26,7 @@ export default function SignUp() {
 	}
 
 	return (
-		<View className="flex-1  bg-green-800 items-center justify-center p-8">
+		<View className="flex-1 bg-green-700 items-center justify-center p-8">
 			<StatusBar barStyle="light-content" />
 
 			<View className="w-full mt-12 gap-3">
@@ -49,17 +48,6 @@ export default function SignUp() {
 						placeholder="E-mail"
 						keyboardType="email-address"
 						onChangeText={setEmail}
-					/>
-				</Input>
-
-				<Input>
-					<Ionicons name="school"
-						color={colors.white}
-						size={20}
-					/>
-					<Input.Field
-						placeholder="Registro acadêmico"
-						onChangeText={setRA}
 					/>
 				</Input>
 
