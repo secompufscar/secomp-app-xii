@@ -1,18 +1,21 @@
 
 import React from 'react';
 import { useState } from 'react';
+import { AntDesign } from '@expo/vector-icons';
 import { SafeAreaView, Text, Image, TouchableOpacity, View, ImageBackground, Modal, TouchableWithoutFeedback } from 'react-native';
+import { ParamListBase, useNavigation } from "@react-navigation/native"
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 
 export default function Credential() {
     const [modalVisible, setModalVisible] = useState(false);
+    const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
 
     return (
         <SafeAreaView className='items-center bg-white flex-1'>
-
             <View className='w-96 max-w-[90%] h-screen flex-col items-center '>
-                <View className='w-full h-[15%] items-center relative z-10'>
-                    <View className='w-24 h-[130%] absolute -bottom-9 bg-black' />
+                <View className='w-full h-[20%] items-center relative'>
+                    <View className='w-24 h-[130%] absolute -bottom-10 bg-black' />
                 </View>
 
                 <View className='w-full h-[68%] items-center flex-col rounded-3xl relative overflow-hidden'>
@@ -34,7 +37,7 @@ export default function Credential() {
                         </ImageBackground>
                     </View>
 
-                    <View className='w-full h-[42%] px-8 bg-white'>
+                    <View className='w-full h-[42%] px-8 bg-white border-x border-b border-neutral-500 rounded-b-3xl'>
                         <View className='w-full h-[53%] flex-col py-9 space-y-1'>
                             <Text className='text-4xl font-bold text-neutral-800' allowFontScaling={false}> Nome </Text>
                             <Text className='text-4xl font-bold text-neutral-800' allowFontScaling={false}> Sobrenome </Text>
@@ -49,11 +52,11 @@ export default function Credential() {
                         </View>
                     </View>
 
-                    <View className='w-24 h-8 absolute top-0 bg-black' />
+                    <View className='w-24 h-10 absolute top-0 bg-black' />
                     <View className='w-28 h-3 rounded-full absolute top-[5%] bg-black' />
                 </View>
 
-                <View className='w-full h-[15%] items-center pt-12'>
+                <View className='w-full h-[15%] items-center pt-8'>
                     <TouchableOpacity onPress={() => { setModalVisible(true) }}>
                         <View className='w-44 h-12 items-center justify-center border border-neutral-300 rounded-xl bg-neutral-200/30'>
                             <Text className='text-base font-medium text-black' allowFontScaling={false}>Ampliar QRCode</Text>
@@ -72,7 +75,18 @@ export default function Credential() {
                         </View>
                     </TouchableOpacity>
                 </Modal>
+            </View>
 
+            <View className='w-screen h-28 px-5 pt-8 items-center flex-row bg-neutral-800/70 absolute top-0 border-b border-neutral-600'>
+                <View className='w-[15%] h-full items-center justify-center'>
+                    <TouchableOpacity>
+                        <AntDesign name="arrowleft" size={24} color="#FFFFFF" onPress={() => navigation.goBack()} />
+                    </TouchableOpacity>
+                </View>
+
+                <View className='w-[70%] h-full items-center justify-center'>
+                    <Text className='text-xl font-medium text-white'>Minha Credencial</Text>
+                </View>
             </View>
         </SafeAreaView>
     );

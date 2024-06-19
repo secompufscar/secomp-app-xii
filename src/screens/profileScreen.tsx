@@ -33,7 +33,7 @@ export default function UserProfile() {
 
 			<View className='h-full m-6 flex-col justify-start space-y-4'>
 				<TouchableOpacity onPress={() => { navigation.navigate('Credential') }}>
-					<View className='grow h-16 flex-row items-center space-x-1 rounded-lg bg-neutral-200/30'>
+					<View className='grow h-16 flex-row items-center space-x-1 rounded-lg bg-neutral-200/20'>
 						<View className='w-14 h-full ml-2 items-center justify-center'>
 							<FontAwesome6 name="id-badge" size={24} color="#51B68D" />
 						</View>
@@ -49,7 +49,7 @@ export default function UserProfile() {
 				</TouchableOpacity>
 
 				<TouchableOpacity onPress={() => { navigation.navigate('MyEvents') }}>
-					<View className='grow h-16 flex-row items-center space-x-1 rounded-lg bg-neutral-200/30'>
+					<View className='grow h-16 flex-row items-center space-x-1 rounded-lg bg-neutral-200/20'>
 						<View className='w-14 h-full ml-2 items-center justify-center'>
 							<MaterialIcons name="event" size={24} color="#51B68D" />
 						</View>
@@ -65,7 +65,7 @@ export default function UserProfile() {
 				</TouchableOpacity>
 
 				<TouchableOpacity onPress={() => { navigation.navigate('') }}>
-					<View className='grow h-16 flex-row items-center space-x-1 rounded-lg bg-neutral-200/30'>
+					<View className='grow h-16 flex-row items-center space-x-1 rounded-lg bg-neutral-200/20'>
 						<View className='w-14 h-full ml-2 items-center justify-center'>
 							<MaterialIcons name="logout" size={24} color="#51B68D" />
 						</View>
@@ -115,7 +115,7 @@ export function AdminProfile() {
 
 			<View className='h-full m-6 flex-col justify-start space-y-4'>
 				<TouchableOpacity onPress={() => { navigation.navigate('') }}>
-					<View className='grow h-16 flex-row items-center space-x-1 rounded-lg bg-neutral-200/30'>
+					<View className='grow h-16 flex-row items-center space-x-1 rounded-lg bg-neutral-200/20'>
 						<View className='w-14 h-full ml-2 items-center justify-center'>
 							<FontAwesome6 name="id-badge" size={24} color="#51B68D" />
 						</View>
@@ -131,7 +131,7 @@ export function AdminProfile() {
 				</TouchableOpacity>
 
 				<TouchableOpacity onPress={() => { navigation.navigate('') }}>
-					<View className='grow h-16 flex-row items-center space-x-1 rounded-lg bg-neutral-200/30'>
+					<View className='grow h-16 flex-row items-center space-x-1 rounded-lg bg-neutral-200/20'>
 						<View className='w-14 h-full ml-2 items-center justify-center'>
 							<MaterialIcons name="qr-code" size={24} color="#51B68D" />
 						</View>
@@ -147,7 +147,7 @@ export function AdminProfile() {
 				</TouchableOpacity>
 
 				<TouchableOpacity onPress={() => { navigation.navigate('') }}>
-					<View className='grow h-16 flex-row items-center space-x-1 rounded-lg bg-neutral-200/30'>
+					<View className='grow h-16 flex-row items-center space-x-1 rounded-lg bg-neutral-200/20'>
 						<View className='w-14 h-full ml-2 items-center justify-center'>
 							<MaterialIcons name="logout" size={24} color="#51B68D" />
 						</View>
