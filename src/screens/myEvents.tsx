@@ -147,30 +147,24 @@ export default function MyEvents() {
                 </Animated.View>
             )}
             <View className="flex-row justify-around mx-12">
-                <TouchableOpacity onPress={() => setFuture(1)}>
+                <TouchableOpacity onPress={() => setFuture(true)}>
                     <Text className={`text-xl font-bold text-green-700 ${(future) && "underline"}`}>Futuros</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => setFuture(0)}>
+                <TouchableOpacity onPress={() => setFuture(false)}>
                     <Text className={`text-xl font-bold text-green-700 ${(!future) && "underline"}`}>Completados</Text>
                 </TouchableOpacity>
             </View>
-            {/* <View className="flex-row gap-2">
-                <Text>Debug</Text>
-                <Text>{currentDayString}</Text>
-                <Text>{searching}</Text>
-                <Text>{search}</Text>
-                <Text>{future}</Text>
-            </View> */}
-            <View className="justify-end items-end px-8 py-2">
+
+            <View className="justify-end items-end px-8 py-2 bg-[#FBFBFB]">
                 <TouchableOpacity>
                     <AntDesign name="filter" size={24} onPress={() => handleSearch("Teste")} />
                 </TouchableOpacity>
             </View>
             {(future) ?
-                <ScrollView className="py-5 px-5">
+                <ScrollView className="py-5 px-5 bg-[#FBFBFB]">
                     <View className='flex-row flex-wrap justify-around'>
                         {items.map((item, index) => (
-                            <View className='pb-4' key={index}>
+                            <View className='pb-4 bg-[#FBFBFB]' key={index}>
                                 <MyEvent
                                     scheduleItem={item}
                                 />
@@ -178,10 +172,10 @@ export default function MyEvents() {
                         ))}
                     </View>
                 </ScrollView>
-                : <ScrollView className="py-5 px-5">
+                : <ScrollView className="py-5 px-5 bg-[#FBFBFB]">
                     <View className='flex-row flex-wrap justify-around'>
                         {items.map((item, index) => (
-                            <View className='pb-4' key={index}>
+                            <View className='pb-4 bg-[#FBFBFB]' key={index}>
                                 <MyEvent
                                     scheduleItem={item}
                                 />
