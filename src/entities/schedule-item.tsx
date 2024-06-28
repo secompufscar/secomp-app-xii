@@ -7,4 +7,5 @@ export type ScheduleItemProps = {
     date: string;
     description: string;
     location: string;
+    subscribed?: boolean;
 }

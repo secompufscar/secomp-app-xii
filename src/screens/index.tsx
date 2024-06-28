@@ -10,6 +10,8 @@ import ScheduleDetails from './scheduleDetailsScreen'
 import MyEvents from './myEvents'
 import Credential from './credentialScreen'
 import Notifications from './notificationsScreen'
+import Registration from './registrationScreen'
+import RegistrationDetails from './registrationDetailsScreen'
 
 export {
     Home,
@@ -24,4 +26,6 @@ export {
     MyEvents,
     Credential,
     Notifications,
+    Registration,
+    RegistrationDetails,
 }
