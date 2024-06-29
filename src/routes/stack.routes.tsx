@@ -13,6 +13,8 @@ import {
     MyEvents,
     Credential,
     Notifications,
+    Registration,
+    RegistrationDetails,
 } from '../screens'
 import { ScheduleItemProps } from '../entities/schedule-item';
 
@@ -24,6 +26,7 @@ type StackNavigation = {
     SignUp: undefined;
     Navigator: undefined;
     ScheduleDetails: { item: ScheduleItemProps };
+    RegistrationDetails: {item: ScheduleItemProps};
     MyEvents: undefined;
     Credential: undefined;
     Notifications: undefined;
@@ -43,6 +46,8 @@ export default function StackRoutes(){
             <Stack.Screen name="MyEvents" component={MyEvents}/>
             <Stack.Screen name="Credential" component={Credential}/>
             <Stack.Screen name="Notifications" component={Notifications}/>
+            <Stack.Screen name="Registration" component={Registration}/>
+            <Stack.Screen name="RegistrationDetails" component={RegistrationDetails}/>
         </Stack.Navigator>
     );
 }

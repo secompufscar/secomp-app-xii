@@ -15,7 +15,7 @@ type ScheduleItemComponentProps = {
 // Componente de ítens do cronogramam, pode ser mudado depois para aceitar mais informações
 export default function MyEvent({scheduleItem, onClick}: ScheduleItemComponentProps) {
     return (
-        <View>
+        <TouchableOpacity onPress={onClick}>
             <View className='flex flex-col justify-start w-[156] bg-[#FFFFFF] rounded-2xl' style={(isIos) ? [styles.shadowProp] : [styles.elevation]}>
                 <View className="p-4">
                     <View className='pb-2'>
@@ -33,7 +33,7 @@ export default function MyEvent({scheduleItem, onClick}: ScheduleItemComponentPr
                     </View>
                 </View>
             </View>
-        </View>
+        </TouchableOpacity>
     )
 }
 
