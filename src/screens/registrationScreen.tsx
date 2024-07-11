@@ -129,11 +129,11 @@ export default function Registration() {
         <View className='bg-white flex-1'>
             <View className={`flex-row justify-start items-center pt-12 ${(!searching) && 'pb-10'} px-4 gap-4`}>
                 <TouchableOpacity>
-                    <AntDesign name="arrowleft" size={24} color="#51B68D" onPress={() => navigation.goBack()} />
+                    <AntDesign name="arrowleft" size={24} color="#445BE6" onPress={() => navigation.goBack()} />
                 </TouchableOpacity>
-                <Text className='text-3xl font-bold text-green-700'>Eventos inscritos</Text>
+                <Text className='text-3xl font-bold text-blue'>Eventos inscritos</Text>
                 <TouchableOpacity className='pl-10'>
-                    <AntDesign name="search1" size={24} color="#51B68D" onPress={handleSearching} />
+                    <AntDesign name="search1" size={24} color="#445BE6" onPress={handleSearching} />
                 </TouchableOpacity>
             </View>
             {searching && (
@@ -155,10 +155,10 @@ export default function Registration() {
             )}
             <View className="flex-row justify-around mx-12">
                 <TouchableOpacity onPress={() => setRegistered(false)}>
-                    <Text className={`text-xl font-bold text-green-700 ${(!registered) && "underline"}`}>Inscreva-se</Text>
+                    <Text className={`text-xl font-bold text-blue ${(!registered) && "underline"}`}>Inscreva-se</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => setRegistered(true)}>
-                    <Text className={`text-xl font-bold text-green-700 ${(registered) && "underline"}`}>Inscritos</Text>
+                    <Text className={`text-xl font-bold text-blue ${(registered) && "underline"}`}>Inscritos</Text>
                 </TouchableOpacity>
             </View>
 
@@ -172,7 +172,7 @@ export default function Registration() {
                     {Object.keys(groupedItems).map((date) => (
                         <View key={date} className="w-full">
                             <View className='flex-1 justify-center items-center pb-6'>
-                                <Text className="text-2xl font-bold text-green-700">{date}</Text>
+                                <Text className="text-2xl font-bold text-blue">{date}</Text>
                             </View>
                             <View className='flex-row justify-center'>
                                 {groupedItems[date].map((item, index) => (
@@ -188,6 +188,8 @@ export default function Registration() {
                     ))}
                 </View>
             </ScrollView>
+
+            
         </View>
     );
 }

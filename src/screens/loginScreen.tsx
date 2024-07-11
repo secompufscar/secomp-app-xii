@@ -26,13 +26,22 @@ export default function Login() {
 
     return (
 
-        <View className="flex-1 bg-green-700 items-center justify-center p-8">
-
+        <View className="flex-1 bg-blue items-center justify-center">
+            
+            <StatusBar barStyle="light-content" />
+            
+            <View className="items-center">
+                <Image
+                    source={require("../../assets/logo.png")}
+                    className="h-20"
+                    resizeMode="contain"
+                />
+            </View>
 
             <StatusBar barStyle="light-content" />
 
-            <View className="flex-1 w-full mt-12 gap-3 text-center justify-center">
-                
+            <View className="w-full gap-2 text-center justify-center p-8">
+
                 <Input>
                     <Entypo name="email"
                         color={colors.white}

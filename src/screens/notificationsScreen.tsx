@@ -13,7 +13,7 @@ export default function Notifications() {
 		<SafeAreaView style={styles.container}>
 
 			<View className='flex-row justify-start items-center pt-16 pb-2 px-6 gap-4'>
-				<Text className='text-3xl font-bold text-green-700'>Notficações</Text>
+				<Text className='text-3xl font-bold text-blue'>Notficações</Text>
 			</View>
 
 			<View style={styles.rectangles}>
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
 	},
 	rectangle: {
 		height: 81,
-		backgroundColor: '#51B68D',
+		backgroundColor: '#445BE6',
 		borderRadius: 5,
 		marginBottom: 32,
 		marginHorizontal: 6,

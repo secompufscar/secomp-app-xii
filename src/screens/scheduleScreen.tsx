@@ -56,7 +56,7 @@ export default function Schedule() {
             <View>
 
                 <View className='flex-row justify-start items-center pt-16 pb-2 px-6 gap-4'>
-                    <Text className='text-3xl font-bold text-green-700'>Cronograma</Text>
+                    <Text className='text-3xl font-bold text-blue'>Cronograma</Text>
                 </View>
 
                 <View className='px-6 pt-6'>  

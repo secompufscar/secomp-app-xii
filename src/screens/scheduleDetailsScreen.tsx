@@ -19,9 +19,9 @@ export default function ScheduleDetails() {
         <View>
             <View className='flex-row justify-start items-center pt-12 pb-6 px-4 gap-4'>
                 <TouchableOpacity>
-                    <AntDesign name="arrowleft" size={24} color="#51B68D" onPress={() => navigation.goBack()} />
+                    <AntDesign name="arrowleft" size={24} color="#445BE6" onPress={() => navigation.goBack()} />
                 </TouchableOpacity>
-                <Text className='text-3xl font-bold text-green-700'>Detalhes</Text>
+                <Text className='text-3xl font-bold text-blue'>Detalhes</Text>
             </View>
             <View>
                 <Text className="text-2xl text-center font-bold">{item.title}</Text>

@@ -11,7 +11,7 @@ export function ButtonHome ({title, isLoading = false, ...rest}: Props){
         <TouchableOpacity 
             disabled={isLoading}
             activeOpacity={0.7}
-            className="w-5/6 h-14 bg-green-700 items-center justify-center rounded-full"
+            className="w-5/6 h-14 bg-blue items-center justify-center rounded-lg"
             {...rest}
         >
 

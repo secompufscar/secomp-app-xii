@@ -36,7 +36,7 @@ export default function WeekCalendar({ selectedDate, onDateSelect }: WeekCalenda
                 return (
                     <TouchableOpacity
                         key={index}
-                        className={`flex justify-center items-center w-12 h-12 ${isSelected ? 'bg-[#51B68D] rounded-full' : ''}`}
+                        className={`flex justify-center items-center w-12 h-12 ${isSelected ? 'bg-[#445BE6] rounded-full' : ''}`}
                         onPress={() => onDateSelect(dateString)}
                     >
                         <Text className={`${isSelected ? "text-white" : 'text-black'}`}>

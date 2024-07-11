@@ -16,7 +16,7 @@ export function Button ({title, isLoading = false, ...rest}: Props){
         >
 
             {isLoading?(<ActivityIndicator className= "text-blue"/>):(
-            <Text className="text-green-700 text-base font-bold uppercase"> 
+            <Text className="text-blue text-base font-bold uppercase"> 
                 {title}
             </Text>)
             }

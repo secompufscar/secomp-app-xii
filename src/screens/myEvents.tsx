@@ -122,11 +122,11 @@ export default function MyEvents() {
         <View className='bg-white flex-1'>
             <View className={`flex-row justify-start items-center pt-12 ${(!searching) && 'pb-10'} px-4 gap-4`}>
                 <TouchableOpacity>
-                    <AntDesign name="arrowleft" size={24} color="#51B68D" onPress={() => navigation.goBack()} />
+                    <AntDesign name="arrowleft" size={24} color="#445BE6" onPress={() => navigation.goBack()} />
                 </TouchableOpacity>
-                <Text className='text-3xl font-bold text-green-700'>Eventos inscritos</Text>
+                <Text className='text-3xl font-bold text-blue'>Eventos inscritos</Text>
                 <TouchableOpacity className='pl-10'>
-                    <AntDesign name="search1" size={24} color="#51B68D" onPress={handleSearching} />
+                    <AntDesign name="search1" size={24} color="#445BE6" onPress={handleSearching} />
                 </TouchableOpacity>
             </View>
             {searching && (
@@ -148,23 +148,23 @@ export default function MyEvents() {
             )}
             <View className="flex-row justify-around mx-12">
                 <TouchableOpacity onPress={() => setFuture(true)}>
-                    <Text className={`text-xl font-bold text-green-700 ${(future) && "underline"}`}>Futuros</Text>
+                    <Text className={`text-xl font-bold text-blue ${(future) && "underline"}`}>Futuros</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => setFuture(false)}>
-                    <Text className={`text-xl font-bold text-green-700 ${(!future) && "underline"}`}>Completados</Text>
+                    <Text className={`text-xl font-bold text-blue ${(!future) && "underline"}`}>Completados</Text>
                 </TouchableOpacity>
             </View>
 
-            <View className="justify-end items-end px-8 py-2 bg-[#FBFBFB]">
+            <View className="justify-end items-end px-8 py-2 bg-white">
                 <TouchableOpacity>
                     <AntDesign name="filter" size={24} onPress={() => handleSearch("Teste")} />
                 </TouchableOpacity>
             </View>
             {(future) ?
-                <ScrollView className="py-5 px-5 bg-[#FBFBFB]">
+                <ScrollView className="py-5 px-5 bg-white">
                     <View className='flex-row flex-wrap justify-around'>
                         {items.map((item, index) => (
-                            <View className='pb-4 bg-[#FBFBFB]' key={index}>
+                            <View className='pb-4 bg-white' key={index}>
                                 <MyEvent
                                     scheduleItem={item}
                                 />
@@ -172,10 +172,10 @@ export default function MyEvents() {
                         ))}
                     </View>
                 </ScrollView>
-                : <ScrollView className="py-5 px-5 bg-[#FBFBFB]">
+                : <ScrollView className="py-5 px-5 bg-white">
                     <View className='flex-row flex-wrap justify-around'>
                         {items.map((item, index) => (
-                            <View className='pb-4 bg-[#FBFBFB]' key={index}>
+                            <View className='pb-4 bg-white' key={index}>
                                 <MyEvent
                                     scheduleItem={item}
                                 />

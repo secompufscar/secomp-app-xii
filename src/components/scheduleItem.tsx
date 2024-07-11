@@ -11,7 +11,7 @@ type ScheduleItemComponentProps = {
 export default function ScheduleItemComponent({scheduleItem, onClick}: ScheduleItemComponentProps) {
     return (
         <TouchableOpacity onPress={onClick}>
-            <View className='flex flex-row justify-start min-w-full items-center p-4 rounded-md bg-green-700'>
+            <View className='flex flex-row justify-start min-w-full items-center p-4 rounded-md bg-blue'>
                 <View className='pl-8 pr-4'>
                     <Text className='text-white'>{scheduleItem.hour}</Text>
                 </View>

@@ -26,10 +26,20 @@ export default function SignUp() {
 	}
 
 	return (
-		<View className="flex-1 bg-green-700 items-center justify-center p-8">
+		<View className="flex-1 bg-blue items-center justify-center">
 			<StatusBar barStyle="light-content" />
 
-			<View className="w-full mt-12 gap-3">
+            <View className="items-center">
+                <Image
+                    source={require("../../assets/logo.png")}
+                    className="h-20"
+                    resizeMode="contain"
+                />
+            </View>
+			
+
+
+			<View className="w-full gap-2 text-center justify-center p-8">
 				<Input>
 					<FontAwesome5
 						name="user-alt"
@@ -71,6 +81,8 @@ export default function SignUp() {
 				</TouchableOpacity>
 
 			</View>
+
+
 		</View>
 	)
 }

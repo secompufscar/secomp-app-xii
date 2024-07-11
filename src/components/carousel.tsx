@@ -39,7 +39,7 @@ const MultiCardCarousel = () => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + cards.length) % cards.length);
   };
 
-  if (currentIndex > cards.length - 3) {
+  if (currentIndex > cards.length - 2) {
     setCurrentIndex(0);
   }
 
@@ -49,7 +49,7 @@ const MultiCardCarousel = () => {
       <View className='relative w-11/12'>
 
         <View className='flex-row'>
-          {cards.slice(currentIndex, currentIndex + 3).map((card, index) => (
+          {cards.slice(currentIndex, currentIndex + 2).map((card, index) => (
             <View style={styles.card} key={index}>
               <Image style={styles.cardImage} source={{ uri: card.image }} />
               <Text className='font-bold justify-center text-center'>{card.title}</Text>
@@ -57,13 +57,14 @@ const MultiCardCarousel = () => {
           ))}
         </View>
 
+      
         <View className="flex flex-row justify-between absolute w-full top-1/2 -mt-4">
           <TouchableOpacity className='items-center'onPress={handlePrev}>
-            <AntDesign name="leftcircle" size={25} color={colors.green[700]}  />
+            <AntDesign name="leftcircle" size={25} color={colors.blue}  />
           </TouchableOpacity>
 
           <TouchableOpacity onPress={handleNext}>
-           <AntDesign name="rightcircle" size={25} color={colors.green[700]} />
+           <AntDesign name="rightcircle" size={25} color={colors.blue} />
           </TouchableOpacity>
         </View>
         
@@ -75,19 +76,21 @@ const MultiCardCarousel = () => {
 const styles = StyleSheet.create({
   card: {
     flex: 1,
-    width: width / 3.5,
+    width: width / 2.2,
     padding: 8,
+    paddingBottom:10,
     backgroundColor: 'white',
     borderRadius: 8,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 4,
-    elevation: 5,
+    elevation: 7,
+    marginHorizontal: 7, 
   },
   cardImage: {
     width: '100%',
-    height: 100,
+    height: 150,
     marginBottom: 8,
     borderRadius: 8,
   },

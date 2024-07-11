@@ -15,7 +15,7 @@ export default function TabRoutes() {
                 headerShown: false,
                 tabBarActiveTintColor: 'white',
                 tabBarStyle: {
-                    backgroundColor: "#51B68D",
+                    backgroundColor: "#445BE6",
                     borderTopWidth: 0,
                     height: 70,
                 },

@@ -11,16 +11,16 @@ export default function UserProfile() {
 	return (
 		<SafeAreaView className='bg-white flex-1'>
 			<View className='flex-row justify-start items-center pt-16 pb-2 px-6 gap-4'>
-				<Text className='text-3xl font-bold text-green-700'>Perfil</Text>
+				<Text className='text-3xl font-bold text-blue'>Perfil</Text>
 			</View>
 
-			<View className='h-44 mx-6 mb-2 py-6 flex-row items-center justify-start space-x-4 border-b-2 border-green-700'>
+			<View className='h-44 mx-6 mb-2 py-6 flex-row items-center justify-start space-x-4 border-b-2 border-blue'>
 				<View className='w-32 h-full rounded-full'>
 					<Image source={require("../../assets/default-user.png")} className='w-full h-32 max-w-full max-h-full object-cover object-center rounded-full' />
 				</View>
 
 				<View className='grow flex-col justify-start'>
-					<Text className='text-xl font-semibold text-green-700 pb-0.5'>Usuário</Text>
+					<Text className='text-xl font-semibold text-blue pb-0.5'>Usuário</Text>
 					<Text className='text-sm text-neutral-500'>youremail@gmail.com</Text>
 				</View>
 
@@ -35,7 +35,7 @@ export default function UserProfile() {
 				<TouchableOpacity onPress={() => { navigation.navigate('Credential') }}>
 					<View className='grow h-16 flex-row items-center space-x-1 rounded-lg bg-neutral-200/20'>
 						<View className='w-14 h-full ml-2 items-center justify-center'>
-							<FontAwesome6 name="id-badge" size={24} color="#51B68D" />
+							<FontAwesome6 name="id-badge" size={24} color="#445BE6" />
 						</View>
 
 						<View className='grow'>
@@ -51,7 +51,7 @@ export default function UserProfile() {
 				<TouchableOpacity onPress={() => { navigation.navigate('MyEvents') }}>
 					<View className='grow h-16 flex-row items-center space-x-1 rounded-lg bg-neutral-200/20'>
 						<View className='w-14 h-full ml-2 items-center justify-center'>
-							<MaterialIcons name="event" size={24} color="#51B68D" />
+							<MaterialIcons name="event" size={24} color="#445BE6" />
 						</View>
 
 						<View className='grow'>
@@ -67,7 +67,7 @@ export default function UserProfile() {
 				<TouchableOpacity onPress={() => { navigation.navigate('') }}>
 					<View className='grow h-16 flex-row items-center space-x-1 rounded-lg bg-neutral-200/20'>
 						<View className='w-14 h-full ml-2 items-center justify-center'>
-							<MaterialIcons name="logout" size={24} color="#51B68D" />
+							<MaterialIcons name="logout" size={24} color="#445BE6" />
 						</View>
 
 						<View className='grow'>
