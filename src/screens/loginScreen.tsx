@@ -2,9 +2,11 @@ import { View, TouchableOpacity, StatusBar, Alert, Text, Image } from "react-nat
 import { useState } from "react"
 
 import { useNavigation } from "@react-navigation/native"
-import { StackTypes } from '../routes/stack.routes';
-
 import Entypo from '@expo/vector-icons/Entypo';
+
+import { getProfileById, setProfile } from "../services/users"
+
+import { StackTypes } from '../routes/stack.routes';
 
 import { Input } from "../components/input";
 import { Button } from "../components/button";
@@ -17,11 +19,22 @@ export default function Login() {
     const [email, setEmail] = useState("")
     const [senha, setSenha] = useState("")
 
-    function handleLogin() {
-        if (!email.trim() || !senha.trim())
-            return Alert.alert("Login", "Preencha todos os campos")
+    const handleLogin = async () => {
+        if (!email.trim() || !senha.trim()) {
+            Alert.alert("Login", "Preencha todos os campos")
 
-        navigation.navigate("Home");
+            return
+        }
+
+        try {
+            const data = await getProfileById("userId")
+
+            await setProfile(data)
+
+            navigation.navigate("Home");
+        } catch(error) {
+            Alert.alert("Login", "Não foi possível efetuar o login, tente novamente mais tarde!")
+        }
     }
 
     return (
