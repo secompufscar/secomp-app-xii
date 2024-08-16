@@ -12,10 +12,13 @@ import { Input } from "../components/input";
 import { Button } from "../components/button";
 
 import { colors } from "../styles/colors"
+import { useAuth } from "../hooks/AuthContext";
+import api from "../services/api";
 
 export default function Login() {
-
     const navigation = useNavigation<StackTypes>();
+    const { setUser }: any = useAuth()
+
     const [email, setEmail] = useState("")
     const [senha, setSenha] = useState("")
 
@@ -27,11 +30,9 @@ export default function Login() {
         }
 
         try {
-            const data = await getProfileById("userId")
-
-            await setProfile(data)
-
-            navigation.navigate("Home");
+            const response = await api.post("/login", {
+                
+            })
         } catch(error) {
             Alert.alert("Login", "Não foi possível efetuar o login, tente novamente mais tarde!")
         }
@@ -60,6 +61,7 @@ export default function Login() {
                         color={colors.white}
                         size={20}
                     />
+
                     <Input.Field
                         placeholder="E-mail"
                         onChangeText={setEmail}

@@ -19,7 +19,7 @@ export default function TabRoutes() {
                     borderTopWidth: 0,
                     height: 70,
                 },
-                tabBarShowLabel: false,
+                tabBarShowLabel: false
             }}>
 
             <Tab.Screen
