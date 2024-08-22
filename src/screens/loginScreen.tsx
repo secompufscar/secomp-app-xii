@@ -4,8 +4,6 @@ import { useState } from "react"
 import { useNavigation } from "@react-navigation/native"
 import Entypo from '@expo/vector-icons/Entypo';
 
-import { getProfileById, setProfile } from "../services/users"
-
 import { StackTypes } from '../routes/stack.routes';
 
 import { Input } from "../components/input";
@@ -13,14 +11,16 @@ import { Button } from "../components/button";
 
 import { colors } from "../styles/colors"
 import { useAuth } from "../hooks/AuthContext";
-import api from "../services/api";
+
+import {login} from "../services/users";
 
 export default function Login() {
     const navigation = useNavigation<StackTypes>();
-    const { setUser }: any = useAuth()
+    const { signIn }: any = useAuth()
 
     const [email, setEmail] = useState("")
     const [senha, setSenha] = useState("")
+    const [isLoading, setIsLoading] = useState(false)
 
     const handleLogin = async () => {
         if (!email.trim() || !senha.trim()) {
@@ -29,14 +29,24 @@ export default function Login() {
             return
         }
 
+        setIsLoading(true)
+
         try {
-            const response = await api.post("/login", {
-                
-            })
+            const data = await login({email, senha})
+
+            await signIn(data)
+
+            console.log(data)
+
         } catch(error) {
-            Alert.alert("Login", "Não foi possível efetuar o login, tente novamente mais tarde!")
+            Alert.alert("Login", "Não foi possível efetuar o login") //Precisa tratar erros específicos como senha ou email incorretos
+            console.log(error)
+        } finally {
+            setIsLoading(false)
         }
     }
+        
+
 
     return (
 

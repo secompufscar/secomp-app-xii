@@ -1,26 +1,47 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Image } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Image, FlatList} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { useNavigation } from "@react-navigation/native"
+import { ParamListBase, useNavigation } from "@react-navigation/native"
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackTypes } from '../routes/stack.routes';
 
 import { ButtonHome } from "../components/buttonHome";
 
 import MultiCardCarousel from "../components/carousel"
 
+import {getActivities} from "../services/activities"
+import { useEffect } from 'react';
+
+import { useAuth } from "../hooks/AuthContext";
+
+
+import { useState } from "react"
+
 
 export default function Home() {
-    const navigation = useNavigation<StackTypes>();
+	const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
+    const {user:{user}}: any = useAuth()
+    
+     //  const [activities, setActivities] = useState<Activity[]>([]);
+
+    /*useEffect(() => {
+        const getActivitiesData = async () => {
+            const data = await getActivities();
+            setActivities(data);
+        };
+    
+        getActivitiesData();
+      }, []);*/
 
     return (
+
         <SafeAreaView className='bg-white flex-1'>
             <ScrollView className='flex-1'>
 
                 <View className='flex-row  items-center  pt-12 pb-2 px-4 gap-4'>
-                    <Text className='text-3xl font-bold text-blue'>Olá, Usuário!</Text>
+                    <Text className='text-3xl font-bold text-blue'>Olá, {user.nome}!</Text>
                 </View>
-
 
                 <View className='flex-row items-center justify-center pt-5 px-4 gap-4 space-x-4 border-b-2 border-blue mx-6 mb-2 py-4'>
                     <Text className='text-xl font-bold text-blue'>
@@ -41,7 +62,8 @@ export default function Home() {
                 </View>
 
                 <View className='items-center justify-center pb-7'>
-                    <ButtonHome title="INSCREVA-SE NOS EVENTOS!" onPress={() => { navigation.navigate("Home") }} />
+                    <ButtonHome title="INSCREVA-SE NOS EVENTOS!" onPress={() => { navigation.navigate("Registration") }} />
+
                 </View>
 
 
@@ -58,4 +80,3 @@ export default function Home() {
         </SafeAreaView>
     );
 }
-

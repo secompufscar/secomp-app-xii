@@ -9,20 +9,44 @@ import { colors } from "../styles/colors"
 
 import { Input } from "../components/input"
 import { Button } from "../components/button"
+import { useAuth } from "../hooks/AuthContext";
+
+import {signup} from "../services/users";
+
 
 export default function SignUp() {
 
 	const navigation = useNavigation<StackTypes>();
-	const [name, setName] = useState("")
+	const [nome, setNome] = useState("")
 	const [email, setEmail] = useState("")
 	const [senha, setSenha] = useState("")
+	const [isLoading, setIsLoading] = useState(false)
 
-	function handleRegister() {
-		if (!name.trim() || !email.trim()) {
+	
+	const { signUp }: any = useAuth()
+
+	const handleRegister = async () =>  {
+		if (!nome.trim() || !email.trim() || !senha.trim()) {
 			return Alert.alert("Inscrição", "Preencha todos os campos!")
 		}
 
 		navigation.navigate("Home")
+
+		setIsLoading(true)
+
+        try {
+        	const data = await signup({nome, email, senha})
+
+           	await signUp(data)
+
+        	console.log(data)
+
+        } catch(error) {
+            Alert.alert("Registro", "Não foi possível efetuar o registro") //Precisa tratar erros específicos como senha ou email incorretos
+            console.log(error)
+        } finally {
+            setIsLoading(false)
+        }
 	}
 
 	return (
@@ -46,7 +70,7 @@ export default function SignUp() {
 						color={colors.white}
 						size={20}
 					/>
-					<Input.Field placeholder="Nome completo" onChangeText={setName} />
+					<Input.Field placeholder="Nome completo" onChangeText={setNome} />
 				</Input>
 
 				<Input>

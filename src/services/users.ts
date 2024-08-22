@@ -1,17 +1,34 @@
 import api from './api'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// GET PARAMETERS EXAMPLE
 
-export const getProfileById = async (id: string): Promise<User> => {
-    const { data } = await api.get(`/getProfile/${id}`)
+type Login = ({
+    email: string
+    senha: string
+})
 
-    return data
-}
+type SignUp = ({
+    nome: string
+    email: string
+    senha: string
+})
 
-// POST EXAMPLE
+export const login = async (data: Login): Promise<User> => {
+    const response = await api.post("/users/login", data)
 
-export const setProfile = async (data: User): Promise<User> => {
-    const response = await api.post<User>('/setProfile')
+    const { token } = response.data;
+        
+    // Armazenar o token em AsyncStorage
+    await AsyncStorage.setItem('userToken', token);
 
     return response.data
 }
+
+export const signup = async (data: SignUp): Promise<User> => {
+    const response = await api.post("/users/signup", data)
+
+    return response.data
+}
+
+
+  

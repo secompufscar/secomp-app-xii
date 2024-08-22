@@ -5,11 +5,12 @@ import { AntDesign } from '@expo/vector-icons';
 import { SafeAreaView, Text, Image, TouchableOpacity, View, ImageBackground, Modal, TouchableWithoutFeedback } from 'react-native';
 import { ParamListBase, useNavigation } from "@react-navigation/native"
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-
+import { useAuth } from "../hooks/AuthContext";
 
 export default function Credential() {
     const [modalVisible, setModalVisible] = useState(false);
     const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
+	const {user:{user}}: any = useAuth()
 
     return (
         <SafeAreaView className='items-center bg-white flex-1'>
@@ -39,12 +40,7 @@ export default function Credential() {
 
                     <View className='w-full h-[42%] px-8 bg-white border-x border-b border-neutral-500 rounded-b-3xl'>
                         <View className='w-full h-[53%] flex-col py-9 space-y-1'>
-                            <Text className='text-4xl font-bold text-neutral-800' allowFontScaling={false}> Nome </Text>
-                            <Text className='text-4xl font-bold text-neutral-800' allowFontScaling={false}> Sobrenome </Text>
-                        </View>
-
-                        <View className='w-full h-10 px-2'>
-                            <Text className='text-lg font-medium text-neutral-500' allowFontScaling={false}> Estudante </Text>
+                            <Text className='text-4xl font-bold text-neutral-800' allowFontScaling={false}> {user.nome} </Text>
                         </View>
 
                         <View className='w-[50%] h-[20%] items-end px-1 self-end'>

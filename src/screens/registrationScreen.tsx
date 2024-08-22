@@ -26,7 +26,7 @@ export default function Registration() {
     const [searching, setSearching] = useState(false)
     const [items, setItems] = useState<ScheduleItemProps[]>([])
     const [registered, setRegistered] = useState(false)
-
+    
     const anim = useRef(new Animated.Value(0)).current;
 
     const open = () => {

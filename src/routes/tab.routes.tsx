@@ -1,14 +1,18 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Entypo, MaterialIcons, Ionicons, FontAwesome6, Feather } from '@expo/vector-icons';
 
-import { Home, Schedule, Gamificacao, UserProfile, Notifications } from '../screens';
-import { AdminProfile } from '../screens/profileScreen';
+import { Home, Schedule, Gamificacao, UserProfile, Notifications, AdminProfile } from '../screens';
 
 import { colors } from "../styles/colors"
+import { useAuth } from "../hooks/AuthContext";
 
 const Tab = createBottomTabNavigator();
 
+
 export default function TabRoutes() {
+
+    const { user: { user } }: any = useAuth()
+
     return (
         <Tab.Navigator
             screenOptions={{
@@ -55,16 +59,29 @@ export default function TabRoutes() {
                 }}
             />
 
-            <Tab.Screen
-                name="PERFIL"
-                component={UserProfile}
-                options={{
-                    tabBarIcon: ({ focused }) => (
-                        <Ionicons name={focused ? "person" : "person-outline"} size={28} color={colors.white} />
-                    )
-                }}
-            />
+            {
+                user.tipo == 'USER' ? <Tab.Screen
+                    name="PERFIL"
+                    component={UserProfile}
+                    options={{
+                        tabBarIcon: ({ focused }) => (
+                            <Ionicons name={focused ? "person" : "person-outline"} size={28} color={colors.white} />
+                        ),
+                    }}
+                /> : <Tab.Screen
+                    name="PERFIL"
+                    component={AdminProfile}
+                    options={{
+                        tabBarIcon: ({ focused }) => (
+                            <Ionicons name={focused ? "person" : "person-outline"} size={28} color={colors.white} />
+                        ),
+                    }}
+                />
+            }
+
 
         </Tab.Navigator>
     );
 }
+
+

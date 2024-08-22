@@ -9,8 +9,24 @@ export const AuthProvider = ({ children }: any) => {
   const [loading, setLoading] = useState(true)
 
   const signOut = async () => {
-    await AsyncStorage.setItem("user", null)
+    try {
+      await AsyncStorage.removeItem("user");  // Remover o item completamente
+      setUser(null);  // Atualizar o estado do usuário para null
+    } catch (error) {
+      console.error("Erro ao fazer sign out:", error);
+    }
+  };
+
+  const signIn = async (data: any) => {
+    await AsyncStorage.setItem("user", JSON.stringify(data))
+    setUser(data)
   }
+
+  const signUp = async (data: any) => {
+      await AsyncStorage.setItem("user", JSON.stringify(data));
+      setUser(data);
+  }
+  
 
   useEffect(() => {
     const handle = async () => {
@@ -30,6 +46,8 @@ export const AuthProvider = ({ children }: any) => {
   return (
     <AuthContext.Provider value={{
       signOut,
+      signIn,
+      signUp,
       user,
       setUser,
       loading
