@@ -10,7 +10,10 @@ import {
     Notifications,
     Registration,
     RegistrationDetails,
+    Categorias,
+    Minicursos,
 } from '../screens'
+
 import { ScheduleItemProps } from '../entities/schedule-item';
 
 const Stack = createNativeStackNavigator();
@@ -40,6 +43,9 @@ export default function StackRoutes() {
             <Stack.Screen name="Notifications" component={Notifications} />
             <Stack.Screen name="Registration" component={Registration} />
             <Stack.Screen name="RegistrationDetails" component={RegistrationDetails} />
+            <Stack.Screen name="Categorias" component={Categorias} />
+            <Stack.Screen name="Minicursos" component={Minicursos} />
+
         </Stack.Navigator>
     );
 }

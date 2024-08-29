@@ -12,6 +12,8 @@ import Credential from './credentialScreen'
 import Notifications from './notificationsScreen'
 import Registration from './registrationScreen'
 import RegistrationDetails from './registrationDetailsScreen'
+import Categorias from './categoriaScreen'
+import Minicursos from './atividadesMinicursos'
 
 export {
     Home,
@@ -28,4 +30,6 @@ export {
     Notifications,
     Registration,
     RegistrationDetails,
+    Categorias,
+    Minicursos,
 }

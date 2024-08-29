@@ -1,7 +1,6 @@
 import api from './api'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-
 type Login = ({
     email: string
     senha: string
