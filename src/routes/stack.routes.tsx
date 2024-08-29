@@ -12,6 +12,9 @@ import {
     RegistrationDetails,
     Categorias,
     Minicursos,
+    Palestras,
+    Workshops,
+    Competições,
 } from '../screens'
 
 import { ScheduleItemProps } from '../entities/schedule-item';
@@ -45,7 +48,9 @@ export default function StackRoutes() {
             <Stack.Screen name="RegistrationDetails" component={RegistrationDetails} />
             <Stack.Screen name="Categorias" component={Categorias} />
             <Stack.Screen name="Minicursos" component={Minicursos} />
-
+            <Stack.Screen name="Palestras" component={Palestras} />
+            <Stack.Screen name="Competições" component={Competições} />
+            <Stack.Screen name="Workshops" component={Workshops} />
         </Stack.Navigator>
     );
 }
