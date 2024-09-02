@@ -24,4 +24,13 @@ export const getUserSubscribedActivities = async (userId: string): Promise<Activ
     return response.data
 }
 
+export const subscribeToActivity = async (userId: string, eventId: string) => {
+    const response = await api.post("/userAtActivities",{
+        "userId": userId,
+        "activityId": eventId
+    })
+
+    return response
+}
+
 export type { Activity };

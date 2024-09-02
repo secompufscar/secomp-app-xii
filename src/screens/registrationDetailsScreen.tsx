@@ -5,6 +5,8 @@ import { useRoute } from "@react-navigation/native";
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 import {Platform, StyleSheet} from "react-native";
+import { useAuth } from "../hooks/AuthContext";
+import { subscribeToActivity } from "../services/activities";
 
 const isIos: Boolean = Platform.OS === 'ios'
 
@@ -16,8 +18,19 @@ type RegistrationDetailsProps = {
 export default function RegistrationDetails() {
     const navigation = useNavigation();
     const route = useRoute()
+    const {user:{user}}: any = useAuth()
 
     const { item, registered } = route.params as RegistrationDetailsProps
+
+    function requestSubscription() {
+        console.log('test')
+        subscribeToActivity(user.id, item.id)
+        navigation.goBack()
+    }
+
+    function requestUnSubscription() {
+
+    }
 
     return (
         <View className='bg-white flex-1'>
@@ -62,11 +75,11 @@ export default function RegistrationDetails() {
 
             <View style={(isIos) ? [styles.shadowProp] : [styles.elevation]}>
                 { registered ? (
-                <TouchableOpacity className="bg-green-700 py-2 rounded-2xl mx-8">
+                <TouchableOpacity className="bg-green-700 py-2 rounded-2xl mx-8" onPress={() => requestUnSubscription}>
                     <Text className="text-white text-center font-bold text-xl">Desinscrever</Text>
                 </TouchableOpacity>
                 ) : (
-                <TouchableOpacity className="bg-green-700 py-2 rounded-2xl mx-8" >
+                <TouchableOpacity className="bg-green-700 py-2 rounded-2xl mx-8" onPress={requestSubscription}>
                     <Text className="text-white text-center font-bold text-xl">Inscreva-se</Text>
                 </TouchableOpacity>
                 )}
