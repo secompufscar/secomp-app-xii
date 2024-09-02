@@ -10,13 +10,13 @@ import { useAuth } from "../hooks/AuthContext";
 export default function Credential() {
     const [modalVisible, setModalVisible] = useState(false);
     const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
-	const {user:{user}}: any = useAuth()
-
+    const { user: { user } }: any = useAuth()
+    
     return (
         <SafeAreaView className='items-center bg-white flex-1'>
             <View className='w-96 max-w-[90%] h-screen flex-col items-center '>
                 <View className='w-full h-[20%] items-center relative'>
-                    <View className='w-24 h-[130%] absolute -bottom-10 bg-black' />
+                    <View className='w-24 h-[130%] absolute -bottom-10 bg-blue' />
                 </View>
 
                 <View className='w-full h-[68%] items-center flex-col rounded-3xl relative overflow-hidden'>
@@ -32,8 +32,12 @@ export default function Credential() {
                                 </View>
                             </View>
 
-                            <View className='w-32 h-32 mx-10 mt-1 self-end'>
-                                <Image source={require("../../assets/qrcode.png")} resizeMode="cover" className='w-full h-full max-w-full max-h-full object-cover' />
+                            <View className='w-40 h-40 mx-10 mt-1 self-end'>
+                                
+                                <Image 
+                                    source={{ uri: user.qrCode }} 
+                                    resizeMode="cover"
+                                    className='w-full h-full max-w-full max-h-full object-cover' />
                             </View>
                         </ImageBackground>
                     </View>
@@ -65,7 +69,7 @@ export default function Credential() {
                         <View className='w-full h-full flex items-center bg-neutral-900/70'>
                             <TouchableWithoutFeedback>
                                 <View className='w-80 h-80 absolute top-52 items-center p-6 rounded-xl bg-white'>
-                                    <Image source={require("../../assets/qrcode-black.png")} resizeMode="cover" className='w-[96%] h-[96%] mt-1 max-w-full max-h-full object-cover' />
+                                    <Image source={{ uri: user.qrCode }} resizeMode="cover" className='w-[96%] h-[96%] mt-1 max-w-full max-h-full object-cover' />
                                 </View>
                             </TouchableWithoutFeedback>
                         </View>

@@ -52,7 +52,7 @@ export default function Home() {
                 </View> */}
 
                 <View className='flex-row items-center justify-center pt-9 pb-10 px-4 gap-4'>
-                    <Text className='font-semibold break-all text-justify'>
+                    <Text className='font-semibold break-all text-justify text-center'>
                        BEM-VINDO À DÉCIMA SEGUNDA EDIÇÃO DA SEMANA DA COMPUTAÇÃO!
                     </Text>
                 </View>
