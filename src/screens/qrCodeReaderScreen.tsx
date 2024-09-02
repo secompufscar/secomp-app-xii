@@ -47,7 +47,7 @@ export default function QRCode() {
 
                     Alert.alert(
                         'Check-In',
-                        `Check-in realizado com sucesso! Usuário foi marcado como presente`,
+                        `Check-in realizado com sucesso! \nUsuário marcado como presente.`,
                         [{ text: 'OK', onPress: () => navigation.goBack() }] 
                     );
                 } else {
