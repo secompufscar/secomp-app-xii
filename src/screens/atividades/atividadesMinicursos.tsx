@@ -54,7 +54,15 @@ export default function Minicursos() {
     return (
         <SafeAreaView className='bg-white flex-1'>
 
-            <View className='flex-row justify-start items-center pt-20 px-6 gap-4'>
+            <View className='w-screen h-16 px-5 pt-8 items-center flex-row'>
+                <View className='w-8 h-full items-center justify-center'>
+                    <TouchableOpacity>
+                        <AntDesign name="leftcircleo" size={24} color="#a3a3a3" onPress={() => navigation.goBack()} />
+                    </TouchableOpacity>
+                </View>
+            </View>
+
+            <View className='flex-row justify-start items-center pt-7 px-6 gap-4'>
                 <Text className='text-3xl font-bold text-blue'>Minicursos</Text>
             </View>
 
@@ -66,13 +74,6 @@ export default function Minicursos() {
                 contentContainerStyle={{ padding: 16 }}
             />
 
-            <View className='w-screen h-28 px-5 pt-8 items-center flex-row absolute top-0'>
-                <View className='w-[8%] h-full items-center justify-center'>
-                    <TouchableOpacity>
-                        <AntDesign name="leftcircleo" size={24} color="#a3a3a3" onPress={() => navigation.goBack()} />
-                    </TouchableOpacity>
-                </View>
-            </View>
         </SafeAreaView>
     );
 }
