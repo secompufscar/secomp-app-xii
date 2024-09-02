@@ -47,7 +47,7 @@ export default function QRCode() {
 
                     Alert.alert(
                         'Check-In',
-                        `Check-in realizado com sucesso para o usuário ${userId} na atividade ${activityId}.`,
+                        `Check-in realizado com sucesso! Usuário foi marcado como presente`,
                         [{ text: 'OK', onPress: () => navigation.goBack() }] 
                     );
                 } else {
@@ -58,8 +58,10 @@ export default function QRCode() {
                     );
                 }
             } catch (error) {
+                const err = error as any; 
+
                 // Imprime o erro no console para depuração
-                console.error('Erro ao processar o check-in:', error);
+                console.error('Erro ao processar o check-in:', err.response.data);
                 
                 Alert.alert(
                     'Erro',
