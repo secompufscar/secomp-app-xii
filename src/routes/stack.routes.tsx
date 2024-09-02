@@ -15,6 +15,7 @@ import {
     Palestras,
     Workshops,
     Competições,
+    QRCode,
 } from '../screens'
 
 import { ScheduleItemProps } from '../entities/schedule-item';
@@ -31,6 +32,7 @@ type StackNavigation = {
     MyEvents: undefined;
     Credential: undefined;
     Notifications: undefined;
+    QRCode: { id: string };
 };
 
 export type StackTypes = NativeStackNavigationProp<StackNavigation>;
@@ -51,6 +53,7 @@ export default function StackRoutes() {
             <Stack.Screen name="Palestras" component={Palestras} />
             <Stack.Screen name="Competições" component={Competições} />
             <Stack.Screen name="Workshops" component={Workshops} />
+            <Stack.Screen name="QRCode" component={QRCode} />
         </Stack.Navigator>
     );
 }
