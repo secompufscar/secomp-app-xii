@@ -9,7 +9,7 @@ import {Platform, StyleSheet} from "react-native";
 const isIos: Boolean = Platform.OS === 'ios'
 
 type RegistrationDetailsProps = {
-    item: ScheduleItemProps
+    item: Activity
     registered: boolean
 }
 
@@ -43,16 +43,16 @@ export default function RegistrationDetails() {
                 <View className='flex flex-col justify-start p-2 bg-[#FFFFFF] rounded-2xl' style={(isIos) ? [styles.shadowProp] : [styles.elevation]}>
                     <View className="p-4">
                         <View className='pb-2'>
-                            <Text className='text-xl font-bold'>{item.title}</Text>
+                            <Text className='text-xl font-bold'>{item.nome}</Text>
                         </View>
                         <View className=''>
                             <View className='flex-row items-center pb-1'>
                                 <AntDesign name="calendar" size={24} color="#51B68D" />
-                                <Text className='pl-2'>{item.date}</Text>
+                                <Text className='pl-2'>{item.data.substring(0, 10)}</Text>
                             </View>
                             <View className='flex-row items-center pb-1'>
                                 <AntDesign name="enviromento" size={24} color="#51B68D" />
-                                <Text className='pl-2'>{item.location}</Text>
+                                <Text className='pl-2'>{item.vagas}</Text>
                             </View>
                         </View>
                     </View>
