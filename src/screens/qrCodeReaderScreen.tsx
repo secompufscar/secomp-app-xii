@@ -1,12 +1,16 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { View, Text, StyleSheet, Button, Alert, Linking, AppState } from 'react-native';
-import {CameraView} from "expo-camera"
+import React, { useEffect, useRef } from 'react';
+import { View, Text, StyleSheet, Alert, AppState } from 'react-native';
+import { ParamListBase, useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { CameraView } from "expo-camera";
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRoute } from '@react-navigation/native';
+import { checkIn } from "../services/checkIn";
 
 export default function QRCode() {
+    const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
     const route = useRoute();
-    const { id } = route.params as { id: string };
+    const { id: activityId } = route.params as { id: string };
     const qrLock = useRef(false);
     const appState = useRef(AppState.currentState);
 
@@ -23,23 +27,56 @@ export default function QRCode() {
         return () => {
             subscription.remove();
         };
-    }, [])
+    }, []);
+
+    const handleBarCodeScanned = async ({ data }: { data: string }) => {
+        if (data && !qrLock.current) {
+            qrLock.current = true;
+            try {
+                const userId = data; // data é o userId escaneado do QR Code
+                
+                // Verificando se leitura recebeu os valores corretor
+                console.log(userId);
+                console.log(activityId);
+
+                if (userId && activityId) {
+                    const response = await checkIn(userId, activityId);
+
+                    // Verificado resultado do checkIn
+                    console.log(response);
+
+                    Alert.alert(
+                        'Check-In',
+                        `Check-in realizado com sucesso para o usuário ${userId} na atividade ${activityId}.`,
+                        [{ text: 'OK', onPress: () => navigation.goBack() }] 
+                    );
+                } else {
+                    Alert.alert(
+                        'Erro',
+                        'Dados inválidos para check-in.',
+                        [{ text: 'OK', onPress: () => navigation.goBack() }] 
+                    );
+                }
+            } catch (error) {
+                // Imprime o erro no console para depuração
+                console.error('Erro ao processar o check-in:', error);
+                
+                Alert.alert(
+                    'Erro',
+                    'Falha ao processar o check-in.',
+                    [{ text: 'OK', onPress: () => navigation.goBack() }]
+                );
+            }
+        }
+    };
 
     return (
         <SafeAreaView style={StyleSheet.absoluteFillObject}>
             <CameraView style={StyleSheet.absoluteFillObject}
                         facing='back'
-                        onBarcodeScanned={({data}) => {
-                            if (data && !qrLock.current){
-                                qrLock.current = true;
-                                setTimeout(async () => {
-                                    await Linking.openURL(data);
-                                }, 500);
-                            }
-                        }}>
+                        onBarcodeScanned={handleBarCodeScanned}>
                 
             </CameraView>
-
         </SafeAreaView>
     );
 }
