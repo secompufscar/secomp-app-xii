@@ -4,6 +4,8 @@ import { useNavigation } from "@react-navigation/native";
 import { ScheduleItemProps } from '../entities/schedule-item';
 import { AntDesign } from '@expo/vector-icons';
 import MyEvent from '../components/myEvent';
+import { getActivities, getUserSubscribedActivities } from '../services/activities';
+import { useAuth } from '../hooks/AuthContext';
 
 const formatDate = (date: Date) => {
     const year = date.getFullYear();
@@ -12,9 +14,9 @@ const formatDate = (date: Date) => {
     return `${year}-${month}-${day}`;
 };
 
-const groupByDate = (items : ScheduleItemProps[]) => {
-    return items.reduce((acc, item) => {
-        (acc[item.date] = acc[item.date] || []).push(item);
+const groupByDate = (items: Activity[]): Record<string, Activity[]> => {
+    return items.reduce((acc: Record<string, Activity[]>, item: Activity) => {
+        (acc[item.data] = acc[item.data] || []).push(item);
         return acc;
     }, {});
 };
@@ -24,8 +26,9 @@ export default function Registration() {
     const currentDayString = "13"
     const [search, setSearch] = useState("")
     const [searching, setSearching] = useState(false)
-    const [items, setItems] = useState<ScheduleItemProps[]>([])
+    const [items, setItems] = useState<Activity[]>([])
     const [registered, setRegistered] = useState(false)
+    const {user:{user}}: any = useAuth()
     
     const anim = useRef(new Animated.Value(0)).current;
 
@@ -47,58 +50,24 @@ export default function Registration() {
 
     useEffect(() => {
         const fetchItems = async () => {
-            const fetchedItems = [{
-                title: "Teste",
-                hour: "10:00",
-                description: "Teste description",
-                speaker: "João Teste",
-                date: '12/06/2024',
-                location: "Auditório DC",
-                subscribed: false
-            }, {
-                title: "Teste",
-                hour: "10:00",
-                description: "Teste description",
-                speaker: "João Teste",
-                date: '12/06/2024',
-                location: "Auditório DC",
-                subscribed: false
-            }, {
-                title: "Teste",
-                hour: "10:00",
-                description: "Teste description",
-                speaker: "João Teste",
-                date: '13/06/2024',
-                location: "Auditório DC",
-                subscribed: false
-            }, {
-                title: "Teste",
-                hour: "10:00",
-                description: "Teste description",
-                speaker: "João Teste",
-                date: '13/06/2024',
-                location: "Auditório DC",
-                subscribed: false
-            }, {
-                title: "Teste2",
-                hour: "10:00",
-                description: "Teste description",
-                speaker: "João Teste",
-                date: '14/06/2024',
-                location: "Auditório DC",
-                subscribed: false
-            }]
+            const fetchedItemsUnsubscribed: Activity[] = await getActivities();
 
+            const fetchedItemsSubscribed: Activity[] = await getUserSubscribedActivities(user.id);
+        
+            let filteredItems: Activity[] = fetchedItemsUnsubscribed;
+        
             if (registered) {
-                var filteredItems = fetchedItems.filter(item => item.subscribed == true)
+                filteredItems = fetchedItemsSubscribed;
             } else {
-                var filteredItems = fetchedItems.filter(item => item.subscribed == false)
+                filteredItems = fetchedItemsUnsubscribed.filter(unsubscribedItem => 
+                    !fetchedItemsSubscribed.some(subscribedItem => subscribedItem.id === unsubscribedItem.id)
+                );
             }
-
+        
             if (searching) {
-                filteredItems = filteredItems.filter(item => item.title.includes(search))
+                filteredItems = filteredItems.filter(item => item.nome.includes(search));
             }
-
+        
             setItems(filteredItems);
         };
 
@@ -120,7 +89,7 @@ export default function Registration() {
 
     const groupedItems = groupByDate(items);
 
-    const handlePress = (item: ScheduleItemProps, registered: boolean) => {
+    const handlePress = (item: Activity, registered: boolean = false) => {
         // @ts-ignore
         navigation.navigate('RegistrationDetails', { item, registered });
     }
@@ -172,14 +141,14 @@ export default function Registration() {
                     {Object.keys(groupedItems).map((date) => (
                         <View key={date} className="w-full">
                             <View className='flex-1 justify-center items-center pb-6'>
-                                <Text className="text-2xl font-bold text-blue">{date}</Text>
+                                <Text className="text-2xl font-bold text-blue">{date.substring(0, 10)}</Text>
                             </View>
-                            <View className='flex-row justify-center'>
+                            <View className='flex-row flex-wrap justify-around'>
                                 {groupedItems[date].map((item, index) => (
-                                    <View className='pb-4 px-4 bg-[#FBFBFB]' key={index}>
+                                    <View className='pb-4 px-2 bg-[#FBFBFB] flex-wrap' key={index}>
                                         <MyEvent
                                             scheduleItem={item}
-                                            onClick={() => handlePress(item, item.subscribed)}
+                                            onClick={() => handlePress(item)}
                                         />
                                     </View>
                                 ))}

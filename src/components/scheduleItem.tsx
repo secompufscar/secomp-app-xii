@@ -3,7 +3,7 @@ import {View, Text, Button, TouchableHighlight, TouchableOpacity} from 'react-na
 import { ScheduleItemProps } from '../entities/schedule-item';
 
 type ScheduleItemComponentProps = {
-    scheduleItem: ScheduleItemProps;
+    scheduleItem: Activity;
     onClick: () => void;
 }
 
@@ -13,11 +13,11 @@ export default function ScheduleItemComponent({scheduleItem, onClick}: ScheduleI
         <TouchableOpacity onPress={onClick}>
             <View className='flex flex-row justify-start min-w-full items-center p-4 rounded-md bg-blue'>
                 <View className='pl-8 pr-4'>
-                    <Text className='text-white'>{scheduleItem.hour}</Text>
+                    <Text className='text-white'>{scheduleItem.data.substring(11, 16)}</Text>
                 </View>
                 <View className='pl-4 pr-8 max-w-[80%]'>
-                    <Text className='text-white'>{scheduleItem.title}</Text>
-                    <Text className='text-white'>{scheduleItem.description}</Text>
+                    <Text className='text-white'>{scheduleItem.nome} - {scheduleItem.palestranteNome}</Text>
+                    <Text className='text-white'>{scheduleItem.detalhes}</Text>
                 </View>
             </View>
         </TouchableOpacity>

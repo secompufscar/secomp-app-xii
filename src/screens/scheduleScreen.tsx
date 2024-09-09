@@ -5,6 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import { ScheduleItemProps } from '../entities/schedule-item';
 import { AntDesign } from '@expo/vector-icons';
 import WeekCalendar from '../components/calendar';
+import { getActivities } from '../services/activities';
 
 const formatDate = (date: Date) => {
     const year = date.getFullYear();
@@ -17,36 +18,22 @@ export default function Schedule() {
     const navigation = useNavigation();
     const currentDateString = formatDate(new Date());
     const [selectedDate, setSelectedDate] = useState(currentDateString);
-    const [items, setItems] = useState<ScheduleItemProps[]>([]);
+    const [items, setItems] = useState<Activity[]>([]);
 
     // useEffect para carregar os itens do cronograma todas as vezes que o atributo selectedDate mudar
     useEffect(() => {
         const fetchItems = async () => {
-            // Substituir com chamada de API assim que o backend estiver pronto
-            // const fetchedItems = await api.get(`/schedule/${selectedDate}`);
-            const fetchedItems = [{
-                title: "Teste",
-                hour: "10:00",
-                description: "Teste description",
-                speaker: "João Teste",
-                date: selectedDate,
-                location: "Auditório DC"
-            },{
-                title: "Teste2",
-                hour: "10:00",
-                description: "Teste description",
-                speaker: "João Teste",
-                date: selectedDate,
-                location: "Auditório DC"
-            }]
-            setItems(fetchedItems);
+            const activities: Activity[] = await getActivities();
+
+            //const filteredActivities = (await activities).filter(activity => activity.data.substring(0, 8) === selectedDate);
+
+            setItems(activities);
         };
 
         fetchItems();
     }, [selectedDate]);
 
-    const handlePress = (item: ScheduleItemProps) => {
-        // Por alguma razão, o typescript marca a passagem de parametros como erro, mesmo funcionando perfeitamente.
+    const handlePress = (item: Activity) => {
         // @ts-ignore
         navigation.navigate('ScheduleDetails', { item });
     };
@@ -78,13 +65,6 @@ export default function Schedule() {
                         ))}
                     </ScrollView>
                 </View>
-                {/* 
-                //DEBUG selectedDate
-                <View>
-                    <Text className='text-center'>
-                        {selectedDate}
-                    </Text>
-                </View> */}
             </View>
         </SafeAreaView>
     );

@@ -1,3 +1,4 @@
+import { useAuth } from '../hooks/AuthContext'
 import api from './api'
 
 type Activity = ({
@@ -16,3 +17,20 @@ export const getActivities = async (): Promise<Activity[]> => {
 
     return response.data
 }
+
+export const getUserSubscribedActivities = async (userId: string): Promise<Activity[]> => {
+    const response = await api.get(`/userAtActivities/all-activities/${userId}`)
+
+    return response.data
+}
+
+export const subscribeToActivity = async (userId: string, eventId: string) => {
+    const response = await api.post("/userAtActivities",{
+        "userId": userId,
+        "activityId": eventId
+    })
+
+    return response
+}
+
+export type { Activity };

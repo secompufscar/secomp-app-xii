@@ -5,19 +5,32 @@ import { useRoute } from "@react-navigation/native";
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 import {Platform, StyleSheet} from "react-native";
+import { useAuth } from "../hooks/AuthContext";
+import { subscribeToActivity } from "../services/activities";
 
 const isIos: Boolean = Platform.OS === 'ios'
 
 type RegistrationDetailsProps = {
-    item: ScheduleItemProps
+    item: Activity
     registered: boolean
 }
 
 export default function RegistrationDetails() {
     const navigation = useNavigation();
     const route = useRoute()
+    const {user:{user}}: any = useAuth()
 
     const { item, registered } = route.params as RegistrationDetailsProps
+
+    function requestSubscription() {
+        console.log('test')
+        subscribeToActivity(user.id, item.id)
+        navigation.goBack()
+    }
+
+    function requestUnSubscription() {
+
+    }
 
     return (
         <View className='bg-white flex-1'>
@@ -43,16 +56,16 @@ export default function RegistrationDetails() {
                 <View className='flex flex-col justify-start p-2 bg-[#FFFFFF] rounded-2xl' style={(isIos) ? [styles.shadowProp] : [styles.elevation]}>
                     <View className="p-4">
                         <View className='pb-2'>
-                            <Text className='text-xl font-bold'>{item.title}</Text>
+                            <Text className='text-xl font-bold'>{item.nome}</Text>
                         </View>
                         <View className=''>
                             <View className='flex-row items-center pb-1'>
                                 <AntDesign name="calendar" size={24} color="#51B68D" />
-                                <Text className='pl-2'>{item.date}</Text>
+                                <Text className='pl-2'>{item.data.substring(0, 10)}</Text>
                             </View>
                             <View className='flex-row items-center pb-1'>
                                 <AntDesign name="enviromento" size={24} color="#51B68D" />
-                                <Text className='pl-2'>{item.location}</Text>
+                                <Text className='pl-2'>{item.vagas}</Text>
                             </View>
                         </View>
                     </View>
@@ -62,11 +75,11 @@ export default function RegistrationDetails() {
 
             <View style={(isIos) ? [styles.shadowProp] : [styles.elevation]}>
                 { registered ? (
-                <TouchableOpacity className="bg-green-700 py-2 rounded-2xl mx-8">
+                <TouchableOpacity className="bg-green-700 py-2 rounded-2xl mx-8" onPress={() => requestUnSubscription}>
                     <Text className="text-white text-center font-bold text-xl">Desinscrever</Text>
                 </TouchableOpacity>
                 ) : (
-                <TouchableOpacity className="bg-green-700 py-2 rounded-2xl mx-8" >
+                <TouchableOpacity className="bg-green-700 py-2 rounded-2xl mx-8" onPress={requestSubscription}>
                     <Text className="text-white text-center font-bold text-xl">Inscreva-se</Text>
                 </TouchableOpacity>
                 )}
