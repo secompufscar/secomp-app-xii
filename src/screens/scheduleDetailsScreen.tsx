@@ -6,7 +6,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 
 type ScheduleDetailsProps = {
-    item: ScheduleItemProps
+    item: Activity
 }
 
 export default function ScheduleDetails() {
@@ -24,12 +24,12 @@ export default function ScheduleDetails() {
                 <Text className='text-3xl font-bold text-blue'>Detalhes</Text>
             </View>
             <View>
-                <Text className="text-2xl text-center font-bold">{item.title}</Text>
+                <Text className="text-2xl text-center font-bold">{item.nome}</Text>
                 <View className="p-4 gap-4">
-                    <Text>Date: {item.date}</Text>
-                    <Text>Description: {item.description}</Text>
-                    <Text>Location: {item.location}</Text>
-                    <Text>Speaker: {item.speaker}</Text>
+                    <Text>Data: {item.data.substring(0, 10)} / {item.data.substring(11, 16)}</Text>
+                    <Text>Descrição: {item.detalhes}</Text>
+                    <Text>Vagas: {item.vagas}</Text>
+                    <Text>Palestrante: {item.palestranteNome}</Text>
                 </View>
             </View>
         </View>
