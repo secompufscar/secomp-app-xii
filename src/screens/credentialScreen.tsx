@@ -16,12 +16,12 @@ export default function Credential() {
         <SafeAreaView className='items-center bg-white flex-1'>
             <View className='w-96 max-w-[90%] h-screen flex-col items-center '>
                 <View className='w-full h-[20%] items-center relative'>
-                    <View className='w-24 h-[130%] absolute -bottom-10 bg-blue' />
+                    <View className='w-24 h-[130%] absolute -bottom-10 bg-black' />
                 </View>
 
                 <View className='w-full h-[68%] items-center flex-col rounded-3xl relative overflow-hidden'>
                     <View className='w-full h-[58%]'>
-                        <ImageBackground source={require("../../assets/credential-bg3.png")} resizeMode='cover' className='w-full h-full object-center max-w-full max-h-full'>
+                        <ImageBackground source={require("../../assets/credential.png")} resizeMode='cover' className='w-full h-full object-center max-w-full max-h-full'>
                             <View className='w-full h-20 px-10 py-7 flex-row'>
                                 <View className='w-1/2 h-full items-start'>
                                     <Text className='text-xs text-white'> SECOMP XII</Text>
@@ -42,13 +42,13 @@ export default function Credential() {
                         </ImageBackground>
                     </View>
 
-                    <View className='w-full h-[42%] px-8 bg-white border-x border-b border-neutral-500 rounded-b-3xl'>
+                    <View className='w-full h-[42%] px-8 bg-blue border-x border-b border-neutral-500 rounded-b-3xl '>
                         <View className='w-full h-[53%] flex-col py-9 space-y-1'>
-                            <Text className='text-4xl font-bold text-neutral-800' allowFontScaling={false}> {user.nome} </Text>
+                            <Text className='text-5xl font-bold text-white' allowFontScaling={false}> {user.nome} </Text>
                         </View>
 
-                        <View className='w-[50%] h-[20%] items-end px-1 self-end'>
-                            <Image source={require("../../assets/black-logo.png")} resizeMode="cover" className='w-24 h-full max-w-full max-h-full object-cover' />
+                        <View className='w-[50%] h-[20%] items-center px-1 self-center'>
+                            <Image source={require("../../assets/logo.png")} resizeMode="cover" className='w-24 h-full max-w-full max-h-full object-cover' />
                         </View>
                     </View>
 

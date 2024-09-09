@@ -38,9 +38,19 @@ export default function Login() {
 
             console.log(data)
 
-        } catch(error) {
-            Alert.alert("Login", "Não foi possível efetuar o login") //Precisa tratar erros específicos como senha ou email incorretos
-            console.log(error)
+        } catch (error) {
+            const err = error as any; 
+
+            const errorMessage = err.response?.data?.message || 'Falha ao processar o login.';
+
+            // Imprime o erro no console para depuração
+
+            //console.error('Erro ao processar o check-in:', err.response.data);
+         
+            Alert.alert(
+                'Login',
+                errorMessage
+            );
         } finally {
             setIsLoading(false)
         }
@@ -87,6 +97,7 @@ export default function Login() {
                     <Input.Field
                         placeholder="Senha"
                         onChangeText={setSenha}
+                        secureTextEntry={true} 
                     />
 
                 </Input>
@@ -96,6 +107,12 @@ export default function Login() {
                 <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
                     <Text className="text-white text-base font-bold text-center mt-4">
                         Ainda não possui cadastro?
+                    </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
+                    <Text className="text-white text-base font-bold text-center mt-4">
+                        Esqueceu a senha?
                     </Text>
                 </TouchableOpacity>
 
