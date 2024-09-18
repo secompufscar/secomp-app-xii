@@ -6,4 +6,5 @@ interface Activity {
     vagas: int
     detalhes: int
     categoriaId: string
+    local: string
 }

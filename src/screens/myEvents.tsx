@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, TextInput, Animated } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
+import { AntDesign, Ionicons } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 import { ScheduleItemProps } from '../entities/schedule-item';
 import MyEvent from '../components/myEvent';
+import { getUserSubscribedActivities } from '../services/activities';
+import { useAuth } from '../hooks/AuthContext';
 
 const formatDate = (date: Date) => {
     const day = date.getDate().toString().padStart(2,);
@@ -17,8 +19,10 @@ export default function MyEvents() {
     const [search, setSearch] = useState("")
     const [searching, setSearching] = useState(false)
     //const [filter, setFilter] = useState("")
-    const [items, setItems] = useState<ScheduleItemProps[]>([])
+    const [items, setItems] = useState<Activity[]>([])
     const [future, setFuture] = useState(true)
+    const {user:{user}}: any = useAuth()
+
 
     const anim = useRef(new Animated.Value(0)).current;
 
@@ -40,62 +44,29 @@ export default function MyEvents() {
 
     useEffect(() => {
         const fetchItems = async () => {
-            // Substituir com chamada de API assim que o backend estiver pronto
-            // const fetchedItems = await api.get(`/events/${user_id}`);
-            const fetchedItems = [{
-                title: "Teste",
-                hour: "10:00",
-                description: "Teste description",
-                speaker: "João Teste",
-                date: '12/06/2024',
-                location: "Auditório DC"
-            }, {
-                title: "Teste",
-                hour: "10:00",
-                description: "Teste description",
-                speaker: "João Teste",
-                date: '12/06/2024',
-                location: "Auditório DC"
-            }, {
-                title: "Teste",
-                hour: "10:00",
-                description: "Teste description",
-                speaker: "João Teste",
-                date: '12/06/2024',
-                location: "Auditório DC"
-            }, {
-                title: "Teste",
-                hour: "10:00",
-                description: "Teste description",
-                speaker: "João Teste",
-                date: '12/06/2024',
-                location: "Auditório DC"
-            }, {
-                title: "Teste2",
-                hour: "10:00",
-                description: "Teste description",
-                speaker: "João Teste",
-                date: '14/06/2024',
-                location: "Auditório DC"
-            }]
+
+            const fetchedItemsSubscribed: Activity[] = await getUserSubscribedActivities(user.id);
+
+            const validFetchedItemsSubscribed = fetchedItemsSubscribed || [];
+            console.log(validFetchedItemsSubscribed);
 
             //Filtragem de eventos futuros ou passados
             if (future) {
-                var filteredItems = fetchedItems.filter(item => item.date > currentDayString)
+                var filteredItems = validFetchedItemsSubscribed.filter(item => item.data.substring(0,10) > currentDayString)
             } else {
-                var filteredItems = fetchedItems.filter(item => item.date < currentDayString)
+                var filteredItems = validFetchedItemsSubscribed.filter(item => item.data.substring(0,10) < currentDayString)
             }
 
             //Filtragem de eventos por pesquisa
             if (searching) {
-                filteredItems = filteredItems.filter(item => item.title.includes(search))
+                filteredItems = filteredItems.filter(item => item.nome.includes(search))
             }
 
             //Filtragem de eventos por filtro, ainda não implementado
             // if (filter) {
             // }
 
-            setItems(filteredItems);
+            setItems(validFetchedItemsSubscribed);
         };
 
         fetchItems();

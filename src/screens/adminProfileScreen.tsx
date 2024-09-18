@@ -35,7 +35,7 @@ export default function AdminProfile() {
 			</View>
 
 			<View className='h-full m-6 flex-col justify-start space-y-4'>
-				<TouchableOpacity onPress={() => { navigation.navigate('') }}>
+				{/* <TouchableOpacity onPress={() => { navigation.navigate('') }}>
 					<View className='grow h-16 flex-row items-center space-x-1 rounded-lg bg-neutral-200/20'>
 						<View className='w-14 h-full ml-2 items-center justify-center'>
 							<FontAwesome6 name="id-badge" size={24} color="#445BE6" />
@@ -49,7 +49,7 @@ export default function AdminProfile() {
 							<FontAwesome6 name="chevron-right" size={18} color="#a3a3a3" />
 						</View>
 					</View>
-				</TouchableOpacity>
+				</TouchableOpacity> */}
 
 				<TouchableOpacity onPress={() => { navigation.navigate('Categorias') }}>
 					<View className='grow h-16 flex-row items-center space-x-1 rounded-lg bg-neutral-200/20'>

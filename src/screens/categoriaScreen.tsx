@@ -40,6 +40,9 @@ export default function Categorias() {
 
             case 'Workshops':
                 return 'people-group';
+            
+            case 'Credenciamento':
+                return 'id-badge';
 
             default:
                 return 'list';  // Icone padrão

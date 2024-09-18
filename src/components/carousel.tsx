@@ -1,100 +1,112 @@
-import React, { useState } from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
-import AntDesign from '@expo/vector-icons/AntDesign';
-
-import { colors } from "../styles/colors"
+import React, { useEffect, useRef, useState } from 'react';
+import { View, Image, FlatList, Dimensions, StyleSheet } from 'react-native';
 
 const { width } = Dimensions.get('window');
 
-const MultiCardCarousel = () => {
+// Importe as imagens locais
+const image1 = require('../../assets/empresas/rocketseat.png');
+const image2 = require('../../assets/empresas/tempest.png');
+const image3 = require('../../assets/empresas/visagio.png');
+const image4 = require('../../assets/empresas/tractian.png');
+const image5 = require('../../assets/empresas/magalu.png');
+
+const images = [
+  { id: '1', uri: image1 },
+  { id: '2', uri: image2 },
+  { id: '3', uri: image3 },
+  { id: '4', uri: image4 },
+  { id: '5', uri: image5 },
+];
+
+const ImageCarousel = () => {
+  const flatListRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const cards = [
-    {
-      image: 'https://source.unsplash.com/random',
-      title: 'SERASA',
-    },
-    {
-      image: 'https://source.unsplash.com/random',
-      title: 'MAGALU',
-    },
-    {
-      image: 'https://source.unsplash.com/random',
-      title: 'ROCKETSEAT',
-    },
-    {
-      image: 'https://source.unsplash.com/random',
-      title: 'ARQUIVEI',
-    },
-    {
-      image: 'https://source.unsplash.com/random',
-      title: 'IFOOD',
-    },
-  ];
+  const intervalRef = useRef(null);
 
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % cards.length);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (flatListRef.current) {
+        const nextIndex = (currentIndex + 1) % images.length;
+        flatListRef.current.scrollToOffset({
+          offset: nextIndex * width,
+          animated: true,
+        });
+        setCurrentIndex(nextIndex);
+      }
+    }, 3000); // Scroll every 3 seconds
+
+    intervalRef.current = interval;
+
+    return () => {
+      clearInterval(intervalRef.current); 
+    };
+  }, [currentIndex]);
+
+  const handleScroll = (event) => {
+    const index = Math.floor(event.nativeEvent.contentOffset.x / width);
+    setCurrentIndex(index);
   };
 
-  const handlePrev = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + cards.length) % cards.length);
-  };
-
-  if (currentIndex > cards.length - 2) {
-    setCurrentIndex(0);
-  }
+  const renderItem = ({ item }) => (
+    <View style={styles.imageContainer}>
+      <Image source={item.uri} style={styles.image} />
+    </View>
+  );
 
   return (
-    <View className='mt-8 items-center'>
-      
-      <View className='relative w-11/12'>
-
-        <View className='flex-row'>
-          {cards.slice(currentIndex, currentIndex + 2).map((card, index) => (
-            <View style={styles.card} key={index}>
-              <Image style={styles.cardImage} source={{ uri: card.image }} />
-              <Text className='font-bold justify-center text-center'>{card.title}</Text>
-            </View>
-          ))}
-        </View>
-
-      
-        <View className="flex flex-row justify-between absolute w-full top-1/2 -mt-4">
-          <TouchableOpacity className='items-center'onPress={handlePrev}>
-            <AntDesign name="leftcircle" size={25} color={colors.blue}  />
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={handleNext}>
-           <AntDesign name="rightcircle" size={25} color={colors.blue} />
-          </TouchableOpacity>
-        </View>
-        
+    <View style={styles.container}>
+      <FlatList
+        ref={flatListRef}
+        data={images}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+        horizontal
+        pagingEnabled
+        onScroll={handleScroll}
+        showsHorizontalScrollIndicator={false}
+      />
+      <View style={styles.pagination}>
+        {images.map((_, index) => (
+          <View
+            key={index}
+            style={[
+              styles.dot,
+              { backgroundColor: currentIndex === index ? 'black' : 'gray' },
+            ]}
+          />
+        ))}
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  card: {
+  container: {
     flex: 1,
-    width: width / 2.2,
-    padding: 8,
-    paddingBottom:10,
-    backgroundColor: 'white',
-    borderRadius: 8,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-    elevation: 7,
-    marginHorizontal: 7, 
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  cardImage: {
-    width: '100%',
-    height: 150,
-    marginBottom: 8,
-    borderRadius: 8,
+  imageContainer: {
+    width: width,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-
+  image: {
+    width: width,
+    height: 200,
+    resizeMode: 'cover',
+  },
+  pagination: {
+    position: 'absolute',
+    bottom: 10,
+    flexDirection: 'row',
+  },
+  dot: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    margin: 5,
+  },
 });
 
-export default MultiCardCarousel;
+export default ImageCarousel;

@@ -59,13 +59,15 @@ export default function QRCode() {
             } catch (error) {
                 const err = error as any; 
 
+                const errorMessage = err.response?.data?.message || 'Falha ao processar o check-in.';
+
                 // Imprime o erro no console para depuração
 
-                console.error('Erro ao processar o check-in:', err.response.data);
+                //console.error('Erro ao processar o check-in:', err.response.data);
              
                 Alert.alert(
                     'Erro',
-                    'Falha ao processar o check-in.',
+                    errorMessage,
                     [{ text: 'OK', onPress: () => navigation.goBack() }]
                 );
             }

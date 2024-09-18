@@ -30,7 +30,7 @@ export default function SignUp() {
 			return Alert.alert("Inscrição", "Preencha todos os campos!")
 		}
 
-		navigation.navigate("Home")
+		//navigation.navigate("Home")
 
 		setIsLoading(true)
 
@@ -41,9 +41,15 @@ export default function SignUp() {
 
         	console.log(data)
 
-        } catch(error) {
-            Alert.alert("Registro", "Não foi possível efetuar o registro") //Precisa tratar erros específicos como senha ou email incorretos
-            console.log(error)
+        } catch (error) {
+            const err = error as any; 
+
+            const errorMessage = err.response?.data?.message || 'Falha ao processar o cadastramento.';
+
+            Alert.alert(
+                'Cadastro',
+                errorMessage
+            );
         } finally {
             setIsLoading(false)
         }
@@ -93,6 +99,8 @@ export default function SignUp() {
 					<Input.Field
 						placeholder="Senha"
 						onChangeText={setSenha}
+						secureTextEntry={true} 
+
 					/>
 				</Input>
 
