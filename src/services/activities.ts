@@ -9,6 +9,7 @@ type Activity = ({
     vagas: string
     detalhes: string
     categoriaId: string
+    local: string
 })
 
 
@@ -32,5 +33,12 @@ export const subscribeToActivity = async (userId: string, eventId: string) => {
 
     return response
 }
+
+export const unsubscribeToActivity = async (userId: string, eventId: string) => {
+    const response = await api.delete(`/userAtActivities/${userId}/${eventId}`);
+
+    return response
+}
+
 
 export type { Activity };

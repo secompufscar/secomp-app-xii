@@ -29,8 +29,9 @@ export default function Registration() {
     const [items, setItems] = useState<Activity[]>([])
     const [registered, setRegistered] = useState(false)
     const {user:{user}}: any = useAuth()
-    
+
     const anim = useRef(new Animated.Value(0)).current;
+//ADICIONAR CARREGAMENTO DE TELA 
 
     const open = () => {
         Animated.timing(anim, {
@@ -53,14 +54,21 @@ export default function Registration() {
             const fetchedItemsUnsubscribed: Activity[] = await getActivities();
 
             const fetchedItemsSubscribed: Activity[] = await getUserSubscribedActivities(user.id);
+
+
+            const validFetchedItemsSubscribed = fetchedItemsSubscribed || [];
         
-            let filteredItems: Activity[] = fetchedItemsUnsubscribed;
+            let filteredItems: Activity[] = fetchedItemsUnsubscribed || [];
         
+            console.log('Unsubscribed Items:', fetchedItemsUnsubscribed);
+            console.log('Subscribed Items:', fetchedItemsSubscribed);
+
+            
             if (registered) {
                 filteredItems = fetchedItemsSubscribed;
             } else {
                 filteredItems = fetchedItemsUnsubscribed.filter(unsubscribedItem => 
-                    !fetchedItemsSubscribed.some(subscribedItem => subscribedItem.id === unsubscribedItem.id)
+                    !validFetchedItemsSubscribed.some(subscribedItem => subscribedItem.id === unsubscribedItem.id)
                 );
             }
         
@@ -100,10 +108,10 @@ export default function Registration() {
                 <TouchableOpacity>
                     <AntDesign name="arrowleft" size={24} color="#445BE6" onPress={() => navigation.goBack()} />
                 </TouchableOpacity>
-                <Text className='text-3xl font-bold text-blue'>Eventos inscritos</Text>
-                <TouchableOpacity className='pl-10'>
+                <Text className='text-3xl font-bold text-blue'>Inscrição</Text>
+                {/* <TouchableOpacity className='pl-25'> 
                     <AntDesign name="search1" size={24} color="#445BE6" onPress={handleSearching} />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
             </View>
             {searching && (
                 <Animated.View className='p-4' style={{
@@ -122,21 +130,22 @@ export default function Registration() {
                     />
                 </Animated.View>
             )}
-            <View className="flex-row justify-around mx-12">
+            {/* <View className="flex-row justify-around mx-12">
                 <TouchableOpacity onPress={() => setRegistered(false)}>
-                    <Text className={`text-xl font-bold text-blue ${(!registered) && "underline"}`}>Inscreva-se</Text>
+                    <Text className={`text-xl font-bold text-blue ${(!registered) && "underline"}`}>Inscreva-se</Text> 
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => setRegistered(true)}>
                     <Text className={`text-xl font-bold text-blue ${(registered) && "underline"}`}>Inscritos</Text>
                 </TouchableOpacity>
-            </View>
+            </View> */}
 
-            <View className="justify-end items-end px-8 py-2 bg-[#FBFBFB]">
+            {/* <View className="justify-end items-end px-8 py-2 bg-[#FBFBFB]">
                 <TouchableOpacity>
                     <AntDesign name="filter" size={24} onPress={() => handleSearch("Teste")} />
                 </TouchableOpacity>
-            </View>
-            <ScrollView className="flex px-5 bg-[#FBFBFB]">
+            </View> */}
+
+            <ScrollView className="flex px-5 py-0">
                 <View className='flex-row flex-wrap justify-around'>
                     {Object.keys(groupedItems).map((date) => (
                         <View key={date} className="w-full">
@@ -145,7 +154,7 @@ export default function Registration() {
                             </View>
                             <View className='flex-row flex-wrap justify-around'>
                                 {groupedItems[date].map((item, index) => (
-                                    <View className='pb-4 px-2 bg-[#FBFBFB] flex-wrap' key={index}>
+                                    <View className='pb-4 px-2 bg-white flex-wrap' key={index}>
                                         <MyEvent
                                             scheduleItem={item}
                                             onClick={() => handlePress(item)}

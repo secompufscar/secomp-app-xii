@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Image, FlatList} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Image, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ParamListBase, useNavigation } from "@react-navigation/native"
@@ -8,9 +8,9 @@ import { StackTypes } from '../routes/stack.routes';
 
 import { ButtonHome } from "../components/buttonHome";
 
-import MultiCardCarousel from "../components/carousel"
+import ImageCarousel from "../components/carousel"
 
-import {getActivities} from "../services/activities"
+import { getActivities } from "../services/activities"
 import { useEffect } from 'react';
 
 import { useAuth } from "../hooks/AuthContext";
@@ -20,9 +20,9 @@ import { useState } from "react"
 
 
 export default function Home() {
-	const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
-    const {user:{user}}: any = useAuth()
-    
+    const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
+    const { user: { user } }: any = useAuth()
+
     // const [activities, setActivities] = useState<Activity[]>([]);
 
     // useEffect(() => {
@@ -30,7 +30,7 @@ export default function Home() {
     //         const data = await getActivities();
     //         setActivities(data);
     //     };
-    
+
     //     getActivitiesData();
     //   }, []);
 
@@ -44,16 +44,19 @@ export default function Home() {
                 </View>
 
 
-{/* 
+
                 <View className='flex-row items-center justify-center pt-5 px-4 gap-4 space-x-4 border-b-2 border-blue mx-6 mb-2 py-4'>
                     <Text className='text-xl font-bold text-blue'>
                         O QUE É A SECOMP?
                     </Text>
-                </View> */}
+                </View>
 
-                <View className='flex-row items-center justify-center pt-9 pb-10 px-4 gap-4'>
-                    <Text className='font-semibold break-all text-justify text-center'>
-                       BEM-VINDO À DÉCIMA SEGUNDA EDIÇÃO DA SEMANA DA COMPUTAÇÃO!
+                <View className='flex-row justify-center pt-9 pb-10 px-4 gap-4'>
+                    <Text className='text-base text-justify'>
+                        A Semana Acadêmica da Computação da Universidade Federal de São Carlos
+                        surgiu da necessidade de trazer assuntos que fossem de interesse tanto da comunidade acadêmica quanto de entusiastas.
+                        A cada ano, alunos da graduação dos cursos do Departamento de Computação se mobilizam para realizar este grande evento,
+                        no qual pessoas de diferentes áreas relacionadas são convidadas a apresentar, discutir e debater experiências e novidades que trarão informações, conhecimentos e inovação aos participantes.
                     </Text>
                 </View>
 
@@ -63,14 +66,17 @@ export default function Home() {
                 </View>
 
 
-                <View className='flex-row items-center justify-center pt-12 px-4 gap-4 space-x-4 border-b-2 border-blue mx-6 mb-1 py-4'>
+                <View className='flex-row justify-center pt-12 px-4 gap-4 space-x-4 border-b-2 border-blue mx-6 mb-1 py-4'>
                     <Text className='text-xl font-bold text-blue'>
-                        PATROCINADORES
+                        NOSSOS PATROCINADORES
                     </Text>
                 </View>
 
 
-                <MultiCardCarousel />
+                <View className='pb-6'>
+                    <ImageCarousel />
+                </View>
+
             </ScrollView>
 
         </SafeAreaView>

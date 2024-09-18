@@ -13,11 +13,12 @@ export default function ScheduleItemComponent({scheduleItem, onClick}: ScheduleI
         <TouchableOpacity onPress={onClick}>
             <View className='flex flex-row justify-start min-w-full items-center p-4 rounded-md bg-blue'>
                 <View className='pl-8 pr-4'>
-                    <Text className='text-white'>{scheduleItem.data.substring(11, 16)}</Text>
+                    <Text className='text-white font-bold'>{scheduleItem.data.substring(11, 16)}</Text>
                 </View>
                 <View className='pl-4 pr-8 max-w-[80%]'>
-                    <Text className='text-white'>{scheduleItem.nome} - {scheduleItem.palestranteNome}</Text>
-                    <Text className='text-white'>{scheduleItem.detalhes}</Text>
+                    <Text className='text-white font-bold'>{scheduleItem.nome}</Text>
+                    <Text className='text-white'>{scheduleItem.palestranteNome}</Text>
+                   {/* <Text className='text-white'>{scheduleItem.detalhes}</Text> */}
                 </View>
             </View>
         </TouchableOpacity>
