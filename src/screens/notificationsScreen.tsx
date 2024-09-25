@@ -10,52 +10,43 @@ export default function Notifications() {
 	const rectangleWidth = screenWidth - (2 * marginHorizontal);
 
 	return (
-		<SafeAreaView style={styles.container}>
+		<SafeAreaView className='bg-white flex-1'>
 
 			<View className='flex-row justify-start items-center pt-16 pb-2 px-6 gap-4'>
 				<Text className='text-3xl font-bold text-blue'>Notficações</Text>
 			</View>
 
-			<View style={styles.rectangles}>
+			<View className='mt-8 flex-col items-center justify-center px-6 space-y-4'>
 				<TouchableOpacity>
-					<View style={[styles.rectangle, { width: rectangleWidth }]}>
+					<View style={[styles.rectangle]} className='w-full'>
 						<Text style={styles.texto1}>Transaction Completed</Text>
 						<Text style={styles.texto2}>8 minutes ago</Text>
 					</View>
 				</TouchableOpacity>
+
 				<TouchableOpacity>
-					<View style={[styles.rectangle, { width: rectangleWidth }]}>
+					<View style={[styles.rectangle]} className='w-full'>
 						<Text style={styles.texto1}>Transaction Completed</Text>
 						<Text style={styles.texto2}>8 minutes ago</Text>
 					</View>
 				</TouchableOpacity>
 			</View>
+			
 			<StatusBar style="auto" />
 		</SafeAreaView>
 	);
 }
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: '#FFFFFF',
-		alignItems: 'flex-start',
-		paddingTop: 0,
-	},
 	rectangle: {
 		height: 81,
 		backgroundColor: '#445BE6',
 		borderRadius: 5,
-		marginBottom: 32,
-		marginHorizontal: 6,
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'space-between',
 		paddingHorizontal: 20,
 
-	},
-	rectangles: {
-		marginTop: 62,
 	},
 	texto1: {
 		color: 'white',

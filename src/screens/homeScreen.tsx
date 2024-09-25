@@ -36,10 +36,10 @@ export default function Home() {
 
     return (
 
-        <SafeAreaView className='bg-white flex-1'>
+        <SafeAreaView className='bg-white flex-1 px-2'>
             <ScrollView className='flex-1'>
 
-                <View className='flex-row  items-center  pt-12 pb-2 px-4 gap-4'>
+                <View className='flex-row items-center pt-8 pb-2 px-4 gap-4'>
                     <Text className='text-3xl font-bold text-blue'>Olá, {user.nome}!</Text>
                 </View>
 
