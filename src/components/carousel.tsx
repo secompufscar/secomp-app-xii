@@ -35,7 +35,7 @@ const ImageCarousel = () => {
 
         setCurrentIndex(nextIndex);
       }
-    }, 3000); // Scroll every 3 seconds
+    }, 2000); // Scroll every 3 seconds
 
     intervalRef.current = interval;
 
@@ -47,7 +47,6 @@ const ImageCarousel = () => {
   const handleScroll = (event) => {
     const index = Math.floor(event.nativeEvent.contentOffset.x / width);
     
-    // Só atualiza o índice se ele realmente mudou, para evitar inconsistências
     if (index !== currentIndex) {
       setCurrentIndex(index);
     }
@@ -72,10 +71,10 @@ const ImageCarousel = () => {
         scrollEventThrottle={16}
         decelerationRate="fast"
         showsHorizontalScrollIndicator={false}
-        initialNumToRender={images.length}  // Garante que todas as imagens sejam renderizadas inicialmente
+        initialNumToRender={images.length}  
         getItemLayout={(data, index) => (
           { length: width, offset: width * index, index }
-        )}  // Força o layout de cada item no FlatList
+        )} 
       />
       <View style={styles.pagination}>
         {images.map((_, index) => (
@@ -104,11 +103,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
-    width: '100%',  // Faz com que a imagem ocupe 100% da largura do container
-    height: 200,    // Define a altura como 200px
-    maxWidth: width,  // Garante que a imagem não ultrapasse a largura da tela
-    maxHeight: 200,   // Garante que a imagem tenha no máximo 200px de altura
-    resizeMode: 'contain',  // Redimensiona a imagem para caber no container sem cortar
+    width: '100%',  
+    height: 200,   
+    maxWidth: width, 
+    maxHeight: 200,   
+    resizeMode: 'contain',  
   },
   pagination: {
     position: 'absolute',
