@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { View, Image, StatusBar, Alert, TouchableOpacity, Text } from "react-native"
+import { View, Image, StatusBar, Alert, TouchableOpacity, Text, Platform } from "react-native"
 import { FontAwesome5, Entypo, MaterialIcons, Ionicons } from "@expo/vector-icons"
 
 import { useNavigation } from "@react-navigation/native"
@@ -11,7 +11,7 @@ import { Input } from "../components/input"
 import { Button } from "../components/button"
 import { useAuth } from "../hooks/AuthContext";
 
-import {signup} from "../services/users";
+import { signup } from "../services/users";
 
 
 export default function SignUp() {
@@ -22,51 +22,66 @@ export default function SignUp() {
 	const [senha, setSenha] = useState("")
 	const [isLoading, setIsLoading] = useState(false)
 
-	
-	const { signUp }: any = useAuth()
 
-	const handleRegister = async () =>  {
+	//const { signUp }: any = useAuth()
+
+	const handleRegister = async () => {
 		if (!nome.trim() || !email.trim() || !senha.trim()) {
-			return Alert.alert("Inscrição", "Preencha todos os campos!")
-		}
 
-		//navigation.navigate("Home")
+			if (Platform.OS === 'web') {
+				window.alert("Inscrição: Preencha todos os campos!");
+			} else {
+				Alert.alert("Inscrição", "Preencha todos os campos!");
+			}
+		}
 
 		setIsLoading(true)
 
-        try {
-        	const data = await signup({nome, email, senha})
+		try {
+			const data = await signup({ nome, email, senha })
 
-           	await signUp(data)
+			if (data === true) {
+				if (Platform.OS === 'web') {
+					alert("Inscrição: Um e-mail de confirmação foi enviado para seu e-mail!");
+					navigation.navigate('Login'); // Navega para a tela de login na web
+				} else {
+					Alert.alert(
+						"Inscrição",
+						"Um e-mail de confirmação foi enviado com sucesso!",
+						[
+							{ text: "OK", onPress: () => navigation.navigate('Login') } // Navega para a tela de login
+						]
+					);
+				}
+			}
 
-        	console.log(data)
+		} catch (error) {
+			const err = error as any;
 
-        } catch (error) {
-            const err = error as any; 
+			const errorMessage = err.response?.data?.message || 'Falha ao processar o cadastramento.';
 
-            const errorMessage = err.response?.data?.message || 'Falha ao processar o cadastramento.';
+			Alert.alert(
+				'Cadastro',
+				errorMessage
+			);
+		} finally {
+			setIsLoading(false)
 
-            Alert.alert(
-                'Cadastro',
-                errorMessage
-            );
-        } finally {
-            setIsLoading(false)
-        }
+		}
 	}
 
 	return (
 		<View className="flex-1 bg-blue items-center justify-center">
 			<StatusBar barStyle="light-content" />
 
-            <View className="items-center">
-                <Image
-                    source={require("../../assets/logo.png")}
-                    className="h-20"
-                    resizeMode="contain"
-                />
-            </View>
-			
+			<View className="items-center">
+				<Image
+					source={require("../../assets/logo.png")}
+					className="h-20"
+					resizeMode="contain"
+				/>
+			</View>
+
 
 
 			<View className="w-full gap-2 text-center justify-center p-8">
@@ -99,12 +114,13 @@ export default function SignUp() {
 					<Input.Field
 						placeholder="Senha"
 						onChangeText={setSenha}
-						secureTextEntry={true} 
+						secureTextEntry={true}
 
 					/>
 				</Input>
 
-				<Button title="Realizar inscrição" onPress={handleRegister} />
+				<Button title="REGISTRAR" onPress={handleRegister} isLoading={isLoading}
+				/>
 
 				<TouchableOpacity onPress={() => navigation.navigate("Login")}>
 					<Text className="text-white text-base font-bold text-center mt-4">

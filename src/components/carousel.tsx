@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { View, Image, FlatList, Dimensions, StyleSheet } from 'react-native';
+import { View, Image, FlatList, Dimensions, StyleSheet, Platform } from 'react-native';
 
 const { width } = Dimensions.get('window');
 
@@ -27,10 +27,12 @@ const ImageCarousel = () => {
     const interval = setInterval(() => {
       if (flatListRef.current) {
         const nextIndex = (currentIndex + 1) % images.length;
+
         flatListRef.current.scrollToOffset({
           offset: nextIndex * width,
           animated: true,
         });
+
         setCurrentIndex(nextIndex);
       }
     }, 3000); // Scroll every 3 seconds
@@ -38,18 +40,22 @@ const ImageCarousel = () => {
     intervalRef.current = interval;
 
     return () => {
-      clearInterval(intervalRef.current); 
+      clearInterval(intervalRef.current);
     };
   }, [currentIndex]);
 
   const handleScroll = (event) => {
     const index = Math.floor(event.nativeEvent.contentOffset.x / width);
-    setCurrentIndex(index);
+    
+    // Só atualiza o índice se ele realmente mudou, para evitar inconsistências
+    if (index !== currentIndex) {
+      setCurrentIndex(index);
+    }
   };
 
   const renderItem = ({ item }) => (
     <View style={styles.imageContainer}>
-      <Image source={item.uri} style={styles.image} />
+      <Image source={item.uri} style={styles.image} resizeMode="contain" />
     </View>
   );
 
@@ -63,7 +69,13 @@ const ImageCarousel = () => {
         horizontal
         pagingEnabled
         onScroll={handleScroll}
+        scrollEventThrottle={16}
+        decelerationRate="fast"
         showsHorizontalScrollIndicator={false}
+        initialNumToRender={images.length}  // Garante que todas as imagens sejam renderizadas inicialmente
+        getItemLayout={(data, index) => (
+          { length: width, offset: width * index, index }
+        )}  // Força o layout de cada item no FlatList
       />
       <View style={styles.pagination}>
         {images.map((_, index) => (
@@ -92,9 +104,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
-    width: width,
-    height: 200,
-    resizeMode: 'cover',
+    width: '100%',  // Faz com que a imagem ocupe 100% da largura do container
+    height: 200,    // Define a altura como 200px
+    maxWidth: width,  // Garante que a imagem não ultrapasse a largura da tela
+    maxHeight: 200,   // Garante que a imagem tenha no máximo 200px de altura
+    resizeMode: 'contain',  // Redimensiona a imagem para caber no container sem cortar
   },
   pagination: {
     position: 'absolute',

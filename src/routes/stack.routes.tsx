@@ -7,7 +7,6 @@ import {
     ScheduleDetails,
     MyEvents,
     Credential,
-    Notifications,
     Registration,
     RegistrationDetails,
     Categorias,
@@ -45,7 +44,6 @@ export default function StackRoutes() {
             <Stack.Screen name="ScheduleDetails" component={ScheduleDetails} />
             <Stack.Screen name="MyEvents" component={MyEvents} />
             <Stack.Screen name="Credential" component={Credential} />
-            <Stack.Screen name="Notifications" component={Notifications} />
             <Stack.Screen name="Registration" component={Registration} />
             <Stack.Screen name="RegistrationDetails" component={RegistrationDetails} />
             <Stack.Screen name="Categorias" component={Categorias} />

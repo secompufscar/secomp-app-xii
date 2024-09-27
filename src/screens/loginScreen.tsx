@@ -1,4 +1,4 @@
-import { View, TouchableOpacity, StatusBar, Alert, Text, Image } from "react-native"
+import { View, TouchableOpacity, StatusBar, Alert, Text, Image, Platform } from "react-native"
 import { useState } from "react"
 
 import { useNavigation } from "@react-navigation/native"
@@ -24,9 +24,11 @@ export default function Login() {
 
     const handleLogin = async () => {
         if (!email.trim() || !senha.trim()) {
-            Alert.alert("Login", "Preencha todos os campos")
-
-            return
+            if (Platform.OS === 'web') {
+                window.alert("Inscrição: Preencha todos os campos!");
+            } else {
+                Alert.alert("Login", "Preencha todos os campos!");
+            }
         }
 
         setIsLoading(true)
@@ -47,10 +49,12 @@ export default function Login() {
 
             //console.error('Erro ao processar o check-in:', err.response.data);
          
-            Alert.alert(
-                'Login',
-                errorMessage
-            );
+            if (Platform.OS === 'web') {
+                window.alert(`Login: ${errorMessage}`);
+            } else {
+                Alert.alert("Login", errorMessage);
+            }
+
         } finally {
             setIsLoading(false)
         }
@@ -102,7 +106,7 @@ export default function Login() {
 
                 </Input>
 
-                <Button title="REALIZAR LOGIN" onPress={handleLogin} />
+                <Button title="LOGIN" onPress={handleLogin} isLoading={isLoading} />
 
                 <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
                     <Text className="text-white text-base font-bold text-center mt-4">

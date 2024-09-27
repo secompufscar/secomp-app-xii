@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Entypo, MaterialIcons, Ionicons, FontAwesome6, Feather } from '@expo/vector-icons';
 
-import { Home, Schedule, Gamificacao, UserProfile, Notifications, AdminProfile } from '../screens';
+import { Home, Schedule, UserProfile, AdminProfile } from '../screens';
 
 import { colors } from "../styles/colors"
 import { useAuth } from "../hooks/AuthContext";
@@ -46,16 +46,6 @@ export default function TabRoutes() {
                         <Ionicons name={focused ? "list" : "list-outline"} size={28} color={colors.white} />
                     ),
 
-                }}
-            />
-
-            <Tab.Screen
-                name="NOTIFICAÇÕES"
-                component={Notifications}
-                options={{
-                    tabBarIcon: ({ focused }) => (
-                        <Ionicons name={focused ? "notifications" : "notifications-outline"} size={28} color={colors.white} />
-                    )
                 }}
             />
 

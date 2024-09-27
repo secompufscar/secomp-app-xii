@@ -44,13 +44,6 @@ export default function Home() {
                 </View>
 
 
-
-                <View className='flex-row items-center justify-center pt-5 px-4 gap-4 space-x-4 border-b-2 border-blue mx-6 mb-2 py-4'>
-                    <Text className='text-xl font-bold text-blue'>
-                        O QUE É A SECOMP?
-                    </Text>
-                </View>
-
                 <View className='flex-row justify-center pt-9 pb-10 px-4 gap-4'>
                     <Text className='text-base text-justify'>
                         A Semana Acadêmica da Computação da Universidade Federal de São Carlos
@@ -68,7 +61,7 @@ export default function Home() {
 
                 <View className='flex-row justify-center pt-12 px-4 gap-4 space-x-4 border-b-2 border-blue mx-6 mb-1 py-4'>
                     <Text className='text-xl font-bold text-blue'>
-                        NOSSOS PATROCINADORES
+                        PATROCINADORES
                     </Text>
                 </View>
 
