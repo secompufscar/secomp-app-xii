@@ -1,10 +1,8 @@
 import Login from './loginScreen'
 import SignUp from './signupScreen'
 
-import Home from './homeScreen'
-
-import UserProfile from './userProfileScreen'
-import AdminProfile from './adminProfileScreen'
+import UserHome from './homeScreenUser'
+import AdminHome from './homeScreenAdmin'
 
 import Navigator from './navigatorScreen'
 import Schedule from './scheduleScreen'
@@ -25,11 +23,10 @@ import QRCode from './qrCodeReaderScreen'
 
 
 export {
-    Home,
     Login,
     SignUp,
-    UserProfile,
-    AdminProfile,
+    UserHome,
+    AdminHome,
     Navigator,
     Schedule,
     ScheduleDetails,

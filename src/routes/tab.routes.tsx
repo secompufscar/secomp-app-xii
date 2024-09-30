@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Entypo, MaterialIcons, Ionicons, FontAwesome6, Feather } from '@expo/vector-icons';
 
-import { Home, Schedule, UserProfile, AdminProfile } from '../screens';
+import {Schedule, UserHome, AdminHome } from '../screens';
 
 import { colors } from "../styles/colors"
 import { useAuth } from "../hooks/AuthContext";
@@ -26,17 +26,25 @@ export default function TabRoutes() {
                 tabBarShowLabel: false
             }}>
 
-            <Tab.Screen
-                name="HOME"
-                component={Home}
-                options={{
-                    tabBarIcon: ({ focused }) => (
-                        <Ionicons name={focused ? "home" : "home-outline"} size={28} color={colors.white} />
-                    )
-
-                }}
-            />
-
+{
+                user.tipo == 'USER' ? <Tab.Screen
+                    name="HOME"
+                    component={UserHome}
+                    options={{
+                        tabBarIcon: ({ focused }) => (
+                            <Ionicons name={focused ? "home" : "home-outline"} size={28} color={colors.white} />
+                        ),
+                    }}
+                /> : <Tab.Screen
+                    name="PERFIL"
+                    component={AdminHome}
+                    options={{
+                        tabBarIcon: ({ focused }) => (
+                            <Ionicons name={focused ? "home" : "home-outline"} size={28} color={colors.white} />
+                        ),
+                    }}
+                />
+            }
 
             <Tab.Screen
                 name="CRONOGRAMA"
@@ -48,27 +56,6 @@ export default function TabRoutes() {
 
                 }}
             />
-
-            {
-                user.tipo == 'USER' ? <Tab.Screen
-                    name="PERFIL"
-                    component={UserProfile}
-                    options={{
-                        tabBarIcon: ({ focused }) => (
-                            <Ionicons name={focused ? "person" : "person-outline"} size={28} color={colors.white} />
-                        ),
-                    }}
-                /> : <Tab.Screen
-                    name="PERFIL"
-                    component={AdminProfile}
-                    options={{
-                        tabBarIcon: ({ focused }) => (
-                            <Ionicons name={focused ? "person" : "person-outline"} size={28} color={colors.white} />
-                        ),
-                    }}
-                />
-            }
-
 
         </Tab.Navigator>
     );

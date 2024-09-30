@@ -108,7 +108,7 @@ export default function Registration() {
                 <TouchableOpacity>
                     <AntDesign name="arrowleft" size={24} color="#445BE6" onPress={() => navigation.goBack()} />
                 </TouchableOpacity>
-                <Text className='text-3xl font-bold text-blue'>Inscrição</Text>
+                <Text className='text-3xl font-bold text-blue'>Inscrições</Text>
                 {/* <TouchableOpacity className='pl-25'> 
                     <AntDesign name="search1" size={24} color="#445BE6" onPress={handleSearching} />
                 </TouchableOpacity> */}
@@ -130,20 +130,16 @@ export default function Registration() {
                     />
                 </Animated.View>
             )}
-            {/* <View className="flex-row justify-around mx-12">
+
+            <View className="flex-row justify-around mx-12 mb-5">
                 <TouchableOpacity onPress={() => setRegistered(false)}>
                     <Text className={`text-xl font-bold text-blue ${(!registered) && "underline"}`}>Inscreva-se</Text> 
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => setRegistered(true)}>
                     <Text className={`text-xl font-bold text-blue ${(registered) && "underline"}`}>Inscritos</Text>
                 </TouchableOpacity>
-            </View> */}
+            </View> 
 
-            {/* <View className="justify-end items-end px-8 py-2 bg-[#FBFBFB]">
-                <TouchableOpacity>
-                    <AntDesign name="filter" size={24} onPress={() => handleSearch("Teste")} />
-                </TouchableOpacity>
-            </View> */}
 
             <ScrollView className="flex px-5 py-0">
                 <View className='flex-row flex-wrap justify-around'>

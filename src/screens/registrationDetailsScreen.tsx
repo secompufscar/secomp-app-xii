@@ -97,7 +97,7 @@ export default function RegistrationDetails() {
                 <TouchableOpacity>
                     <AntDesign name="arrowleft" size={24} color="#445BE6" onPress={() => navigation.goBack()} />
                 </TouchableOpacity>
-                <Text className='text-3xl font-bold text-blue'>Inscrição</Text>
+                <Text className='text-3xl font-bold text-blue'>Inscrições</Text>
                 {/* <TouchableOpacity className='pl-10' disabled={true}>
                     <AntDesign name="search1" size={24} color="#51B68D" />
                 </TouchableOpacity> */}

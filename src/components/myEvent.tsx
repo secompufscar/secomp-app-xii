@@ -40,7 +40,7 @@ export default function MyEvent({scheduleItem, onClick}: ScheduleItemComponentPr
 const styles = StyleSheet.create({
     shadowProp: {
         shadowColor: '#171717',
-        shadowOffset: {width: -1, height: 4},
+        shadowOffset: {width: -1, height: 10},
         shadowOpacity: 0.2,
         shadowRadius: 3,
     },
