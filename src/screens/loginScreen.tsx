@@ -12,7 +12,7 @@ import { Button } from "../components/button";
 import { colors } from "../styles/colors"
 import { useAuth } from "../hooks/AuthContext";
 
-import {login} from "../services/users";
+import { login } from "../services/users";
 
 export default function Login() {
     const navigation = useNavigation<StackTypes>();
@@ -21,6 +21,7 @@ export default function Login() {
     const [email, setEmail] = useState("")
     const [senha, setSenha] = useState("")
     const [isLoading, setIsLoading] = useState(false)
+	const [senhaVisivel, setSenhaVisivel] = useState(false);
 
     const handleLogin = async () => {
         if (!email.trim() || !senha.trim()) {
@@ -34,21 +35,21 @@ export default function Login() {
         setIsLoading(true)
 
         try {
-            const data = await login({email, senha})
+            const data = await login({ email, senha })
 
             await signIn(data)
 
             console.log(data)
 
         } catch (error) {
-            const err = error as any; 
+            const err = error as any;
 
             const errorMessage = err.response?.data?.message || 'Falha ao processar o login.';
 
             // Imprime o erro no console para depuração
 
             //console.error('Erro ao processar o check-in:', err.response.data);
-         
+
             if (Platform.OS === 'web') {
                 window.alert(`Login: ${errorMessage}`);
             } else {
@@ -59,15 +60,15 @@ export default function Login() {
             setIsLoading(false)
         }
     }
-        
+
 
 
     return (
 
         <View className="flex-1 bg-blue items-center justify-center">
-            
+
             <StatusBar barStyle="light-content" />
-            
+
             <View className="items-center">
                 <Image
                     source={require("../../assets/logo.png")}
@@ -101,8 +102,16 @@ export default function Login() {
                     <Input.Field
                         placeholder="Senha"
                         onChangeText={setSenha}
-                        secureTextEntry={true} 
+                        secureTextEntry={!senhaVisivel}
                     />
+
+                    <TouchableOpacity onPress={() => setSenhaVisivel(!senhaVisivel)}>
+                        <Entypo
+                            name={senhaVisivel ? 'eye-with-line' : 'eye'} // Alterna o ícone do olho
+                            size={20}
+                            color={'#fff'}
+                        />
+                    </TouchableOpacity>
 
                 </Input>
 

@@ -21,6 +21,8 @@ export default function SignUp() {
 	const [email, setEmail] = useState("")
 	const [senha, setSenha] = useState("")
 	const [isLoading, setIsLoading] = useState(false)
+	const [senhaVisivel, setSenhaVisivel] = useState(false);
+
 
 
 	//const { signUp }: any = useAuth()
@@ -107,17 +109,22 @@ export default function SignUp() {
 				</Input>
 
 				<Input>
-					<Entypo name="lock"
-						color={colors.white}
-						size={20}
-					/>
+					<Entypo name="lock" color={'#fff'} size={20} />
 					<Input.Field
 						placeholder="Senha"
+						value={senha}
 						onChangeText={setSenha}
-						secureTextEntry={true}
-
+						secureTextEntry={!senhaVisivel} // Alterna entre mostrar ou esconder a senha
 					/>
+					<TouchableOpacity onPress={() => setSenhaVisivel(!senhaVisivel)}>
+						<Entypo
+							name={senhaVisivel ? 'eye-with-line' : 'eye'} // Alterna o ícone do olho
+							size={20}
+							color={'#fff'}
+						/>
+					</TouchableOpacity>
 				</Input>
+
 
 				<Button title="REGISTRAR" onPress={handleRegister} isLoading={isLoading}
 				/>
