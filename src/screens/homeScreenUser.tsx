@@ -140,7 +140,7 @@ export default function UserHome() {
                     <View className='flex-col justify-center items-center space-y-3'>
                         <View className='h-32 w-full flex-row space-x-3 xl:h-48'>
                             <TouchableOpacity className='h-full w-[60%]' onPress={() => Linking.openURL('https://tractian.com/sobre')}>
-                                <View className='rounded-lg bg-neutral-200/50'>
+                                <View className='h-full grow rounded-lg bg-neutral-200/50'>
                                     <Image
                                         source={require('../../assets/empresas/tractian.png')}
                                         style={{
@@ -155,7 +155,7 @@ export default function UserHome() {
                             </TouchableOpacity>
 
                             <TouchableOpacity className='h-full grow' onPress={() => Linking.openURL('https://www.tempest.com.br/sobre-nos/')}>
-                                <View className='rounded-lg bg-neutral-200'>
+                                <View className='h-full grow rounded-lg bg-neutral-200'>
                                     <Image
                                         source={require('../../assets/empresas/tempest.png')}
                                         style={{
@@ -172,7 +172,7 @@ export default function UserHome() {
 
                         <View className='h-32 w-full flex-row space-x-3 xl:h-48'>
                             <TouchableOpacity className='h-full w-[40%]' onPress={() => Linking.openURL('https://visagio.com/quem-somos/')}>
-                                <View className='rounded-lg bg-neutral-200 p-1'>
+                                <View className='h-full grow rounded-lg bg-neutral-200 p-1'>
                                     <Image
                                         source={require('../../assets/empresas/visagio.png')}
                                         style={{
@@ -187,7 +187,7 @@ export default function UserHome() {
                             </TouchableOpacity>
 
                             <TouchableOpacity className='h-full grow' onPress={() => Linking.openURL('https://app.rocketseat.com.br/')}>
-                                <View className='rounded-lg bg-neutral-200/50'>
+                                <View className='h-full grow rounded-lg bg-neutral-200/50'>
                                     <Image
                                         source={require('../../assets/empresas/rocketseat.png')}
                                         style={{
