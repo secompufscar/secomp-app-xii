@@ -96,11 +96,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 10,
   },
+  
   imageContainer: {
     width: width,
     justifyContent: 'center',
     alignItems: 'center',
+    padding: 10,
   },
   image: {
     width: '100%',  
