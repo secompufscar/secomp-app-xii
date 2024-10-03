@@ -2,10 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, ScrollView, SafeAreaView, TouchableOpacity, Animated, TextInput } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 import { ScheduleItemProps } from '../entities/schedule-item';
-import { AntDesign } from '@expo/vector-icons';
 import MyEvent from '../components/myEvent';
 import { getActivities, getUserSubscribedActivities } from '../services/activities';
 import { useAuth } from '../hooks/AuthContext';
+
+import { AntDesign } from '@expo/vector-icons';
+import { FontAwesome6, MaterialIcons } from '@expo/vector-icons';
 
 const formatDate = (date: Date) => {
     const year = date.getFullYear();
@@ -103,18 +105,21 @@ export default function Registration() {
     }
 
     return (
-        <View className='bg-white flex-1'>
-            <View className={`flex-row justify-start items-center pt-12 ${(!searching) && 'pb-10'} px-4 gap-4`}>
-                <TouchableOpacity>
-                    <AntDesign name="arrowleft" size={24} color="#445BE6" onPress={() => navigation.goBack()} />
+        <View className='bg-white flex-1 px-8'>
+            <View className={`flex-row justify-center items-center mt-12 ${(!searching) && 'pb-8'}`}>
+                <TouchableOpacity className='py-2 px-3' style={{ position: 'absolute', left: 2, top: 0}} onPress={() => navigation.goBack()}>
+                    <FontAwesome6 name="chevron-left" size={14} color="#000000"/>
                 </TouchableOpacity>
-                <Text className='text-3xl font-bold text-blue'>Inscrições</Text>
+
+                <Text style={{ fontFamily: 'Inter_600SemiBold' }} className='text-xl text-black pt-0.5'>Eventos</Text>
+
                 {/* <TouchableOpacity className='pl-25'> 
                     <AntDesign name="search1" size={24} color="#445BE6" onPress={handleSearching} />
                 </TouchableOpacity> */}
             </View>
+
             {searching && (
-                <Animated.View className='p-4' style={{
+                <Animated.View className='p-2' style={{
                     transform: [{
                         translateY: anim.interpolate({
                             inputRange: [0, 1],
@@ -130,18 +135,18 @@ export default function Registration() {
                     />
                 </Animated.View>
             )}
-{/* 
-            <View className="flex-row justify-around mx-12 mb-5">
+
+            <View className="flex-row justify-between mb-5 px-4">
                 <TouchableOpacity onPress={() => setRegistered(false)}>
-                    <Text className={`text-xl font-bold text-blue ${(!registered) && "underline"}`}>Inscreva-se</Text> 
+                    <Text style={{ fontFamily: 'Inter_600SemiBold' }} className={`text-lg w-32 p-1 text-center text-blue ${(!registered) && "underline"}`}>Inscreva-se</Text> 
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => setRegistered(true)}>
-                    <Text className={`text-xl font-bold text-blue ${(registered) && "underline"}`}>Inscritos</Text>
+                    <Text style={{ fontFamily: 'Inter_600SemiBold' }} className={`text-lg w-32 p-1 text-center text-blue ${(registered) && "underline"}`}>Inscritos</Text>
                 </TouchableOpacity>
             </View> 
- */}
 
-            <ScrollView className="flex px-5 py-0">
+
+            <ScrollView className="flex py-0">
                 <View className='flex-row flex-wrap justify-around'>
                     {Object.keys(groupedItems).map((date) => (
                         <View key={date} className="w-full">
@@ -150,7 +155,7 @@ export default function Registration() {
                             </View>
                             <View className='flex-row flex-wrap justify-around'>
                                 {groupedItems[date].map((item, index) => (
-                                    <View className='pb-4 px-2 bg-white flex-wrap' key={index}>
+                                    <View className='pb-4 bg-white flex-wrap' key={index}>
                                         <MyEvent
                                             scheduleItem={item}
                                             onClick={() => handlePress(item)}

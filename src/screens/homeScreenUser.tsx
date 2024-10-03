@@ -9,19 +9,6 @@ import { StackTypes } from '../routes/stack.routes';
 import { useAuth } from "../hooks/AuthContext";
 import { FontAwesome6, MaterialIcons } from '@expo/vector-icons';
 
-import {
-    useFonts,
-    Inter_100Thin,
-    Inter_200ExtraLight,
-    Inter_300Light,
-    Inter_400Regular,
-    Inter_500Medium,
-    Inter_600SemiBold,
-    Inter_700Bold,
-    Inter_800ExtraBold,
-    Inter_900Black,
-} from '@expo-google-fonts/inter';
-
 export default function UserHome() {
     const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
     const { signOut, user: { user } }: any = useAuth()
@@ -36,19 +23,6 @@ export default function UserHome() {
 
     //     getActivitiesData();
     //   }, []);
-
-    // Fonte Inter
-    let [fontsLoaded] = useFonts({
-        Inter_100Thin,
-        Inter_200ExtraLight,
-        Inter_300Light,
-        Inter_400Regular,
-        Inter_500Medium,
-        Inter_600SemiBold,
-        Inter_700Bold,
-        Inter_800ExtraBold,
-        Inter_900Black,
-    });
 
     // Mensagem baseada no horário do dia
     const getCurrentTime = () => {
@@ -107,7 +81,7 @@ export default function UserHome() {
                             </View>
 
                             <View className='grow'>
-                                <Text style={{ fontFamily: 'Inter_600SemiBold' }} className='text-lg text-neutral-700'>Inscrições</Text>
+                                <Text style={{ fontFamily: 'Inter_600SemiBold' }} className='text-lg text-neutral-700'>Eventos</Text>
                             </View>
 
                             <View className='w-14 h-full ml-2 items-center justify-center'>
