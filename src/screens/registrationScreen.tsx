@@ -10,17 +10,41 @@ import { AntDesign } from '@expo/vector-icons';
 import { FontAwesome6, MaterialIcons } from '@expo/vector-icons';
 
 const formatDate = (date: Date) => {
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const day = date.getDate().toString().padStart(2, '0');
-    return `${year}-${month}-${day}`;
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
 };
 
+
+const formatDayOfWeek = (dateString: string) => {
+    const daysOfWeek = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
+    
+    // Desmembrando a string "YYYY-MM-DD" e criando a data no fuso horário local
+    const [year, month, day] = dateString.split('-').map(Number);
+    const date = new Date(year, month - 1, day); // Mês em JS começa de 0
+
+    const dayOfWeek = date.getDay();
+    return daysOfWeek[dayOfWeek];
+};
+
+
+
 const groupByDate = (items: Activity[]): Record<string, Activity[]> => {
-    return items.reduce((acc: Record<string, Activity[]>, item: Activity) => {
+    const grouped = items.reduce((acc: Record<string, Activity[]>, item: Activity) => {
         (acc[item.data] = acc[item.data] || []).push(item);
         return acc;
     }, {});
+
+    // Ordenando as datas em ordem crescente
+    const sortedGrouped = Object.keys(grouped)
+        .sort((a, b) => new Date(a).getTime() - new Date(b).getTime())
+        .reduce((acc: Record<string, Activity[]>, key: string) => {
+            acc[key] = grouped[key];
+            return acc;
+        }, {});
+
+    return sortedGrouped;
 };
 
 export default function Registration() {
@@ -30,10 +54,10 @@ export default function Registration() {
     const [searching, setSearching] = useState(false)
     const [items, setItems] = useState<Activity[]>([])
     const [registered, setRegistered] = useState(false)
-    const {user:{user}}: any = useAuth()
+    const { user: { user } }: any = useAuth()
 
     const anim = useRef(new Animated.Value(0)).current;
-//ADICIONAR CARREGAMENTO DE TELA 
+    //ADICIONAR CARREGAMENTO DE TELA 
 
     const open = () => {
         Animated.timing(anim, {
@@ -59,25 +83,25 @@ export default function Registration() {
 
 
             const validFetchedItemsSubscribed = fetchedItemsSubscribed || [];
-        
+
             let filteredItems: Activity[] = fetchedItemsUnsubscribed || [];
-        
+
             console.log('Unsubscribed Items:', fetchedItemsUnsubscribed);
             console.log('Subscribed Items:', fetchedItemsSubscribed);
 
-            
+
             if (registered) {
                 filteredItems = fetchedItemsSubscribed;
             } else {
-                filteredItems = fetchedItemsUnsubscribed.filter(unsubscribedItem => 
+                filteredItems = fetchedItemsUnsubscribed.filter(unsubscribedItem =>
                     !validFetchedItemsSubscribed.some(subscribedItem => subscribedItem.id === unsubscribedItem.id)
                 );
             }
-        
+
             if (searching) {
                 filteredItems = filteredItems.filter(item => item.nome.includes(search));
             }
-        
+
             setItems(filteredItems);
         };
 
@@ -107,8 +131,8 @@ export default function Registration() {
     return (
         <View className='bg-white flex-1 px-8'>
             <View className={`flex-row justify-center items-center mt-12 ${(!searching) && 'pb-8'}`}>
-                <TouchableOpacity className='py-2 px-3' style={{ position: 'absolute', left: 2, top: 0}} onPress={() => navigation.goBack()}>
-                    <FontAwesome6 name="chevron-left" size={14} color="#000000"/>
+                <TouchableOpacity className='py-2 px-3' style={{ position: 'absolute', left: 0, top: 0 }} onPress={() => navigation.goBack()}>
+                    <FontAwesome6 name="chevron-left" size={14} color="#000000" />
                 </TouchableOpacity>
 
                 <Text style={{ fontFamily: 'Inter_600SemiBold' }} className='text-xl text-black pt-0.5'>Eventos</Text>
@@ -136,23 +160,55 @@ export default function Registration() {
                 </Animated.View>
             )}
 
-            <View className="flex-row justify-between mb-5 px-4">
-                <TouchableOpacity onPress={() => setRegistered(false)}>
-                    <Text style={{ fontFamily: 'Inter_600SemiBold' }} className={`text-lg w-32 p-1 text-center text-blue ${(!registered) && "underline"}`}>Inscreva-se</Text> 
+            <View className="flex-row justify-between mb-5 px-2">
+                <TouchableOpacity className='w-[47%]' onPress={() => setRegistered(false)}>
+                    <Text
+                        style={{
+                            fontFamily: 'Inter_600SemiBold',
+                            backgroundColor: !registered ? 'rgba(68, 91, 230, 0.1)' : 'rgba(229, 231, 235, 0.4)', // bg-blue/10 ou bg-neutral-200/40
+                            color: !registered ? '#445BE6' : 'rgba(107, 114, 128, 0.7)', // text-blue ou text-neutral-500/70
+                            fontSize: 18, // text-lg
+                            paddingHorizontal: 4,
+                            paddingVertical: 10,
+                            textAlign: 'center',
+                            borderRadius: 10,
+                        }}
+                    >
+                        Inscreva-se
+                    </Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => setRegistered(true)}>
-                    <Text style={{ fontFamily: 'Inter_600SemiBold' }} className={`text-lg w-32 p-1 text-center text-blue ${(registered) && "underline"}`}>Inscritos</Text>
+
+                <TouchableOpacity className='w-[47%]' onPress={() => setRegistered(true)}>
+                    <Text
+                        style={{
+                            fontFamily: 'Inter_600SemiBold',
+                            backgroundColor: registered ? 'rgba(68, 91, 230, 0.1)' : 'rgba(229, 231, 235, 0.4)', // bg-blue/10 ou bg-neutral-200/40
+                            color: registered ? '#445BE6' : 'rgba(107, 114, 128, 0.7)', // text-blue ou text-neutral-500/70
+                            fontSize: 18, // text-lg
+                            paddingHorizontal: 4,
+                            paddingVertical: 10,
+                            textAlign: 'center',
+                            borderRadius: 10,
+                        }}
+
+                        className='xl:py-16'
+                    >
+                        Inscritos
+                    </Text>
                 </TouchableOpacity>
-            </View> 
+            </View>
 
 
             <ScrollView className="flex py-0">
                 <View className='flex-row flex-wrap justify-around'>
                     {Object.keys(groupedItems).map((date) => (
                         <View key={date} className="w-full">
-                            <View className='flex-1 justify-center items-center pb-6'>
-                                <Text className="text-2xl font-bold text-blue">{date.substring(0, 10)}</Text>
+                            <View className='flex-1 flex-row justify-start items-center py-4 px-2 space-x-2'>
+                                <MaterialIcons name="event" size={20} color="#445BE6" />
+                                <Text style={{ fontFamily: 'Inter_600SemiBold' }} className="text-lg text-neutral-700">{formatDate(new Date(date.substring(0, 10)))}</Text>
+                                <Text style={{ fontFamily: 'Inter_400Regular' }} className="text-md text-neutral-700/50 pt-0.5">{formatDayOfWeek(date.substring(0, 10))}</Text>
                             </View>
+
                             <View className='flex-row flex-wrap justify-around'>
                                 {groupedItems[date].map((item, index) => (
                                     <View className='pb-4 bg-white flex-wrap' key={index}>
@@ -168,7 +224,7 @@ export default function Registration() {
                 </View>
             </ScrollView>
 
-            
+
         </View>
     );
 }
