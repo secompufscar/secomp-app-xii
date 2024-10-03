@@ -130,7 +130,7 @@ export default function Registration() {
                     />
                 </Animated.View>
             )}
-
+{/* 
             <View className="flex-row justify-around mx-12 mb-5">
                 <TouchableOpacity onPress={() => setRegistered(false)}>
                     <Text className={`text-xl font-bold text-blue ${(!registered) && "underline"}`}>Inscreva-se</Text> 
@@ -139,7 +139,7 @@ export default function Registration() {
                     <Text className={`text-xl font-bold text-blue ${(registered) && "underline"}`}>Inscritos</Text>
                 </TouchableOpacity>
             </View> 
-
+ */}
 
             <ScrollView className="flex px-5 py-0">
                 <View className='flex-row flex-wrap justify-around'>

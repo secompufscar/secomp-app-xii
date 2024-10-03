@@ -14,9 +14,21 @@ const formatDate = (date: Date) => {
     return `${year}-${month}-${day}`;
 };
 
+const getCurrentWeekDates = () => {
+    const currentDate = new Date('2024-10-28');
+    const startOfWeek = currentDate.getDate() - currentDate.getDay();
+    const weekDates = Array.from({ length: 7 }).map((_, index) => {
+        const date = new Date(currentDate);
+        date.setDate(startOfWeek + index);
+        return date;
+    });
+    return weekDates;
+};
+
 export default function Schedule() {
     const navigation = useNavigation();
     const currentDateString = formatDate(new Date());
+    const [weekDates, setWeekDates] = useState(getCurrentWeekDates());
     const [selectedDate, setSelectedDate] = useState(currentDateString);
     const [items, setItems] = useState<Activity[]>([]);
 
@@ -24,10 +36,13 @@ export default function Schedule() {
     useEffect(() => {
         const fetchItems = async () => {
             const activities: Activity[] = await getActivities();
+            console.log('test')
+            console.log(selectedDate)
+            console.log(activities)
 
-            //const filteredActivities = (await activities).filter(activity => activity.data.substring(0, 8) === selectedDate);
+            const filteredActivities = activities.filter(activity => activity.data.substring(0, 10) === selectedDate);
 
-            setItems(activities);
+            setItems(filteredActivities);
         };
 
         fetchItems();
@@ -47,10 +62,26 @@ export default function Schedule() {
                 </View>
 
                 <View className='px-6 pt-6'>  
-                    <WeekCalendar
-                        selectedDate={selectedDate}
-                        onDateSelect={setSelectedDate}
-                    />
+                    <View className='flex-row justify-center'>
+                        {weekDates.map((date, index) => {
+                            const dateString = formatDate(date);
+                            const isSelected = dateString === selectedDate;
+                            return (
+                                <TouchableOpacity
+                                    key={index}
+                                    className={`flex justify-center items-center w-12 h-12 ${isSelected ? 'bg-[#445BE6] rounded-full' : ''}`}
+                                    onPress={() => setSelectedDate(dateString)}
+                                >
+                                    <Text className={`${isSelected ? "text-white" : 'text-black'}`}>
+                                        {date.getDate()}
+                                    </Text>
+                                    <Text className={`${isSelected ? "text-white" : 'text-black'}`}>
+                                        {date.toLocaleString('default', { weekday: 'short' })}
+                                    </Text>
+                                </TouchableOpacity>
+                            );
+                        })}
+                    </View>
                 </View>
 
                 <View className='flex justify-center items-center pt-10 px-6'>

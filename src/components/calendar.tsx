@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 // Por enquanto estou pegando as datas da semana atual, porém podemos trocar pelos dias da semana do evento
 const getCurrentWeekDates = () => {
-    const currentDate = new Date();
+    const currentDate = new Date('2024-10-28');
     const startOfWeek = currentDate.getDate() - currentDate.getDay();
     const weekDates = Array.from({ length: 7 }).map((_, index) => {
         const date = new Date(currentDate);
@@ -27,6 +27,10 @@ type WeekCalendarProps = {
 
 export default function WeekCalendar({ selectedDate, onDateSelect }: WeekCalendarProps) {
     const [weekDates, setWeekDates] = useState(getCurrentWeekDates());
+
+    useEffect(() => {
+        console.log(selectedDate)
+    }, [selectedDate])
 
     return (
         <View className='flex-row justify-center'>

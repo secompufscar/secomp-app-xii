@@ -21,7 +21,7 @@ export default function TabRoutes() {
                 tabBarStyle: {
                     backgroundColor: "#445BE6",
                     borderTopWidth: 0,
-                    height: 70,
+                    height: 60,
                 },
                 tabBarShowLabel: false
             }}>
