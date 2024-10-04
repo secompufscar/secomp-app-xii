@@ -19,7 +19,7 @@ const formatDate = (date: Date) => {
 
 const formatDayOfWeek = (dateString: string) => {
     const daysOfWeek = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
-    
+
     // Desmembrando a string "YYYY-MM-DD" e criando a data no fuso horário local
     const [year, month, day] = dateString.split('-').map(Number);
     const date = new Date(year, month - 1, day); // Mês em JS começa de 0
@@ -27,8 +27,6 @@ const formatDayOfWeek = (dateString: string) => {
     const dayOfWeek = date.getDay();
     return daysOfWeek[dayOfWeek];
 };
-
-
 
 const groupByDate = (items: Activity[]): Record<string, Activity[]> => {
     const grouped = items.reduce((acc: Record<string, Activity[]>, item: Activity) => {
@@ -46,6 +44,7 @@ const groupByDate = (items: Activity[]): Record<string, Activity[]> => {
 
     return sortedGrouped;
 };
+
 
 export default function Registration() {
     const navigation = useNavigation();
@@ -203,15 +202,18 @@ export default function Registration() {
                 <View className='flex-row flex-wrap justify-around'>
                     {Object.keys(groupedItems).map((date) => (
                         <View key={date} className="w-full">
-                            <View className='flex-1 flex-row justify-start items-center py-4 px-2 space-x-2'>
+                            <View className='flex-1 flex-row justify-start items-center mt-4 mb-2 px-2 space-x-2'>
                                 <MaterialIcons name="event" size={20} color="#445BE6" />
                                 <Text style={{ fontFamily: 'Inter_600SemiBold' }} className="text-lg text-neutral-700">{formatDate(new Date(date.substring(0, 10)))}</Text>
                                 <Text style={{ fontFamily: 'Inter_400Regular' }} className="text-md text-neutral-700/50 pt-0.5">{formatDayOfWeek(date.substring(0, 10))}</Text>
                             </View>
 
-                            <View className='flex-row flex-wrap justify-around'>
+                            <View className='flex-row flex-wrap justify-between mb-4'>
                                 {groupedItems[date].map((item, index) => (
-                                    <View className='pb-4 bg-white flex-wrap' key={index}>
+                                    <View
+                                        className='p-2 w-full'
+                                        key={index}
+                                    >
                                         <MyEvent
                                             scheduleItem={item}
                                             onClick={() => handlePress(item)}
