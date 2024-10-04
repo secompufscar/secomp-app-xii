@@ -16,7 +16,7 @@ export default function Palestras() {
     const [activities, setActivities] = useState<Activity[]>([]);
 
     // Id da cateogira palestras
-    const categoriaId = "67f233c2-a6e2-4d0a-a327-3c6955ea36a3";
+    const categoriaId = "2";
 
     useEffect(() => {
         const getActivitiesData = async () => {

@@ -16,7 +16,7 @@ export default function Minicursos() {
     const [activities, setActivities] = useState<Activity[]>([]);
 
     // Id da cateogira minicurso
-    const categoriaId = "140a33f3-0898-4cd5-955e-69620f51405f";
+    const categoriaId = "1";
 
     useEffect(() => {
         const getActivitiesData = async () => {

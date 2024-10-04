@@ -16,7 +16,7 @@ export default function Workshops() {
     const [activities, setActivities] = useState<Activity[]>([]);
 
     // Id da cateogira workshops
-    const categoriaId = "b9fa7e7a-b313-45fe-868c-3b80149103cb";
+    const categoriaId = "3";
 
     useEffect(() => {
         const getActivitiesData = async () => {

@@ -16,7 +16,7 @@ export default function Competições() {
     const [activities, setActivities] = useState<Activity[]>([]);
 
     // Id da cateogira competições
-    const categoriaId = "cb149f90-64b8-4e34-9cf0-78a8faaaec2c";
+    const categoriaId = "4";
 
     useEffect(() => {
         const getActivitiesData = async () => {
