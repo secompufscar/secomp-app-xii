@@ -45,7 +45,7 @@ export default function Credential() {
                                 <Text className='text-5xl font-bold  text-white' allowFontScaling={false}> {user.nome} </Text>
                             </View>
 
-                            <View className='w-full h-[20%] items-center px-1 self-center absolute bottom-0 z-10'>
+                            <View className='w-full h-[20%] items-center px-1 self-center absolute bottom-10 z-10'>
                                 <Image
                                     source={require("../../assets/logo-credential.png")}
                                     resizeMode="contain"

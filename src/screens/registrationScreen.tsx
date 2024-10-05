@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, ScrollView, SafeAreaView, TouchableOpacity, Animated, TextInput } from 'react-native';
+import { View, Text, ScrollView, SafeAreaView, TouchableOpacity, Animated, TextInput, ActivityIndicator } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 import { ScheduleItemProps } from '../entities/schedule-item';
 import MyEvent from '../components/myEvent';
 import { getActivities, getUserSubscribedActivities } from '../services/activities';
 import { useAuth } from '../hooks/AuthContext';
+
 
 import { FontAwesome6, MaterialIcons } from '@expo/vector-icons';
 
@@ -45,6 +46,7 @@ const groupByDate = (items: Activity[]): Record<string, Activity[]> => {
 };
 
 
+
 export default function Registration() {
     const navigation = useNavigation();
     const currentDayString = "13"
@@ -53,6 +55,8 @@ export default function Registration() {
     const [items, setItems] = useState<Activity[]>([])
     const [registered, setRegistered] = useState(false)
     const { user: { user } }: any = useAuth()
+    const [loading, setLoading] = useState(false);
+
 
     const anim = useRef(new Animated.Value(0)).current;
     //ADICIONAR CARREGAMENTO DE TELA 
@@ -75,6 +79,8 @@ export default function Registration() {
 
     useEffect(() => {
         const fetchItems = async () => {
+            setLoading(true);  // Iniciar o carregamento
+
             try {
                 const fetchedItemsUnsubscribed: Activity[] = await getActivities();
                 const fetchedItemsSubscribed: UserAtActivity[] = await getUserSubscribedActivities(user.id);
@@ -111,7 +117,10 @@ export default function Registration() {
                 setItems(filteredItems);
             } catch (error) {
                 console.error("Erro ao buscar atividades: ", error);
+            } finally {
+                setLoading(false);  // Encerrar o carregamento
             }
+
         };
 
         fetchItems();
@@ -171,73 +180,86 @@ export default function Registration() {
                     />
                 </Animated.View>
             )}
-
-            <View className="flex-row justify-between mb-5 px-2">
-                <TouchableOpacity className='w-[47%]' onPress={() => setRegistered(false)}>
-                    <Text
-                        style={{
-                            fontFamily: 'Inter_600SemiBold',
-                            backgroundColor: !registered ? 'rgba(68, 91, 230, 0.1)' : 'rgba(229, 231, 235, 0.4)', // bg-blue/10 ou bg-neutral-200/40
-                            color: !registered ? '#445BE6' : 'rgba(107, 114, 128, 0.7)', // text-blue ou text-neutral-500/70
-                            fontSize: 18, // text-lg
-                            paddingHorizontal: 4,
-                            paddingVertical: 10,
-                            textAlign: 'center',
-                            borderRadius: 10,
-                        }}
-                    >
-                        Inscreva-se
-                    </Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity className='w-[47%]' onPress={() => setRegistered(true)}>
-                    <Text
-                        style={{
-                            fontFamily: 'Inter_600SemiBold',
-                            backgroundColor: registered ? 'rgba(68, 91, 230, 0.1)' : 'rgba(229, 231, 235, 0.4)', // bg-blue/10 ou bg-neutral-200/40
-                            color: registered ? '#445BE6' : 'rgba(107, 114, 128, 0.7)', // text-blue ou text-neutral-500/70
-                            fontSize: 18, // text-lg
-                            paddingHorizontal: 4,
-                            paddingVertical: 10,
-                            textAlign: 'center',
-                            borderRadius: 10,
-                        }}
-
-                        className='xl:py-16'
-                    >
-                        Inscritos
-                    </Text>
-                </TouchableOpacity>
+            {loading ? (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <ActivityIndicator size="large" color="#445BE6" />
             </View>
-
-
-            <ScrollView className="flex py-0">
-                <View className='flex-row flex-wrap justify-around'>
-                    {Object.keys(groupedItems).map((date) => (
-                        <View key={date} className="w-full">
-                            <View className='flex-1 flex-row justify-start items-center mt-4 mb-2 px-2 space-x-2'>
-                                <MaterialIcons name="event" size={20} color="#445BE6" />
-                                <Text style={{ fontFamily: 'Inter_600SemiBold' }} className="text-lg text-neutral-700">{formatDate(new Date(date.substring(0, 10)))}</Text>
-                                <Text style={{ fontFamily: 'Inter_400Regular' }} className="text-md text-neutral-700/50 pt-0.5">{formatDayOfWeek(date.substring(0, 10))}</Text>
+            ) : (
+                <>
+                    <View className="flex-row justify-between mb-5 px-2">
+                        <TouchableOpacity className='w-[47%]' onPress={() => setRegistered(false)}>
+                            <View
+                                style={{
+                                    backgroundColor: !registered ? 'rgba(68, 91, 230, 0.1)' : 'rgba(229, 231, 235, 0.4)', // bg-blue/10 ou bg-neutral-200/40
+                                    borderRadius: 10,
+                                }}
+                            >
+                                <Text
+                                    style={{
+                                        fontFamily: 'Inter_600SemiBold',
+                                        color: !registered ? '#445BE6' : 'rgba(107, 114, 128, 0.7)', // text-blue ou text-neutral-500/70
+                                        fontSize: 18, // text-lg
+                                        paddingHorizontal: 4,
+                                        paddingVertical: 10,
+                                        textAlign: 'center',
+                                    }}
+                                >
+                                    Inscreva-se
+                                </Text>
                             </View>
+                        </TouchableOpacity>
 
-                            <View className='flex-row flex-wrap justify-between mb-4'>
-                                {groupedItems[date].map((item, index) => (
-                                    <View
-                                        className='p-2 w-full'
-                                        key={index}
-                                    >
-                                        <MyEvent
-                                            scheduleItem={item}
-                                            onClick={() => handlePress(item)}
-                                        />
+                        <TouchableOpacity className='w-[47%]' onPress={() => setRegistered(true)}>
+                            <View
+                                style={{
+                                    backgroundColor: registered ? 'rgba(68, 91, 230, 0.1)' : 'rgba(229, 231, 235, 0.4)', // bg-blue/10 ou bg-neutral-200/40
+                                    borderRadius: 10,
+                                }}
+                            >
+                                <Text
+                                    style={{
+                                        fontFamily: 'Inter_600SemiBold',
+                                        color: registered ? '#445BE6' : 'rgba(107, 114, 128, 0.7)', // text-blue ou text-neutral-500/70
+                                        fontSize: 18, // text-lg
+                                        paddingHorizontal: 4,
+                                        paddingVertical: 10,
+                                        textAlign: 'center',
+                                    }}
+                                >
+                                    Inscritos
+                                </Text>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+
+
+                    <ScrollView className="flex py-0">
+                        <View className='flex-row flex-wrap justify-around'>
+                            {Object.keys(groupedItems).map((date) => (
+                                <View key={date} className="w-full">
+                                    <View className='flex-1 flex-row justify-start items-center mt-4 mb-2 px-2 space-x-2'>
+                                        <MaterialIcons name="event" size={20} color="#445BE6" />
+                                        <Text style={{ fontFamily: 'Inter_600SemiBold' }} className="text-lg text-neutral-700">{formatDate(new Date(date.substring(0, 10)))}</Text>
+                                        <Text style={{ fontFamily: 'Inter_400Regular' }} className="text-md text-neutral-700/50 pt-0.5">{formatDayOfWeek(date.substring(0, 10))}</Text>
                                     </View>
-                                ))}
-                            </View>
+
+                                    <View className='flex-row flex-wrap justify-between mb-4'>
+                                        {groupedItems[date].map((item, index) => (
+                                            <View
+                                                className='p-2 w-full'
+                                                key={index}
+                                            >
+                                                <MyEvent
+                                                    scheduleItem={item}
+                                                    onClick={() => handlePress(item)}
+                                                />
+                                            </View>
+                                        ))}
+                                    </View>
+                                </View>
+                            ))}
                         </View>
-                    ))}
-                </View>
-            </ScrollView>
+                    </ScrollView>
+                </>)}
 
 
         </View>

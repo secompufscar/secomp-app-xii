@@ -79,7 +79,7 @@ export default function SignUp() {
 			<View className="items-center">
 				<Image
 					source={require("../../assets/logo.png")}
-					className="h-20"
+					className="h-24"
 					resizeMode="contain"
 				/>
 			</View>

@@ -72,7 +72,7 @@ export default function Login() {
             <View className="items-center">
                 <Image
                     source={require("../../assets/logo.png")}
-                    className="h-20"
+                    className="h-24"
                     resizeMode="contain"
                 />
             </View>
@@ -119,13 +119,13 @@ export default function Login() {
 
                 <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
                     <Text className="text-white text-base font-bold text-center mt-4">
-                        Ainda não possui cadastro?
+                        Esqueceu a senha?
                     </Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
                     <Text className="text-white text-base font-bold text-center mt-4">
-                        Esqueceu a senha?
+                        Ainda não possui cadastro?
                     </Text>
                 </TouchableOpacity>
 
