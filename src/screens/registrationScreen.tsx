@@ -157,10 +157,6 @@ export default function Registration() {
                 </TouchableOpacity>
 
                 <Text style={{ fontFamily: 'Inter_600SemiBold' }} className='text-xl text-black pt-0.5'>Eventos</Text>
-
-                {/* <TouchableOpacity className='pl-25'> 
-                    <AntDesign name="search1" size={24} color="#445BE6" onPress={handleSearching} />
-                </TouchableOpacity> */}
             </View>
 
             {searching && (
