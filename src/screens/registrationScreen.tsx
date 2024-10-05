@@ -6,7 +6,6 @@ import MyEvent from '../components/myEvent';
 import { getActivities, getUserSubscribedActivities } from '../services/activities';
 import { useAuth } from '../hooks/AuthContext';
 
-import { AntDesign } from '@expo/vector-icons';
 import { FontAwesome6, MaterialIcons } from '@expo/vector-icons';
 
 const formatDate = (date: Date) => {
@@ -76,36 +75,48 @@ export default function Registration() {
 
     useEffect(() => {
         const fetchItems = async () => {
-            const fetchedItemsUnsubscribed: Activity[] = await getActivities();
+            try {
+                const fetchedItemsUnsubscribed: Activity[] = await getActivities();
+                const fetchedItemsSubscribed: UserAtActivity[] = await getUserSubscribedActivities(user.id);
 
-            const fetchedItemsSubscribed: Activity[] = await getUserSubscribedActivities(user.id);
+                const validFetchedItemsSubscribed = fetchedItemsSubscribed || [];
+                const validFetchedItemsUnsubscribed = fetchedItemsUnsubscribed || [];
 
+                let filteredItems: Activity[] = validFetchedItemsUnsubscribed;
 
-            const validFetchedItemsSubscribed = fetchedItemsSubscribed || [];
+                console.log('Unsubscribed Items:', validFetchedItemsUnsubscribed);
+                console.log('Subscribed Items:', validFetchedItemsSubscribed);
 
-            let filteredItems: Activity[] = fetchedItemsUnsubscribed || [];
+                if (registered) {
+                    const subscribedActivityIds = validFetchedItemsSubscribed.map((subscription) => subscription.activityId);
 
-            console.log('Unsubscribed Items:', fetchedItemsUnsubscribed);
-            console.log('Subscribed Items:', fetchedItemsSubscribed);
+                    // Filtra as atividades completas a partir dos `activityId` das inscrições
+                    filteredItems = validFetchedItemsUnsubscribed.filter(activity =>
+                        subscribedActivityIds.includes(activity.id)
+                    );
+                    console.log('Subscribed Activities:', filteredItems);
 
+                } else {
+                    // Se estiver visualizando os não inscritos, filtre as atividades
+                    filteredItems = validFetchedItemsUnsubscribed.filter(unsubscribedItem =>
+                        !validFetchedItemsSubscribed.some(subscribedItem => subscribedItem.id === unsubscribedItem.id)
+                    );
+                }
 
-            if (registered) {
-                filteredItems = fetchedItemsSubscribed;
-            } else {
-                filteredItems = fetchedItemsUnsubscribed.filter(unsubscribedItem =>
-                    !validFetchedItemsSubscribed.some(subscribedItem => subscribedItem.id === unsubscribedItem.id)
-                );
+                // Se estiver buscando, aplique o filtro de busca
+                if (searching) {
+                    filteredItems = filteredItems.filter(item => item.nome.toLowerCase().includes(search.toLowerCase()));
+                }
+
+                setItems(filteredItems);
+            } catch (error) {
+                console.error("Erro ao buscar atividades: ", error);
             }
-
-            if (searching) {
-                filteredItems = filteredItems.filter(item => item.nome.includes(search));
-            }
-
-            setItems(filteredItems);
         };
 
         fetchItems();
-    }, [registered, search]);
+    }, [registered, search, searching, user.id]);
+
 
     function handleSearch(str: string) {
         setSearch(str)
@@ -121,6 +132,8 @@ export default function Registration() {
     }
 
     const groupedItems = groupByDate(items);
+    console.log('Subscribed Items:', items);
+
 
     const handlePress = (item: Activity, registered: boolean = false) => {
         // @ts-ignore
