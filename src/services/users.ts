@@ -23,7 +23,7 @@ export const login = async (data: Login): Promise<User> => {
     return response.data
 }
 
-export const signup = async (data: SignUp): Promise<User> => {
+export const signup = async (data: SignUp): Promise<boolean> => {
     const response = await api.post("/users/signup", data)
 
     return response.data

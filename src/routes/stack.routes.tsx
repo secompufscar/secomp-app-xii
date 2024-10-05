@@ -7,7 +7,6 @@ import {
     ScheduleDetails,
     MyEvents,
     Credential,
-    Notifications,
     Registration,
     RegistrationDetails,
     Categorias,
@@ -16,6 +15,7 @@ import {
     Workshops,
     Competições,
     QRCode,
+    Welcome
 } from '../screens'
 
 import { ScheduleItemProps } from '../entities/schedule-item';
@@ -39,13 +39,12 @@ export type StackTypes = NativeStackNavigationProp<StackNavigation>;
 
 export default function StackRoutes() {
     return (
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Navigator screenOptions={{ headerShown: false, title: "SECOMP UFScar 2024" }}>
             <Stack.Screen name="Home" component={TabRoutes} />
             <Stack.Screen name="Schedule" component={Schedule} />
             <Stack.Screen name="ScheduleDetails" component={ScheduleDetails} />
             <Stack.Screen name="MyEvents" component={MyEvents} />
             <Stack.Screen name="Credential" component={Credential} />
-            <Stack.Screen name="Notifications" component={Notifications} />
             <Stack.Screen name="Registration" component={Registration} />
             <Stack.Screen name="RegistrationDetails" component={RegistrationDetails} />
             <Stack.Screen name="Categorias" component={Categorias} />
@@ -54,7 +53,7 @@ export default function StackRoutes() {
             <Stack.Screen name="Competições" component={Competições} />
             <Stack.Screen name="Workshops" component={Workshops} />
             <Stack.Screen name="QRCode" component={QRCode} />
+            <Stack.Screen name="Welcome" component={Welcome} />
         </Stack.Navigator>
     );
 }
-

@@ -22,10 +22,10 @@ export const AuthProvider = ({ children }: any) => {
     setUser(data)
   }
 
-  const signUp = async (data: any) => {
-      await AsyncStorage.setItem("user", JSON.stringify(data));
-      setUser(data);
-  }
+  // const signUp = async (data: any) => {
+  //     await AsyncStorage.setItem("user", JSON.stringify(data));
+  //     setUser(data);
+  // }
   
 
   useEffect(() => {
@@ -47,7 +47,7 @@ export const AuthProvider = ({ children }: any) => {
     <AuthContext.Provider value={{
       signOut,
       signIn,
-      signUp,
+      //signUp,
       user,
       setUser,
       loading

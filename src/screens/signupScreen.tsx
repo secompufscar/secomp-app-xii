@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { View, Image, StatusBar, Alert, TouchableOpacity, Text } from "react-native"
+import { View, Image, StatusBar, Alert, TouchableOpacity, Text, Platform } from "react-native"
 import { FontAwesome5, Entypo, MaterialIcons, Ionicons } from "@expo/vector-icons"
 
 import { useNavigation } from "@react-navigation/native"
@@ -13,6 +13,23 @@ import { useAuth } from "../hooks/AuthContext";
 
 import {signup} from "../services/users";
 
+const validateEmail = (email: string) => {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+  };
+
+function capitalizeFirstLetter(string: string) {
+	const words = string.toLocaleLowerCase().split(" ");
+	
+	for (let i = 0; i < words.length; i++) {
+		words[i] = words[i][0] ? words[i][0].toUpperCase() + words[i].substr(1) : "";
+	}
+	
+	return words.join(" ");
+}
 
 export default function SignUp() {
 
@@ -21,35 +38,73 @@ export default function SignUp() {
 	const [email, setEmail] = useState("")
 	const [senha, setSenha] = useState("")
 	const [isLoading, setIsLoading] = useState(false)
-
+	const [senhaVisivel, setSenhaVisivel] = useState(false);
 	
 	const { signUp }: any = useAuth()
 
 	const handleRegister = async () =>  {
-		if (!nome.trim() || !email.trim() || !senha.trim()) {
-			return Alert.alert("Inscrição", "Preencha todos os campos!")
-		}
+        if (!email.trim() || !senha.trim() || !nome.trim()) {
+            if (Platform.OS === 'web') {
+                window.alert("Por favor, preencha todos os campos!");
+            } else {
+                Alert.alert("Inscrição", "Por favor, preencha todos os campos!");
+            }
+
+            return
+        }
+
+        if (!validateEmail(email)) {
+            if (Platform.OS === 'web') {
+                window.alert("Por favor, digite um email válido!");
+            } else {
+                Alert.alert("Inscrição", "Por favor, digite um email válido!");
+            }
+
+            return 
+        }
+
+        if (senha.length < 6) {
+            if (Platform.OS === 'web') {
+                window.alert("Por favor, digite uma senha com mais de 6 caracteres!");
+            } else {
+                Alert.alert("Inscrição", "Por favor, digite uma senha com mais de 6 caracteres!");
+            }
+
+            return
+        }
 
 		//navigation.navigate("Home")
 
 		setIsLoading(true)
 
-        try {
-        	const data = await signup({nome, email, senha})
+		try {
+			const data = await signup({ nome, email, senha })
 
-           	await signUp(data)
+			if (data === true) {
+				if (Platform.OS === 'web') {
+					alert("Um e-mail de confirmação foi enviado para seu e-mail!");
+					navigation.navigate('Login'); 
+				} else {
+					Alert.alert(
+						"Inscrição",
+						"Um e-mail de confirmação foi enviado com sucesso!",
+						[
+							{ text: "OK", onPress: () => navigation.navigate('Login') } // Navega para a tela de login
+						]
+					);
+				}
+			}
 
-        	console.log(data)
-
-        } catch (error) {
+		} catch (error) {
             const err = error as any; 
 
             const errorMessage = err.response?.data?.message || 'Falha ao processar o cadastramento.';
 
-            Alert.alert(
-                'Cadastro',
-                errorMessage
-            );
+            if (Platform.OS === 'web') {
+                window.alert(`${errorMessage}`);
+            } else {
+                Alert.alert("Inscreva-se", errorMessage);
+            }
         } finally {
             setIsLoading(false)
         }
@@ -60,9 +115,9 @@ export default function SignUp() {
 			<StatusBar barStyle="light-content" />
 
             <View className="items-center">
-                <Image
+			<Image
                     source={require("../../assets/logo.png")}
-                    className="h-20"
+                    className="h-24"
                     resizeMode="contain"
                 />
             </View>
@@ -76,7 +131,7 @@ export default function SignUp() {
 						color={colors.white}
 						size={20}
 					/>
-					<Input.Field placeholder="Nome completo" onChangeText={setNome} />
+					<Input.Field placeholder="Nome completo" value={nome} onChangeText={(text) => setNome(capitalizeFirstLetter(text))} />
 				</Input>
 
 				<Input>
@@ -99,12 +154,19 @@ export default function SignUp() {
 					<Input.Field
 						placeholder="Senha"
 						onChangeText={setSenha}
-						secureTextEntry={true} 
-
+						secureTextEntry={!senhaVisivel}
 					/>
+
+					<TouchableOpacity onPress={() => setSenhaVisivel(!senhaVisivel)}>
+                        <Entypo
+                            name={senhaVisivel ? 'eye-with-line' : 'eye'} // Alterna o ícone do olho
+                            size={20}
+                            color={'#fff'}
+                        />
+                    </TouchableOpacity>
 				</Input>
 
-				<Button title="Realizar inscrição" onPress={handleRegister} />
+				<Button className="mt-2" title="Inscreva-se" onPress={handleRegister} isLoading={isLoading} />
 
 				<TouchableOpacity onPress={() => navigation.navigate("Login")}>
 					<Text className="text-white text-base font-bold text-center mt-4">

@@ -1,4 +1,4 @@
-import { View, TouchableOpacity, StatusBar, Alert, Text, Image } from "react-native"
+import { View, TouchableOpacity, StatusBar, Alert, Text, Image, Platform } from "react-native"
 import { useState } from "react"
 
 import { useNavigation } from "@react-navigation/native"
@@ -12,7 +12,15 @@ import { Button } from "../components/button";
 import { colors } from "../styles/colors"
 import { useAuth } from "../hooks/AuthContext";
 
-import {login} from "../services/users";
+import { login } from "../services/users";
+
+const validateEmail = (email: string) => {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+  };
 
 export default function Login() {
     const navigation = useNavigation<StackTypes>();
@@ -21,53 +29,78 @@ export default function Login() {
     const [email, setEmail] = useState("")
     const [senha, setSenha] = useState("")
     const [isLoading, setIsLoading] = useState(false)
+	const [senhaVisivel, setSenhaVisivel] = useState(false);
 
     const handleLogin = async () => {
         if (!email.trim() || !senha.trim()) {
-            Alert.alert("Login", "Preencha todos os campos")
+            if (Platform.OS === 'web') {
+                window.alert("Por favor, preencha todos os campos!");
+            } else {
+                Alert.alert("Login", "Por favor, preencha todos os campos!");
+            }
 
             return
         }
 
+        if (!validateEmail(email)) {
+            if (Platform.OS === 'web') {
+                window.alert("Por favor, digite um email válido!");
+            } else {
+                Alert.alert("Login", "Por favor, digite um email válido!");
+            }
+
+            return 
+        }
+
+        // if (senha.length < 6) {
+        //     if (Platform.OS === 'web') {
+        //         window.alert("Por favor, digite uma senha com mais de 6 caracteres!");
+        //     } else {
+        //         Alert.alert("Login", "Por favor, digite uma senha com mais de 6 caracteres!");
+        //     }
+
+        //     return
+        // }
+
         setIsLoading(true)
 
         try {
-            const data = await login({email, senha})
+            const data = await login({ email, senha })
 
             await signIn(data)
 
-            console.log(data)
-
         } catch (error) {
-            const err = error as any; 
+            const err = error as any;
 
             const errorMessage = err.response?.data?.message || 'Falha ao processar o login.';
 
             // Imprime o erro no console para depuração
 
             //console.error('Erro ao processar o check-in:', err.response.data);
-         
-            Alert.alert(
-                'Login',
-                errorMessage
-            );
+
+            if (Platform.OS === 'web') {
+                window.alert(`${errorMessage}`);
+            } else {
+                Alert.alert("Login", errorMessage);
+            }
+
         } finally {
             setIsLoading(false)
         }
     }
-        
+
 
 
     return (
 
         <View className="flex-1 bg-blue items-center justify-center">
-            
+
             <StatusBar barStyle="light-content" />
-            
+
             <View className="items-center">
                 <Image
                     source={require("../../assets/logo.png")}
-                    className="h-20"
+                    className="h-24"
                     resizeMode="contain"
                 />
             </View>
@@ -97,22 +130,30 @@ export default function Login() {
                     <Input.Field
                         placeholder="Senha"
                         onChangeText={setSenha}
-                        secureTextEntry={true} 
+                        secureTextEntry={!senhaVisivel}
                     />
+
+                    <TouchableOpacity onPress={() => setSenhaVisivel(!senhaVisivel)}>
+                        <Entypo
+                            name={senhaVisivel ? 'eye-with-line' : 'eye'} // Alterna o ícone do olho
+                            size={20}
+                            color={'#fff'}
+                        />
+                    </TouchableOpacity>
 
                 </Input>
 
-                <Button title="REALIZAR LOGIN" onPress={handleLogin} />
+                <Button className="mt-2" title="Entrar" onPress={handleLogin} isLoading={isLoading} />
+
+                {/* <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
+                    <Text className="text-white text-base font-bold text-center mt-4">
+                        Esqueceu a senha?
+                    </Text>
+                </TouchableOpacity> */}
 
                 <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
                     <Text className="text-white text-base font-bold text-center mt-4">
                         Ainda não possui cadastro?
-                    </Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
-                    <Text className="text-white text-base font-bold text-center mt-4">
-                        Esqueceu a senha?
                     </Text>
                 </TouchableOpacity>
 
@@ -122,4 +163,3 @@ export default function Login() {
 
     )
 }
-

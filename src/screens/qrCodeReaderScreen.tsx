@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, Alert, AppState } from 'react-native';
 import { ParamListBase, useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { CameraView } from "expo-camera";
+// import { CameraView } from "expo-camera";
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRoute } from '@react-navigation/native';
 import { checkIn } from "../services/checkIn";
@@ -77,7 +77,7 @@ export default function QRCode() {
 
     return (
         <SafeAreaView style={StyleSheet.absoluteFillObject}>
-            <CameraView
+            {/* <CameraView
                 style={StyleSheet.absoluteFillObject}
                 facing="back"
                 onBarcodeScanned={handleBarCodeScanned}
@@ -85,7 +85,7 @@ export default function QRCode() {
                 <View style={styles.overlay}>
                     <View style={styles.square} />
                 </View>
-            </CameraView>
+            </CameraView> */}
         </SafeAreaView>
     );
 }

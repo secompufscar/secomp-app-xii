@@ -1,18 +1,14 @@
 import Login from './loginScreen'
 import SignUp from './signupScreen'
 
-import Home from './homeScreen'
-
-import UserProfile from './userProfileScreen'
-import AdminProfile from './adminProfileScreen'
+import UserHome from './homeScreenUser'
+import AdminHome from './homeScreenAdmin'
 
 import Navigator from './navigatorScreen'
-import Gamificacao from './gamificacaoScreen'
 import Schedule from './scheduleScreen'
 import ScheduleDetails from './scheduleDetailsScreen'
 import MyEvents from './myEvents'
 import Credential from './credentialScreen'
-import Notifications from './notificationsScreen'
 
 import Registration from './registrationScreen'
 import RegistrationDetails from './registrationDetailsScreen'
@@ -23,22 +19,20 @@ import Palestras from './atividades/atividadesPalestra'
 import Competições from './atividades/atividadesCompeticoes'
 import Workshops from './atividades/atividadesWorkshops'
 import QRCode from './qrCodeReaderScreen'
+import Welcome from './WelcomeScreen'
 
 
 
 export {
-    Home,
     Login,
     SignUp,
-    Gamificacao,
-    UserProfile,
-    AdminProfile,
+    UserHome,
+    AdminHome,
     Navigator,
     Schedule,
     ScheduleDetails,
     MyEvents,
     Credential,
-    Notifications,
     Registration,
     RegistrationDetails,
     Categorias,
@@ -47,4 +41,5 @@ export {
     Competições,
     Workshops,
     QRCode,
+    Welcome
 }
