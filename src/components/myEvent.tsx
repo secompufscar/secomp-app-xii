@@ -16,7 +16,7 @@ type ScheduleItemComponentProps = {
 export default function MyEvent({scheduleItem, onClick}: ScheduleItemComponentProps) {
     return (
         <TouchableOpacity onPress={onClick}>
-            <View className='flex flex-col justify-start w-[156] bg-white rounded-2xl' style={(isIos) ? [styles.shadowProp] : [styles.elevation]}>
+            <View className='flex flex-col justify-start bg-white rounded-2xl' style={(isIos) ? [styles.shadowProp] : [styles.elevation]}>
                 <View className="p-4">
                     <View className='pb-2'>
                         {/* <Text className='text-blue text-xl font-bold'>{scheduleItem.data.substring(0, 10)}</Text> */}
@@ -45,7 +45,10 @@ const styles = StyleSheet.create({
         shadowRadius: 3,
     },
     elevation: {
-        elevation: 5,
+        elevation: 4,
         shadowColor: '#171717',
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.2,
+        shadowRadius: 3,
     },
 })
