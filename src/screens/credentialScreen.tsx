@@ -6,6 +6,8 @@ import { SafeAreaView, Text, Image, TouchableOpacity, View, ImageBackground, Mod
 import { ParamListBase, useNavigation } from "@react-navigation/native"
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useAuth } from "../hooks/AuthContext";
+import { LinearGradient } from 'expo-linear-gradient';
+
 
 export default function Credential() {
     const [modalVisible, setModalVisible] = useState(false);
@@ -21,7 +23,7 @@ export default function Credential() {
 
                 <View className='w-full h-[68%] items-center flex-col rounded-3xl relative overflow-hidden'>
                     <View className='w-full h-[100%]'>
-                        <ImageBackground source={require("../../assets/credential.png")} resizeMode='cover' className='w-full h-full object-center max-w-full max-h-full'>
+                        <View className='w-full h-full bg-blue'>
                             <View className='w-full h-20 px-10 py-7 flex-row'>
                                 <View className='w-1/2 h-full items-start'>
                                     <Text className='text-xs text-white font-extrabold'> SECOMP XII</Text>
@@ -33,16 +35,14 @@ export default function Credential() {
                             </View>
 
                             <View className='w-40 h-40 mx-10 mt-1 self-end'>
-
                                 <Image
                                     source={{ uri: user.qrCode }}
                                     resizeMode="cover"
                                     className='w-full h-full max-w-full max-h-full object-cover' />
                             </View>
 
-
                             <View className='w-full h-[53%] flex-col py-20 space-y-1'>
-                                <Text className='text-5xl font-bold  text-white' allowFontScaling={false}> {user.nome} </Text>
+                                <Text className='text-5xl font-bold  text-white text-center' allowFontScaling={false}> {user.nome} </Text>
                             </View>
 
                             <View className='w-full h-[20%] items-center px-1 self-center absolute bottom-10 z-10'>
@@ -52,7 +52,8 @@ export default function Credential() {
                                     className='w-45 h-full object-cover'
                                 />
                             </View>
-                        </ImageBackground>
+                        </View>
+
                     </View>
 
                     <View className='w-24 h-10 absolute top-0 bg-black' />
@@ -80,7 +81,7 @@ export default function Credential() {
                 </Modal>
             </View>
 
-            
+
 
             <View className='w-screen h-28 px-5 pt-8 items-center flex-row bg-neutral-700/40 absolute top-0 border-b border-neutral-300/20'>
                 <View className='w-[15%] h-full items-center justify-center'>

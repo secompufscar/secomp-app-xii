@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { View, Image, StatusBar, Alert, TouchableOpacity, Text, Platform } from "react-native"
+import { View, Image, StatusBar, Alert, TouchableOpacity, Text, Platform, ScrollView } from "react-native"
 import { FontAwesome5, Entypo, MaterialIcons, Ionicons } from "@expo/vector-icons"
 
 import { useNavigation } from "@react-navigation/native"
@@ -12,7 +12,24 @@ import { Button } from "../components/button"
 import { useAuth } from "../hooks/AuthContext";
 
 import { signup } from "../services/users";
+import { SafeAreaView } from "react-native-safe-area-context";
 
+const validateEmail = (email: string) => {
+	return String(email)
+		.toLowerCase()
+		.match(
+			/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+		);
+};
+function capitalizeFirstLetter(string: string) {
+	const words = string.toLocaleLowerCase().split(" ");
+
+	for (let i = 0; i < words.length; i++) {
+		words[i] = words[i][0] ? words[i][0].toUpperCase() + words[i].substr(1) : "";
+	}
+
+	return words.join(" ");
+}
 
 export default function SignUp() {
 
@@ -31,20 +48,38 @@ export default function SignUp() {
 		if (!nome.trim() || !email.trim() || !senha.trim()) {
 
 			if (Platform.OS === 'web') {
-				window.alert("Inscrição: Preencha todos os campos!");
+				window.alert("Preencha todos os campos!");
 			} else {
 				Alert.alert("Inscrição", "Preencha todos os campos!");
 			}
+			return
 		}
 
-		setIsLoading(true)
+		if (!validateEmail(email)) {
+			if (Platform.OS === 'web') {
+				window.alert("Por favor, digite um email válido!");
+			} else {
+				Alert.alert("Inscrição", "Por favor, digite um email válido!");
+			}
+
+			return
+		}
+
+		if (senha.length < 6) {
+			if (Platform.OS === 'web') {
+				window.alert("Por favor, digite uma senha com mais de 6 caracteres!");
+			} else {
+				Alert.alert("Inscrição", "Por favor, digite uma senha com mais de 6 caracteres!");
+			}
+			return
+		}
 
 		try {
 			const data = await signup({ nome, email, senha })
 
 			if (data === true) {
 				if (Platform.OS === 'web') {
-					alert("Inscrição: Um e-mail de confirmação foi enviado para seu e-mail!");
+					alert("Um e-mail de confirmação foi enviado para seu e-mail!");
 					navigation.navigate('Login'); // Navega para a tela de login na web
 				} else {
 					Alert.alert(
@@ -62,10 +97,14 @@ export default function SignUp() {
 
 			const errorMessage = err.response?.data?.message || 'Falha ao processar o cadastramento.';
 
-			Alert.alert(
-				'Cadastro',
-				errorMessage
-			);
+			if (Platform.OS === 'web') {
+				alert(`Cadastro: ${errorMessage}`);
+			} else {
+				Alert.alert(
+					'Cadastro',
+					errorMessage
+				);
+			}
 		} finally {
 			setIsLoading(false)
 
@@ -73,72 +112,80 @@ export default function SignUp() {
 	}
 
 	return (
-		<View className="flex-1 bg-blue items-center justify-center">
-			<StatusBar barStyle="light-content" />
+		<SafeAreaView className="flex-1 bg-blue">
 
-			<View className="items-center">
-				<Image
-					source={require("../../assets/logo.png")}
-					className="h-24"
-					resizeMode="contain"
-				/>
-			</View>
+			<ScrollView contentContainerStyle={{
+				flexGrow: 1,
+				justifyContent: 'center',
+				alignItems: 'center',
+			}} scrollEnabled={false}>
 
 
+				<StatusBar barStyle="light-content" />
 
-			<View className="w-full gap-2 text-center justify-center p-8">
-				<Input>
-					<FontAwesome5
-						name="user-alt"
-						color={colors.white}
-						size={20}
+				<View className="items-center">
+					<Image
+						source={require("../../assets/logo.png")}
+						className="h-24"
+						resizeMode="contain"
 					/>
-					<Input.Field placeholder="Nome completo" onChangeText={setNome} />
-				</Input>
+				</View>
 
-				<Input>
-					<Entypo name="email"
-						color={colors.white}
-						size={20}
-					/>
-					<Input.Field
-						placeholder="E-mail"
-						keyboardType="email-address"
-						onChangeText={setEmail}
-					/>
-				</Input>
 
-				<Input>
-					<Entypo name="lock" color={'#fff'} size={20} />
-					<Input.Field
-						placeholder="Senha"
-						value={senha}
-						onChangeText={setSenha}
-						secureTextEntry={!senhaVisivel} // Alterna entre mostrar ou esconder a senha
-					/>
-					<TouchableOpacity onPress={() => setSenhaVisivel(!senhaVisivel)}>
-						<Entypo
-							name={senhaVisivel ? 'eye-with-line' : 'eye'} // Alterna o ícone do olho
+				<View className="w-full gap-2 text-center justify-center p-8">
+					<Input>
+						<FontAwesome5
+							name="user-alt"
+							color={colors.white}
 							size={20}
-							color={'#fff'}
 						/>
+						<Input.Field placeholder="Nome completo" value={nome} 
+						onChangeText={(text) => setNome(capitalizeFirstLetter(text))} />
+					</Input>
+
+					<Input>
+						<Entypo name="email"
+							color={colors.white}
+							size={20}
+						/>
+						<Input.Field
+							placeholder="E-mail"
+							keyboardType="email-address"
+							onChangeText={setEmail}
+						/>
+					</Input>
+
+					<Input>
+						<Entypo name="lock" color={'#fff'} size={20} />
+						<Input.Field
+							placeholder="Senha"
+							value={senha}
+							onChangeText={setSenha}
+							secureTextEntry={!senhaVisivel} // Alterna entre mostrar ou esconder a senha
+						/>
+						<TouchableOpacity onPress={() => setSenhaVisivel(!senhaVisivel)}>
+							<Entypo
+								name={senhaVisivel ? 'eye-with-line' : 'eye'} // Alterna o ícone do olho
+								size={20}
+								color={'#fff'}
+							/>
+						</TouchableOpacity>
+					</Input>
+
+
+					<Button title="INSCREVA-SE" onPress={handleRegister} isLoading={isLoading}
+					/>
+
+					<TouchableOpacity onPress={() => navigation.navigate("Login")}>
+						<Text className="text-white text-base font-bold text-center mt-4">
+							Já possui cadastro?
+						</Text>
 					</TouchableOpacity>
-				</Input>
 
+				</View>
+			</ScrollView>
 
-				<Button title="REGISTRAR" onPress={handleRegister} isLoading={isLoading}
-				/>
-
-				<TouchableOpacity onPress={() => navigation.navigate("Login")}>
-					<Text className="text-white text-base font-bold text-center mt-4">
-						Já possui cadastro?
-					</Text>
-				</TouchableOpacity>
-
-			</View>
-
-
-		</View>
+		</SafeAreaView>
 	)
 }
 

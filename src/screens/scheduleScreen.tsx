@@ -22,6 +22,10 @@ const getCurrentWeekDates = () => {
         date.setDate(startOfWeek + index);
         return date;
     });
+
+    weekDates.pop()
+    weekDates.shift()
+
     return weekDates;
 };
 
@@ -42,9 +46,12 @@ export default function Schedule() {
                 const activities: Activity[] = await getActivities();
                 console.log('Data selecionada:', selectedDate);
                 console.log('Atividades:', activities);
-
+    
                 // Filtra as atividades de acordo com a data selecionada
-                const filteredActivities = activities.filter(activity => activity.data.substring(0, 10) === selectedDate);
+                const filteredActivities = activities
+                    .filter(activity => activity.data.substring(0, 10) === selectedDate)
+                    .sort((a, b) => a.data.substring(11, 16).localeCompare(b.data.substring(11, 16))); // Ordena pela hora
+    
                 setItems(filteredActivities);
             } catch (error) {
                 console.error('Erro ao buscar atividades:', error);
@@ -52,9 +59,10 @@ export default function Schedule() {
                 setLoading(false);
             }
         };
-
+    
         fetchItems();
     }, [selectedDate]);
+    
 
 
     const handlePress = (item: Activity) => {
@@ -64,55 +72,55 @@ export default function Schedule() {
 
     return (
         <SafeAreaView className='bg-white flex-1'>
-            {loading ? (
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <ActivityIndicator size="large" color="#445BE6" />
-                </View>
-            ) : (
-                <View>
-
-                    <View className='flex-row justify-start items-center pt-16 pb-2 px-6 gap-4'>
-                        <Text className='text-3xl font-bold text-blue'>Cronograma</Text>
+            <ScrollView>
+                {loading ? (
+                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                        <ActivityIndicator size="large" color="#445BE6" />
                     </View>
+                ) : (
+                    <View>
 
-                    <View className='px-6 pt-6'>
-                        <View className='flex-row justify-center'>
-                            {weekDates.map((date, index) => {
-                                const dateString = formatDate(date);
-                                const isSelected = dateString === selectedDate;
-                                return (
-                                    <TouchableOpacity
-                                        key={index}
-                                        className={`flex justify-center items-center w-12 h-12 ${isSelected ? 'bg-[#445BE6] rounded-full' : ''}`}
-                                        onPress={() => setSelectedDate(dateString)}
-                                    >
-                                        <Text className={`${isSelected ? "text-white" : 'text-black'}`}>
-                                            {date.getDate()}
-                                        </Text>
-                                        <Text className={`${isSelected ? "text-white" : 'text-black'}`}>
-                                            {date.toLocaleString('default', { weekday: 'short' })}
-                                        </Text>
-                                    </TouchableOpacity>
-                                );
-                            })}
+                        <View className='flex-row justify-start items-center pt-16 pb-2 px-6 gap-4'>
+                            <Text className='text-3xl font-bold text-black'>Cronograma</Text>
                         </View>
-                    </View>
 
-                    <View className='flex justify-center items-center pt-10 px-6'>
-                        <ScrollView>
-                            {items.map((item, index) => (
-                                <View className='pb-4' key={index}>
-                                    <ScheduleItemComponent
-                                        scheduleItem={item}
-                                        onClick={() => handlePress(item)}
-                                    />
-                                </View>
-                            ))}
-                        </ScrollView>
-                    </View>
+                        <View className='px-6 pt-6'>
+                            <View className='flex-row justify-center'>
+                                {weekDates.map((date, index) => {
+                                    const dateString = formatDate(date);
+                                    const isSelected = dateString === selectedDate;
+                                    return (
+                                        <TouchableOpacity
+                                            key={index}
+                                            className={`flex justify-center items-center w-12 h-12 ${isSelected ? 'bg-[#445BE6] rounded-full' : ''}`}
+                                            onPress={() => setSelectedDate(dateString)}
+                                        >
+                                            <Text className={`${isSelected ? "text-white" : 'text-black'}`}>
+                                                {date.getDate()}
+                                            </Text>
+                                            <Text className={`${isSelected ? "text-white" : 'text-black'}`}>
+                                                {date.toLocaleString('default', { weekday: 'short' })}
+                                            </Text>
+                                        </TouchableOpacity>
+                                    );
+                                })}
+                            </View>
+                        </View>
 
-                </View>
-            )}
+                        <View className='flex justify-center items-center pt-10 px-6'>
+                                {items.map((item, index) => (
+                                    <View className='pb-4' key={index}>
+                                        <ScheduleItemComponent
+                                            scheduleItem={item}
+                                            onClick={() => handlePress(item)}
+                                        />
+                                    </View>
+                                ))}
+                        </View>
+
+                    </View>
+                )}
+            </ScrollView>
         </SafeAreaView>
     );
 }

@@ -10,12 +10,11 @@ import { useAuth } from '../hooks/AuthContext';
 import { FontAwesome6, MaterialIcons } from '@expo/vector-icons';
 
 const formatDate = (date: Date) => {
-    const day = date.getDate().toString().padStart(2, '0');
+    const day = date.getUTCDate().toString().padStart(2, '0');
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const year = date.getFullYear();
     return `${day}/${month}/${year}`;
 };
-
 
 const formatDayOfWeek = (dateString: string) => {
     const daysOfWeek = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
@@ -30,7 +29,10 @@ const formatDayOfWeek = (dateString: string) => {
 
 const groupByDate = (items: Activity[]): Record<string, Activity[]> => {
     const grouped = items.reduce((acc: Record<string, Activity[]>, item: Activity) => {
-        (acc[item.data] = acc[item.data] || []).push(item);
+        // Normalizando a data para o formato YYYY-MM-DD
+        const dateKey = item.data.substring(0, 10); // Pegando somente a data (primeiros 10 caracteres)
+
+        (acc[dateKey] = acc[dateKey] || []).push(item);
         return acc;
     }, {});
 
@@ -38,7 +40,12 @@ const groupByDate = (items: Activity[]): Record<string, Activity[]> => {
     const sortedGrouped = Object.keys(grouped)
         .sort((a, b) => new Date(a).getTime() - new Date(b).getTime())
         .reduce((acc: Record<string, Activity[]>, key: string) => {
-            acc[key] = grouped[key];
+            // Ordenar os itens dentro de cada data pelo horário 
+            acc[key] = grouped[key].sort((a, b) => {
+                const timeA = a.data.substring(11, 16);
+                const timeB = b.data.substring(11, 16);
+                return timeA.localeCompare(timeB);
+            });
             return acc;
         }, {});
 
@@ -49,7 +56,6 @@ const groupByDate = (items: Activity[]): Record<string, Activity[]> => {
 
 export default function Registration() {
     const navigation = useNavigation();
-    const currentDayString = "13"
     const [search, setSearch] = useState("")
     const [searching, setSearching] = useState(false)
     const [items, setItems] = useState<Activity[]>([])
@@ -114,6 +120,8 @@ export default function Registration() {
                     filteredItems = filteredItems.filter(item => item.nome.toLowerCase().includes(search.toLowerCase()));
                 }
 
+                filteredItems = filteredItems.filter(item => item.categoriaId === '1');
+
                 setItems(filteredItems);
             } catch (error) {
                 console.error("Erro ao buscar atividades: ", error);
@@ -150,7 +158,7 @@ export default function Registration() {
     }
 
     return (
-        <View className='bg-white flex-1 px-8'>
+        <View className='bg-white flex-1 px-8 pb-8'>
             <View className={`flex-row justify-center items-center mt-12 ${(!searching) && 'pb-8'}`}>
                 <TouchableOpacity className='py-2 px-3' style={{ position: 'absolute', left: 0, top: 0 }} onPress={() => navigation.goBack()}>
                     <FontAwesome6 name="chevron-left" size={14} color="#000000" />
@@ -238,7 +246,7 @@ export default function Registration() {
                                         <Text style={{ fontFamily: 'Inter_400Regular' }} className="text-md text-neutral-700/50 pt-0.5">{formatDayOfWeek(date.substring(0, 10))}</Text>
                                     </View>
 
-                                    <View className='flex-row flex-wrap justify-between mb-4'>
+                                    <View className='flex-row flex-wrap justify-between mb-5'>
                                         {groupedItems[date].map((item, index) => (
                                             <View
                                                 className='p-2 w-full'

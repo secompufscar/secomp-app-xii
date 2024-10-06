@@ -1,17 +1,23 @@
 import React from "react";
 import { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, Alert } from "react-native";
+import { View, Text, TouchableOpacity, Alert, Platform, StyleSheet} from "react-native";
 import { ScheduleItemProps } from "../entities/schedule-item";
 import { useRoute } from "@react-navigation/native";
 import { AntDesign, Ionicons, FontAwesome6 } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
-import { Platform, StyleSheet } from "react-native";
 import { useAuth } from "../hooks/AuthContext";
 import { subscribeToActivity, unsubscribeToActivity } from "../services/activities";
 import { userSubscription } from "../services/userAtActivities";
 import { ButtonHome } from "../components/buttonHome";
 
 const isIos: Boolean = Platform.OS === 'ios'
+
+const formatDate = (date: Date) => {
+    const day = date.getUTCDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+};
 
 type RegistrationDetailsProps = {
     item: Activity
@@ -60,7 +66,7 @@ export default function RegistrationDetails() {
                 }
             } else {
                 if (Platform.OS === 'web') {
-                    alert("Inscrição realizada: Sua inscrição foi realizada com sucesso!");
+                    alert("Sua inscrição foi realizada com sucesso!");
                 } else {
                     Alert.alert('Inscrição realizada', 'Sua inscrição foi realizada com sucesso.');
                 }
@@ -83,7 +89,7 @@ export default function RegistrationDetails() {
             if (confirmUnsubscribe) {
                 unsubscribeToActivity(user.id, item.id)
                     .then(() => {
-                        alert("Desinscrição realizada: Você foi desinscrito com sucesso.");
+                        alert("Você foi desinscrito da atividade com sucesso.");
                         navigation.goBack();
                     })
                     .catch(error => {
@@ -122,17 +128,18 @@ export default function RegistrationDetails() {
                 <Text style={{ fontFamily: 'Inter_600SemiBold' }} className='text-xl text-black pt-0.5'>Eventos</Text>
             </View>
 
-            <View className="p-8 mt-16 mb-16">
-                <View className='flex flex-col justify-start p-2 bg-white rounded-2xl' style={(isIos) ? [styles.shadowProp] : [styles.elevation]}>
+            <View className="p-8 mt-3 mb-3">
+                <View className='flex flex-col justify-start p-2 bg-white rounded-2xl' style={styles.elevation}>
                     <View className="p-4">
                         <View className='pb-4 items-center'>
-                            <Text className='text-xl font-bold text-blue'>{item.nome}</Text>
+                            <Text className='font-bold text-black'>{item.nome}</Text>
                         </View>
                         <View className=''>
                             <View className='flex-row items-center pb-1'>
                                 <AntDesign name="calendar" size={24} color="#445BE6" />
-                                <Text className='pl-2'>{item.data.substring(0, 10)}</Text>
+                                <Text className='pl-2'>{formatDate(new Date(item.data.substring(0, 10)))}</Text>
                             </View>
+                            
                             <View className='flex-row items-center pb-1'>
                                 <Ionicons name="time-outline" size={24} color="#445BE6" />
                                 <Text className='pl-2'>{item.data.substring(11, 16)}</Text>
@@ -145,24 +152,18 @@ export default function RegistrationDetails() {
                                 <AntDesign name="enviromento" size={24} color="#445BE6" />
                                 <Text className='pl-2'>{item.local}</Text>
                             </View>
-                            <View className='flex-row pb-1 items-start'>
+                            <View className='flex-row pb-1 items-start mr-4'>
                                 <Ionicons name="information-circle-outline" size={24} color="#445BE6" />
                                 <Text className='pl-2 flex text-justify'>
                                     {item.detalhes}
                                 </Text>
                             </View>
-
-                            <View className='flex-row items-center pb-1'>
-                                <AntDesign name="enviromento" size={24} color="#445BE6" />
-                                <Text className='pl-2'>{item.vagas}</Text>
-                            </View> 
                         </View>
                     </View>
-                    <View className="pt-10"></View>
                 </View>
             </View>
 
-            <View className="flex items-center" style={(isIos) ? [styles.shadowProp] : [styles.elevation]}>
+            <View className="flex items-center">
                 {subscriptionData ? (
                     <ButtonHome title="DESINSCREVA-SE" onPress={requestUnSubscription} />
 
@@ -182,8 +183,10 @@ const styles = StyleSheet.create({
         shadowRadius: 3,
     },
     elevation: {
-        elevation: 5,
+        elevation: 4,
         shadowColor: '#171717',
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.2,
+        shadowRadius: 3,
     },
-})
-
+});

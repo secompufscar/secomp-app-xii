@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, SafeAreaView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Platform, StyleSheet } from "react-native";
 
@@ -17,25 +17,24 @@ export default function MyEvent({ scheduleItem, onClick }: ScheduleItemComponent
     const eventTime = scheduleItem.data ? scheduleItem.data.substring(11, 16) : 'Horário não disponível';
 
     return (
-        <TouchableOpacity onPress={onClick}>
-            <View className='flex flex-col justify-start bg-white rounded-2xl' style={isIos ? [styles.shadowProp] : [styles.elevation]}>
-                <View className="p-4">
-                    <View className='pb-2'>
-                        <Text className='text-blue text-xl font-bold'>{eventDate}</Text>
-                    </View>
-                    <View className=''>
-                        <View className='flex-row items-center pb-1'>
-                            <Ionicons name="calendar-clear-outline" size={24} color="#445BE6" />
-                            <Text className='pl-2'>{scheduleItem.nome}</Text>
-                        </View>
-                        <View className='flex-row items-center pb-1'>
-                            <Ionicons name="time-outline" size={24} color="#445BE6" />
-                            <Text className='pl-2'>{eventTime}</Text>
+        <SafeAreaView>
+            <TouchableOpacity onPress={onClick}>
+                <View className='flex flex-col justify-start bg-white rounded-2xl' style={isIos ? [styles.shadowProp] : [styles.elevation]}>
+                    <View className="p-4">
+                        <View className=''>
+                            <View className='flex-row items-center pb-1'>
+                                <Ionicons name="calendar-clear-outline" size={24} color="#445BE6" />
+                                <Text className='pl-2 mr-2'>{scheduleItem.nome}</Text>
+                            </View>
+                            <View className='flex-row items-center pb-1'>
+                                <Ionicons name="time-outline" size={24} color="#445BE6" />
+                                <Text className='pl-2'>{eventTime}</Text>
+                            </View>
                         </View>
                     </View>
                 </View>
-            </View>
-        </TouchableOpacity>
+            </TouchableOpacity>
+        </SafeAreaView>
     )
 }
 

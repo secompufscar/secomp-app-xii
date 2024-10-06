@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Entypo, MaterialIcons, Ionicons, FontAwesome6, Feather } from '@expo/vector-icons';
-
-import {Schedule, UserHome, AdminHome } from '../screens';
+import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
+import { View, Text } from "react-native"
+import { Schedule, UserHome, AdminHome } from '../screens';
 
 import { colors } from "../styles/colors"
 import { useAuth } from "../hooks/AuthContext";
@@ -23,16 +23,20 @@ export default function TabRoutes() {
                     borderTopWidth: 0,
                     height: 60,
                 },
-                tabBarShowLabel: false
+                tabBarShowLabel: false,
+                title: "SECOMP UFSCar 2024"
             }}>
 
-{
+            {
                 user.tipo == 'USER' ? <Tab.Screen
                     name="HOME"
                     component={UserHome}
                     options={{
                         tabBarIcon: ({ focused }) => (
-                            <Ionicons name={focused ? "home" : "home-outline"} size={28} color={colors.white} />
+                            <View className={`flex justify-center items-center ${focused ? "font-bold" : "font-normal"}`}>
+                                <Ionicons name={focused ? "home" : "home-outline"} size={28} color={colors.white} />
+                                <Text className='text-center text-white'>Home</Text>
+                            </View>
                         ),
                     }}
                 /> : <Tab.Screen
@@ -51,7 +55,10 @@ export default function TabRoutes() {
                 component={Schedule}
                 options={{
                     tabBarIcon: ({ focused }) => (
-                        <Ionicons name={focused ? "list" : "list-outline"} size={28} color={colors.white} />
+                        <View className={`flex justify-center items-center ${focused ? "font-bold" : "font-normal"}`}>
+                            <Ionicons name={focused ? "calendar-clear" : "calendar-clear-outline"} size={28} color={colors.white} />
+                            <Text className='text-center text-white'>Cronograma</Text>
+                        </View>
                     ),
 
                 }}
@@ -60,5 +67,3 @@ export default function TabRoutes() {
         </Tab.Navigator>
     );
 }
-
-

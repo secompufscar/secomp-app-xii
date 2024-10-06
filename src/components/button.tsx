@@ -10,12 +10,12 @@ export function Button({ title, isLoading = false, ...rest }: Props) {
         <TouchableOpacity
             disabled={isLoading}
             activeOpacity={0.7}
-            className="w-full h-14 bg-white items-center justify-center rounded-lg"
+            className="w-full h-14 bg-white items-center justify-center rounded-lg outline-none"
             {...rest}
         >
 
             {isLoading ? (<ActivityIndicator className="text-blue" />) : (
-                <Text className="text-blue text-base font-bold uppercase">
+                <Text className="text-blue text-base font-bold uppercase outline-none">
                     {title}
                 </Text>)
             }
