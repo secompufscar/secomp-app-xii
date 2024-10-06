@@ -6,6 +6,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useAuth } from "../hooks/AuthContext";
 import { MaterialIcons, AntDesign  } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { BeautifulName } from "beautiful-name"
 
 export default function UserHome() {
     const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
@@ -20,8 +21,13 @@ export default function UserHome() {
         <View className='bg-white flex-1'>            
             <View className='flex-1 justify-center items-center p-4'>
                 <Text style={{ fontSize: 28, fontWeight: 'bold', textAlign: 'center', marginBottom: 20 }}>
-                    Olá, {user.nome}! 👋
+                    Olá, {new BeautifulName(user.nome).beautifulName}! 👋
                 </Text>
+
+                <Text style={{ fontSize: 22, textAlign: 'center', marginVertical: 40, fontWeight: "bold" }}>
+                    Inscrição Confirmada! 👍
+                </Text>
+
                 <Text style={{ fontSize: 18, textAlign: 'center', marginBottom: 40 }}>
                     Em breve, você poderá se inscrever nas atividades da Semana da Computação da UFSCar 2024 - SECOMP. 🚀🚀
                 </Text>
