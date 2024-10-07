@@ -22,8 +22,10 @@ const getCurrentWeekDates = () => {
         date.setDate(startOfWeek + index);
         return date;
     });
+
     weekDates.pop()
     weekDates.shift()
+
     return weekDates;
 };
 
@@ -44,9 +46,12 @@ export default function Schedule() {
                 const activities: Activity[] = await getActivities();
                 console.log('Data selecionada:', selectedDate);
                 console.log('Atividades:', activities);
-
+    
                 // Filtra as atividades de acordo com a data selecionada
-                const filteredActivities = activities.filter(activity => activity.data.substring(0, 10) === selectedDate);
+                const filteredActivities = activities
+                    .filter(activity => activity.data.substring(0, 10) === selectedDate)
+                    .sort((a, b) => a.data.substring(11, 16).localeCompare(b.data.substring(11, 16))); // Ordena pela hora
+    
                 setItems(filteredActivities);
             } catch (error) {
                 console.error('Erro ao buscar atividades:', error);
@@ -54,9 +59,10 @@ export default function Schedule() {
                 setLoading(false);
             }
         };
-
+    
         fetchItems();
     }, [selectedDate]);
+    
 
 
     const handlePress = (item: Activity) => {
@@ -75,7 +81,7 @@ export default function Schedule() {
                     <View>
 
                         <View className='flex-row justify-start items-center pt-16 pb-2 px-6 gap-4'>
-                            <Text className='text-3xl font-bold text-blue'>Cronograma</Text>
+                            <Text className='text-3xl font-bold text-black'>Cronograma</Text>
                         </View>
 
                         <View className='px-6 pt-6'>

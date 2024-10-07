@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Button, TouchableHighlight, TouchableOpacity} from 'react-native';
+import { View, Text, Button, SafeAreaView, TouchableOpacity } from 'react-native';
 import { ScheduleItemProps } from '../entities/schedule-item';
 
 type ScheduleItemComponentProps = {
@@ -8,19 +8,23 @@ type ScheduleItemComponentProps = {
 }
 
 // Componente de ítens do cronogramam, pode ser mudado depois para aceitar mais informações
-export default function ScheduleItemComponent({scheduleItem, onClick}: ScheduleItemComponentProps) {
+export default function ScheduleItemComponent({ scheduleItem, onClick }: ScheduleItemComponentProps) {
     return (
-        <TouchableOpacity onPress={onClick}>
-            <View className='flex flex-row justify-start min-w-full items-center p-4 rounded-md bg-blue'>
-                <View className='pl-8 pr-4'>
-                    <Text className='text-white font-bold'>{scheduleItem.data.substring(11, 16)}</Text>
+        <SafeAreaView>
+            <TouchableOpacity onPress={onClick} >
+                <View className='flex flex-row justify-start min-w-full items-center p-4 rounded-md bg-neutral-200/50'>
+                    <View className='pl-8 pr-4'>
+                        <Text className='text-blue font-bold'>{scheduleItem.data.substring(11, 16)}</Text>
+                    </View>
+                    <View className='pl-4 pr-8 max-w-[70%]'>
+                        <Text className='text-blue font-bold min-w-full'>{scheduleItem.nome}</Text>
+                        <Text className='text-black'>{scheduleItem.palestranteNome}</Text>
+                        {/* <Text className='text-white'>{scheduleItem.detalhes}</Text> */}
+                    </View>
                 </View>
-                <View className='pl-4 pr-8 max-w-[80%]'>
-                    <Text className='text-white font-bold'>{scheduleItem.nome}</Text>
-                    <Text className='text-white'>{scheduleItem.palestranteNome}</Text>
-                   {/* <Text className='text-white'>{scheduleItem.detalhes}</Text> */}
-                </View>
-            </View>
-        </TouchableOpacity>
+            </TouchableOpacity>
+        </SafeAreaView>
+
     )
+
 }
