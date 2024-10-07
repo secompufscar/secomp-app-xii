@@ -9,7 +9,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackTypes } from '../routes/stack.routes';
 
 import { useAuth } from "../hooks/AuthContext";
-import { FontAwesome6, MaterialIcons } from '@expo/vector-icons';
+import { FontAwesome6, MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function UserHome() {
     const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
@@ -28,7 +28,7 @@ export default function UserHome() {
 
     // Mensagem baseada no horário do dia
     const getCurrentTime = () => {
-        const hours =18 //new Date().getHours();
+        const hours = 18 //new Date().getHours();
         if (hours < 12) {
             return { greeting: 'Bom dia 🌅', color: '#ffc573' }; // Cor laranja para manhã
         } else if (hours >= 12 && hours < 18) {
@@ -58,7 +58,7 @@ export default function UserHome() {
                 <View className='flex-col items-start mt-10 pb-2'>
                     <Text style={{ fontFamily: 'Inter_500Medium', color: color }} className='text-lg text-neutral-300'>{greeting}</Text>
                     <Text style={{ fontFamily: 'Inter_600SemiBold' }} className='text-2xl mt-0.5'>{new BeautifulName(user.nome).beautifulName}</Text>
-                    
+
                     {/* <View className="flex-row">
                         <Text style={{ fontFamily: 'Inter_400Regular' }} className='text-sm text-white mt-5 mr-2 py-2 px-3 rounded-lg bg-blue border-0'>Participante</Text>
                         <Text style={{ fontFamily: 'Inter_400Regular' }} className='text-sm text-white mt-5 py-2 px-3 rounded-lg bg-blue border-0'>Pontos: {user.points}</Text>
@@ -118,6 +118,36 @@ export default function UserHome() {
                         </View>
                     </TouchableOpacity>
 
+                </View>
+
+                <View className='mb-10 flex justify-center'>
+                    <Text style={{ fontFamily: 'Inter_600SemiBold' }} className='text-md text-neutral-700 mb-4'>Redes Sociais</Text>
+
+                    <View className="flex-row justify-between items-center space-x-3">
+                        <TouchableOpacity className='h-20 grow' onPress={() => Linking.openURL('https://www.instagram.com/secompufscar/')}>
+                            <View className="h-full w-full rounded-lg bg-neutral-200/30 flex items-center justify-center">
+                                <FontAwesome6 name="instagram" size={42} color="#E1306C" />
+                            </View>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity className='h-20 grow' onPress={() => Linking.openURL('https://www.linkedin.com/company/secomp-ufscar/posts')}>
+                            <View className="h-full w-full rounded-lg bg-neutral-200/30 flex items-center justify-center">
+                                <FontAwesome6 name="linkedin" size={42} color="#0077B5" />
+                            </View>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity className='h-20 grow' onPress={() => Linking.openURL('https://www.facebook.com/secompufscar')}>
+                            <View className="h-full w-full rounded-lg bg-neutral-200/30  flex items-center justify-center">
+                                <FontAwesome6 name="square-facebook" size={42} color="#1877F2" />
+                            </View>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity className='h-20 grow' onPress={() => Linking.openURL('https://www.secompufscar.com.br/')}>
+                            <View className="h-full w-full rounded-lg bg-neutral-200/30 flex items-center justify-center">
+                                <MaterialCommunityIcons name="web" size={42} color="#333333" />
+                            </View>
+                        </TouchableOpacity>
+                    </View>
                 </View>
 
                 <View className='mb-10 flex justify-center'>

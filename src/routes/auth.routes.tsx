@@ -22,8 +22,8 @@ export type AuthTypes = NativeStackNavigationProp<StackNavigation>;
 export default function AuthRoutes() {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false, title: "SECOMP UFSCar 2024" }}>
-            <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="SignUp" component={SignUp} />
+            <Stack.Screen name="Login" component={Login} />
         </Stack.Navigator>
     );
 }

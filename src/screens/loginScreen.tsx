@@ -158,7 +158,7 @@ export default function Login() {
 
                     <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
                         <Text className="text-white text-base font-bold text-center mt-4">
-                            Ainda não possui cadastro?
+                            Ainda não possui inscrição?
                         </Text>
                     </TouchableOpacity>
 
