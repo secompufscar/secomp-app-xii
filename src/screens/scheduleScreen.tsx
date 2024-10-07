@@ -34,7 +34,7 @@ export default function Schedule() {
     const navigation = useNavigation();
     const currentDateString = formatDate(new Date());
     const [weekDates, setWeekDates] = useState(getCurrentWeekDates());
-    const [selectedDate, setSelectedDate] = useState(currentDateString);
+    const [selectedDate, setSelectedDate] = useState(formatDate(weekDates[0])); // Define a primeira data como padrão
     const [items, setItems] = useState<Activity[]>([]);
     const [loading, setLoading] = useState(false);
 
@@ -46,12 +46,12 @@ export default function Schedule() {
                 const activities: Activity[] = await getActivities();
                 console.log('Data selecionada:', selectedDate);
                 console.log('Atividades:', activities);
-    
+
                 // Filtra as atividades de acordo com a data selecionada
                 const filteredActivities = activities
                     .filter(activity => activity.data.substring(0, 10) === selectedDate)
                     .sort((a, b) => a.data.substring(11, 16).localeCompare(b.data.substring(11, 16))); // Ordena pela hora
-    
+
                 setItems(filteredActivities);
             } catch (error) {
                 console.error('Erro ao buscar atividades:', error);
@@ -59,10 +59,10 @@ export default function Schedule() {
                 setLoading(false);
             }
         };
-    
+
         fetchItems();
     }, [selectedDate]);
-    
+
 
 
     const handlePress = (item: Activity) => {
@@ -71,56 +71,77 @@ export default function Schedule() {
     };
 
     return (
-        <SafeAreaView className='bg-white flex-1'>
-            <ScrollView>
-                {loading ? (
-                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                        <ActivityIndicator size="large" color="#445BE6" />
+        <SafeAreaView className='bg-white flex-1 px-8 pb-2'>
+
+
+            <View>
+
+                <View className='flex-row justify-start items-center pt-10 mb-4'>
+                    <Text style={{ fontFamily: 'Inter_700Bold' }} className='text-3xl text-black/80'>Cronograma</Text>
+                </View>
+
+                <View className='mt-4 pb-6'>
+                    <View className='flex-row justify-between'>
+                        {weekDates.map((date, index) => {
+                            const dateString = formatDate(date);
+                            const isSelected = dateString === selectedDate;
+                            return (
+                                <TouchableOpacity
+                                    key={index}
+                                    style={{
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        width: '18%',
+                                        height: 56,
+                                        backgroundColor: isSelected ? 'rgba(59, 130, 246, 0.1)' : 'rgba(229, 231, 235, 0.3)',
+                                        borderRadius: 8,
+                                    }}
+                                    onPress={() => setSelectedDate(dateString)}
+                                >
+                                    <Text
+                                        style={{
+                                            fontFamily: 'Inter_600SemiBold',
+                                            color: !isSelected ? 'rgba(107, 114, 128, 0.7)' : '#445BE6', // text-blue ou text-neutral-500/70
+                                            fontSize: 16,
+                                        }}
+                                    >
+                                        {date.getDate()}
+                                    </Text>
+
+                                    <Text
+                                        style={{
+                                            fontFamily: 'Inter_400Regular',
+                                            color: !isSelected ? 'rgba(107, 114, 128, 0.7)' : '#445BE6', // text-blue ou text-neutral-500/70
+                                            fontSize: 14,
+                                        }}
+                                    >
+                                        {date.toLocaleString('default', { weekday: 'short' })}
+                                    </Text>
+                                </TouchableOpacity>
+                            );
+                        })}
                     </View>
-                ) : (
-                    <View>
-
-                        <View className='flex-row justify-start items-center pt-16 pb-2 px-6 gap-4'>
-                            <Text className='text-3xl font-bold text-black'>Cronograma</Text>
-                        </View>
-
-                        <View className='px-6 pt-6'>
-                            <View className='flex-row justify-center'>
-                                {weekDates.map((date, index) => {
-                                    const dateString = formatDate(date);
-                                    const isSelected = dateString === selectedDate;
-                                    return (
-                                        <TouchableOpacity
-                                            key={index}
-                                            className={`flex justify-center items-center w-12 h-12 ${isSelected ? 'bg-[#445BE6] rounded-full' : ''}`}
-                                            onPress={() => setSelectedDate(dateString)}
-                                        >
-                                            <Text className={`${isSelected ? "text-white" : 'text-black'}`}>
-                                                {date.getDate()}
-                                            </Text>
-                                            <Text className={`${isSelected ? "text-white" : 'text-black'}`}>
-                                                {date.toLocaleString('default', { weekday: 'short' })}
-                                            </Text>
-                                        </TouchableOpacity>
-                                    );
-                                })}
+                </View>
+            </View>
+            {loading ? (
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <ActivityIndicator size="large" color="#445BE6" />
+                </View>
+            ) : (
+                <ScrollView className='flex'>
+                    <View className='flex-row flex-wrap justify-around'>
+                        {items.map((item, index) => (
+                            <View className='w-full mb-3 border border-neutral-200/70 rounded-xl' key={index}>
+                                <ScheduleItemComponent
+                                    scheduleItem={item}
+                                    onClick={() => handlePress(item)}
+                                />
                             </View>
-                        </View>
-
-                        <View className='flex justify-center items-center pt-10 px-6'>
-                                {items.map((item, index) => (
-                                    <View className='pb-4' key={index}>
-                                        <ScheduleItemComponent
-                                            scheduleItem={item}
-                                            onClick={() => handlePress(item)}
-                                        />
-                                    </View>
-                                ))}
-                        </View>
-
+                        ))}
                     </View>
-                )}
-            </ScrollView>
+                </ScrollView>
+            )}
         </SafeAreaView>
     );
 }

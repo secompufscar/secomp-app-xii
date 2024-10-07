@@ -12,13 +12,14 @@ export default function ScheduleItemComponent({ scheduleItem, onClick }: Schedul
     return (
         <SafeAreaView>
             <TouchableOpacity onPress={onClick} >
-                <View className='flex flex-row justify-start min-w-full items-center p-4 rounded-md bg-neutral-200/50'>
-                    <View className='pl-8 pr-4'>
-                        <Text className='text-blue font-bold'>{scheduleItem.data.substring(11, 16)}</Text>
+                <View className='flex flex-row justify-start min-w-full items-center p-4 rounded-xl bg-neutral-200/20'>
+                    <View className='pl-2 pr-2'>
+                        <Text style={{ fontFamily: 'Inter_700Bold' }} className='text-neutral-500 text-xl'>{scheduleItem.data.substring(11, 16)}</Text>
                     </View>
-                    <View className='pl-4 pr-8 max-w-[70%]'>
+
+                    <View className='pl-4 pr-8 max-w-[80%]'>
                         <Text className='text-blue font-bold min-w-full'>{scheduleItem.nome}</Text>
-                        <Text className='text-black'>{scheduleItem.palestranteNome}</Text>
+                        <Text className='text-black mt-1'>{scheduleItem.palestranteNome}</Text>
                         {/* <Text className='text-white'>{scheduleItem.detalhes}</Text> */}
                     </View>
                 </View>

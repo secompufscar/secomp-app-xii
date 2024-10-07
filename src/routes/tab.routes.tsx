@@ -56,7 +56,7 @@ export default function TabRoutes() {
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <View className={`flex justify-center items-center ${focused ? "font-bold" : "font-normal"}`}>
-                            <Ionicons name={focused ? "calendar" : "calendar-outline"} size={28} color={colors.white} />
+                            <Ionicons name={focused ? "calendar-clear" : "calendar-clear-outline"} size={28} color={colors.white} />
                             <Text className='text-center text-white'>Cronograma</Text>
                         </View>
                     ),
