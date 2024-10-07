@@ -1,19 +1,39 @@
 import Routes from './routes';
 import './styles/global.css';
 
-import { StatusBar } from 'expo-status-bar';
-
 import { AuthProvider } from './hooks/AuthContext'
 
-export default function App() {
-  return (
-    <>
-      <StatusBar style="light" backgroundColor='transparent' />
+import {
+  useFonts,
+  Inter_100Thin,
+  Inter_200ExtraLight,
+  Inter_300Light,
+  Inter_400Regular,
+  Inter_500Medium,
+  Inter_600SemiBold,
+  Inter_700Bold,
+  Inter_800ExtraBold,
+  Inter_900Black,
+} from '@expo-google-fonts/inter';
 
-      <AuthProvider>
-        <Routes />
-      </AuthProvider>
-    </>
+export default function App() {
+  // Fonte Inter
+  let [fontsLoaded] = useFonts({
+    Inter_100Thin,
+    Inter_200ExtraLight,
+    Inter_300Light,
+    Inter_400Regular,
+    Inter_500Medium,
+    Inter_600SemiBold,
+    Inter_700Bold,
+    Inter_800ExtraBold,
+    Inter_900Black,
+  });
+
+  return (
+    <AuthProvider>
+      <Routes />
+    </AuthProvider>
   );
 }
 
