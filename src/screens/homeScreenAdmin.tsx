@@ -27,7 +27,7 @@ export default function UserHome() {
     // Mensagem baseada no horário do dia
     const getCurrentTime = () => {
         const hours = new Date().getHours();
-        if (hours < 12) {
+        if (hours >= 6 && hours < 12) {
             return { greeting: 'Bom dia 🌅', color: '#ffc573' }; // Cor laranja para manhã
         } else if (hours >= 12 && hours < 18) {
             return { greeting: 'Boa tarde 🌞', color: '#f0a148' }; // Cor dourada para tarde
@@ -64,7 +64,7 @@ export default function UserHome() {
                             </View>
 
                             <View className='grow'>
-                                <Text style={{ fontFamily: 'Inter_600SemiBold' }} className='text-lg text-neutral-700'>Leitura de Presença</Text>
+                                <Text style={{ fontFamily: 'Inter_600SemiBold' }} className='text-lg text-black'>Leitura de Presença</Text>
                             </View>
 
                             <View className='w-14 h-full ml-2 items-center justify-center'>
@@ -80,7 +80,7 @@ export default function UserHome() {
                             </View>
 
                             <View className='grow'>
-                                <Text style={{ fontFamily: 'Inter_600SemiBold' }} className='text-lg text-neutral-700'>Sair</Text>
+                                <Text style={{ fontFamily: 'Inter_600SemiBold' }} className='text-lg text-black'>Sair</Text>
                             </View>
 
                             <View className='w-14 h-full ml-2 items-center justify-center'>

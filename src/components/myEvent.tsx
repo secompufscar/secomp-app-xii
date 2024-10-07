@@ -21,14 +21,15 @@ export default function MyEvent({ scheduleItem, onClick }: ScheduleItemComponent
             <TouchableOpacity onPress={onClick}>
                 <View className='flex flex-col justify-start bg-white rounded-2xl' style={isIos ? [styles.shadowProp] : [styles.elevation]}>
                     <View className="p-4">
-                        <View className=''>
+                        <View className='space-y-1 p-1'>
                             <View className='flex-row items-center pb-1'>
-                                <Ionicons name="calendar-clear-outline" size={24} color="#445BE6" />
-                                <Text className='pl-2 mr-2'>{scheduleItem.nome}</Text>
+                                <Ionicons name="calendar-clear-outline" size={18} color="#445BE6" />
+                                <Text style={{ fontFamily: 'Inter_500Medium' }} className='pl-2 mr-2'>{scheduleItem.nome}</Text>
                             </View>
-                            <View className='flex-row items-center pb-1'>
-                                <Ionicons name="time-outline" size={24} color="#445BE6" />
-                                <Text className='pl-2'>{eventTime}</Text>
+
+                            <View className='flex-row items-center'>
+                                <Ionicons name="time-outline" size={18} color="#445BE6" />
+                                <Text style={{ fontFamily: 'Inter_400Regular' }} className='pl-2'>{eventTime}</Text>
                             </View>
                         </View>
                     </View>

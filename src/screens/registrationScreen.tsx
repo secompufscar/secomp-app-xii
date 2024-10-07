@@ -159,7 +159,7 @@ export default function Registration() {
 
     return (
         <View className='bg-white flex-1 px-8 pb-8'>
-            <View className={`flex-row justify-center items-center mt-12 ${(!searching) && 'pb-8'}`}>
+            <View className={`flex-row justify-center items-center mt-10 ${(!searching) && 'pb-8'}`}>
                 <TouchableOpacity className='py-2 px-3' style={{ position: 'absolute', left: 0, top: 0 }} onPress={() => navigation.goBack()}>
                     <FontAwesome6 name="chevron-left" size={14} color="#000000" />
                 </TouchableOpacity>
@@ -239,14 +239,14 @@ export default function Registration() {
                     <ScrollView className="flex py-0">
                         <View className='flex-row flex-wrap justify-around'>
                             {Object.keys(groupedItems).map((date) => (
-                                <View key={date} className="w-full">
+                                <View key={date} className="w-full mb-4">
                                     <View className='flex-1 flex-row justify-start items-center mt-4 mb-2 px-2 space-x-2'>
                                         <MaterialIcons name="event" size={20} color="#445BE6" />
                                         <Text style={{ fontFamily: 'Inter_600SemiBold' }} className="text-lg text-neutral-700">{formatDate(new Date(date.substring(0, 10)))}</Text>
                                         <Text style={{ fontFamily: 'Inter_400Regular' }} className="text-md text-neutral-700/50 pt-0.5">{formatDayOfWeek(date.substring(0, 10))}</Text>
                                     </View>
 
-                                    <View className='flex-row flex-wrap justify-between mb-5'>
+                                    <View className='flex-row flex-wrap justify-between'>
                                         {groupedItems[date].map((item, index) => (
                                             <View
                                                 className='p-2 w-full'

@@ -34,8 +34,8 @@ export default function TabRoutes() {
                     options={{
                         tabBarIcon: ({ focused }) => (
                             <View className={`flex justify-center items-center ${focused ? "font-bold" : "font-normal"}`}>
-                                <Ionicons name={focused ? "home" : "home-outline"} size={28} color={colors.white} />
-                                <Text className='text-center text-white'>Home</Text>
+                                <Ionicons name={focused ? "home" : "home-outline"} size={24} color={colors.white} />
+                                <Text className='text-center text-white pt-0.5'>Home</Text>
                             </View>
                         ),
                     }}
@@ -44,7 +44,7 @@ export default function TabRoutes() {
                     component={AdminHome}
                     options={{
                         tabBarIcon: ({ focused }) => (
-                            <Ionicons name={focused ? "home" : "home-outline"} size={28} color={colors.white} />
+                            <Ionicons name={focused ? "home" : "home-outline"} size={24} color={colors.white} />
                         ),
                     }}
                 />
@@ -56,8 +56,8 @@ export default function TabRoutes() {
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <View className={`flex justify-center items-center ${focused ? "font-bold" : "font-normal"}`}>
-                            <Ionicons name={focused ? "calendar-clear" : "calendar-clear-outline"} size={28} color={colors.white} />
-                            <Text className='text-center text-white'>Cronograma</Text>
+                            <Ionicons name={focused ? "calendar-clear" : "calendar-clear-outline"} size={24} color={colors.white} />
+                            <Text className='text-center text-white pt-0.5'>Cronograma</Text>
                         </View>
                     ),
 
