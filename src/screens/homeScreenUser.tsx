@@ -233,6 +233,22 @@ export default function UserHome() {
                                     />
                                 </View>
                             </TouchableOpacity>
+
+
+                            <TouchableOpacity className='h-full grow' onPress={() => Linking.openURL('https://qitech.com.br/')}>
+                                <View className='h-full grow rounded-lg bg-neutral-200'>
+                                    <Image
+                                        source={require('../../assets/empresas/qitech.png')}
+                                        style={{
+                                            width: '100%',
+                                            height: '100%',
+                                            resizeMode: 'contain',
+                                            maxWidth: '100%',
+                                            maxHeight: '100%',
+                                        }}
+                                    />
+                                </View>
+                            </TouchableOpacity>
                         </View>
 
                     </View>
