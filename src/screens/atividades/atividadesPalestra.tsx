@@ -51,23 +51,21 @@ export default function Palestras() {
     const filteredActivities = activities.filter(activity => activity.categoriaId === categoriaId);
 
     return (
-        <SafeAreaView className='bg-white flex-1 px-8'>
-            <View className={"flex-row justify-center items-center mt-10"}>
-                <TouchableOpacity className='py-2 px-3' style={{ position: 'absolute', left: 0, top: 0 }} onPress={() => navigation.goBack()}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: 'white', paddingHorizontal: 32 }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 40 }}>
+                <TouchableOpacity style={{ paddingVertical: 8, paddingHorizontal: 12, position: 'absolute', left: 0, top: 0 }} onPress={() => navigation.goBack()}>
                     <FontAwesome6 name="chevron-left" size={14} color="#000000" />
                 </TouchableOpacity>
 
-                <Text style={{ fontFamily: 'Inter_600SemiBold' }} className='text-xl text-black pt-0.5'>Palestras</Text>
+                <Text style={{ fontFamily: 'Inter_600SemiBold', fontSize: 20, color: 'black' }}>Palestras</Text>
             </View>
 
             <FlatList
-                className='mt-5'
+                style={{ marginTop: 28, paddingHorizontal: 10}}
                 data={filteredActivities}
                 renderItem={renderActivity}
                 keyExtractor={(item) => item.id.toString()}
-                contentContainerStyle={{ padding: 10 }}
             />
-            
         </SafeAreaView>
     );
 }
