@@ -40,7 +40,7 @@ export default function Categorias() {
 
             case 'Workshops':
                 return 'people-group';
-            
+
             case 'Credenciamento':
                 return 'id-badge';
 
@@ -51,13 +51,13 @@ export default function Categorias() {
 
     const renderCategory = ({ item }: { item: Category }) => (
         <TouchableOpacity onPress={() => { navigation.navigate(`${item.nome}`) }}>
-            <View className='grow h-20 flex-row items-center space-x-1 rounded-lg bg-neutral-200/20 my-2'>
+            <View className='grow h-20 flex-row items-center space-x-1 rounded-lg bg-neutral-200/20 my-2 border border-neutral-200/40'>
                 <View className='w-14 h-full ml-2 items-center justify-center'>
                     <FontAwesome6 name={getIconName(item.nome)} size={20} color="#445BE6" />
                 </View>
 
                 <View className='grow'>
-                    <Text className='text-xl font-semibold text-neutral-700'>{item.nome}</Text>
+                    <Text style={{ fontFamily: 'Inter_600SemiBold' }} className='text-lg font-semibold text-neutral-700'>{item.nome}</Text>
                 </View>
 
                 <View className='w-14 h-full ml-2 items-center justify-center'>
@@ -68,21 +68,21 @@ export default function Categorias() {
     );
 
     return (
-        <SafeAreaView className='bg-white flex-1'>
-
-            <View className='flex-row justify-start items-center pt-12 pb-5 px-4 gap-4'>
-                <TouchableOpacity>
-                    <AntDesign name="arrowleft" size={24} color="#445BE6" onPress={() => navigation.goBack()} />
+        <SafeAreaView className='bg-white flex-1 px-8'>
+            <View className={"flex-row justify-center items-center mt-10"}>
+                <TouchableOpacity className='py-2 px-3' style={{ position: 'absolute', left: 0, top: 0 }} onPress={() => navigation.goBack()}>
+                    <FontAwesome6 name="chevron-left" size={14} color="#000000" />
                 </TouchableOpacity>
-                <Text className='text-3xl font-bold text-blue'>Atividades</Text>
+
+                <Text style={{ fontFamily: 'Inter_600SemiBold' }} className='text-xl text-black pt-0.5'>Categorias</Text>
             </View>
 
             <FlatList
-                className='px-2'
+                className='mt-5'
                 data={categories}
                 renderItem={renderCategory}
                 keyExtractor={(item) => item.id.toString()}
-                contentContainerStyle={{ padding: 16 }}
+                contentContainerStyle={{ padding: 10 }}
             />
 
         </SafeAreaView>
