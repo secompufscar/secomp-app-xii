@@ -63,7 +63,7 @@ export default function Minicursos() {
 
             <FlatList
                 style={{ marginTop: 28, paddingHorizontal: 10}}
-                data={activities}
+                data={filteredActivities}
                 renderItem={renderActivity}
                 keyExtractor={(item) => item.id.toString()}
             />
