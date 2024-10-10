@@ -31,11 +31,11 @@ export default function Workshops() {
         <TouchableOpacity onPress={() => { navigation.navigate('QRCode', { id: item.id }) }}>
             <View className='justify-between flex-row rounded-lg bg-neutral-200/20 my-2 border border-neutral-200/40'>
                 <View className='flex-col px-6 py-4 justify-between max-w-[80%]'>
-                    <Text style={{ fontFamily: 'Inter_600SemiBold' }} className='text-base text-neutral-700 mb-1 truncate'>
+                    <Text style={{ fontFamily: 'Inter_600SemiBold' }} className='text-base text-neutral-700 mb-1'>
                         {item.nome}
                     </Text>
 
-                    <Text style={{ fontFamily: 'Inter_400Regular' }} className='text-base text-blue truncate'>
+                    <Text style={{ fontFamily: 'Inter_400Regular' }} className='text-base text-blue'>
                         {item.palestranteNome}
                     </Text>
                 </View>
