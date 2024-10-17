@@ -16,7 +16,7 @@ export default function Palestras() {
     const [activities, setActivities] = useState<Activity[]>([]);
 
     // Id da cateogira palestras
-    const categoriaId = "67f233c2-a6e2-4d0a-a327-3c6955ea36a3";
+    const categoriaId = "2";
 
     useEffect(() => {
         const getActivitiesData = async () => {
@@ -29,19 +29,18 @@ export default function Palestras() {
 
     const renderActivity = ({ item }: { item: Activity }) => (
         <TouchableOpacity onPress={() => { navigation.navigate('QRCode', { id: item.id }) }}>
-            <View className='grow h-32 flex-row space-x-1 rounded-lg bg-neutral-200/20 my-2'>
-                <View className='w-[84%] flex-col px-6 py-4 justify-between'>
-                    <View className='w-full'>
-                        <Text className='text-xl font-semibold text-neutral-700'>{item.nome}</Text>
-                        <Text className='text-base text-neutral-500'>{item.detalhes}</Text>
-                    </View>
+            <View className='justify-between flex-row rounded-lg bg-neutral-200/20 my-2 border border-neutral-200/40'>
+                <View className='flex-col px-6 py-4 justify-between max-w-[80%]'>
+                    <Text style={{ fontFamily: 'Inter_600SemiBold' }} className='text-base text-neutral-700 mb-1 truncate'>
+                        {item.nome}
+                    </Text>
 
-                    <View className=''>
-                        <Text className='text-base text-blue'>{item.palestranteNome}</Text>
-                    </View>
+                    <Text style={{ fontFamily: 'Inter_400Regular' }} className='text-base text-blue truncate'>
+                        {item.palestranteNome}
+                    </Text>
                 </View>
-
-                <View className='w-14 h-full ml-2 items-center justify-center'>
+    
+                <View className='w-14 ml-2 items-center justify-center'>
                     <FontAwesome6 name="chevron-right" size={18} color="#a3a3a3" />
                 </View>
             </View>
@@ -52,23 +51,21 @@ export default function Palestras() {
     const filteredActivities = activities.filter(activity => activity.categoriaId === categoriaId);
 
     return (
-        <SafeAreaView className='bg-white flex-1'>
-
-            <View className='flex-row justify-start items-center pt-12 pb-5 px-4 gap-4'>
-                <TouchableOpacity>
-                    <AntDesign name="arrowleft" size={24} color="#445BE6" onPress={() => navigation.goBack()} />
+        <SafeAreaView style={{ flex: 1, backgroundColor: 'white', paddingHorizontal: 32 }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 40 }}>
+                <TouchableOpacity style={{ paddingVertical: 8, paddingHorizontal: 12, position: 'absolute', left: 0, top: 0 }} onPress={() => navigation.goBack()}>
+                    <FontAwesome6 name="chevron-left" size={14} color="#000000" />
                 </TouchableOpacity>
-                <Text className='text-3xl font-bold text-blue'>Palestras</Text>
+
+                <Text style={{ fontFamily: 'Inter_600SemiBold', fontSize: 20, color: 'black' }}>Palestras</Text>
             </View>
 
             <FlatList
-                className='px-2'
+                style={{ marginTop: 28, paddingHorizontal: 10}}
                 data={filteredActivities}
                 renderItem={renderActivity}
                 keyExtractor={(item) => item.id.toString()}
-                contentContainerStyle={{ padding: 16 }}
             />
-            
         </SafeAreaView>
     );
 }

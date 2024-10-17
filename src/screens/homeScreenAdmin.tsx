@@ -47,9 +47,6 @@ export default function UserHome() {
                     <Text style={{ fontFamily: 'Inter_500Medium', color: color }} className='text-lg text-neutral-300'>{greeting}</Text>
                     <Text style={{ fontFamily: 'Inter_600SemiBold' }} className='text-2xl mt-0.5'>{user.nome}</Text>
 
-                    <View className="flex-row">
-                        <Text style={{ fontFamily: 'Inter_400Regular' }} className='text-sm text-white mt-5 mr-2 py-2 px-3 rounded-lg bg-blue border-0'>Administrador</Text>
-                    </View>
                 </View>
 
                 <View className='mb-8 py-1 flex-row items-center justify-start border-b border-neutral-200' />

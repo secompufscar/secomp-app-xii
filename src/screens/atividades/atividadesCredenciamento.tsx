@@ -9,14 +9,14 @@ import { useEffect, useState } from 'react';
 import { useAuth } from "../../hooks/AuthContext";
 import { getActivities } from '../../services/activities';
 
-export default function Workshops() {
+export default function Credenciamento() {
     const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
     const { user: { user } }: any = useAuth();
 
     const [activities, setActivities] = useState<Activity[]>([]);
 
-    // Id da cateogira workshops
-    const categoriaId = "3";
+    // Id da categoria da SECOMP
+    const categoriaId = "5";
 
     useEffect(() => {
         const getActivitiesData = async () => {
@@ -57,7 +57,7 @@ export default function Workshops() {
                     <FontAwesome6 name="chevron-left" size={14} color="#000000" />
                 </TouchableOpacity>
 
-                <Text style={{ fontFamily: 'Inter_600SemiBold', fontSize: 20, color: 'black' }}>Workshops</Text>
+                <Text style={{ fontFamily: 'Inter_600SemiBold', fontSize: 20, color: 'black' }}>SECOMP</Text>
             </View>
 
             <FlatList

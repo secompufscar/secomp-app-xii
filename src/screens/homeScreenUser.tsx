@@ -28,7 +28,7 @@ export default function UserHome() {
 
     // Mensagem baseada no horário do dia
     const getCurrentTime = () => {
-        const hours = 18 //new Date().getHours();
+        const hours = new Date().getHours();
         if (hours < 12) {
             return { greeting: 'Bom dia 🌅', color: '#ffc573' }; // Cor laranja para manhã
         } else if (hours >= 12 && hours < 18) {
@@ -70,7 +70,7 @@ export default function UserHome() {
                 <View className='flex-col justify-start space-y-4 mb-10'>
                     <Text style={{ fontFamily: 'Inter_600SemiBold' }} className='text-md text-neutral-700'>Menu Principal</Text>
 
-                    {/* <TouchableOpacity onPress={() => { navigation.navigate('Credential') }}>
+                    <TouchableOpacity onPress={() => { navigation.navigate('Credential') }}>
                         <View className='grow h-16 flex-row items-center space-x-1 rounded-lg bg-neutral-200/20'>
                             <View className='w-14 h-full ml-2 items-center justify-center'>
                                 <FontAwesome6 name="id-badge" size={24} color="#445BE6" />
@@ -84,23 +84,23 @@ export default function UserHome() {
                                 <FontAwesome6 name="chevron-right" size={18} color="#a3a3a3" />
                             </View>
                         </View>
-                    </TouchableOpacity> */}
+                    </TouchableOpacity>
 
-                    {/* <TouchableOpacity onPress={() => { navigation.navigate("Registration") }}>
+                    <TouchableOpacity onPress={() => { navigation.navigate("Registration") }}>
                         <View className='grow h-16 flex-row items-center space-x-1 rounded-lg bg-neutral-200/20'>
                             <View className='w-14 h-full ml-2 items-center justify-center'>
                                 <MaterialIcons name="event" size={24} color="#445BE6" />
                             </View>
 
                             <View className='grow'>
-                                <Text style={{ fontFamily: 'Inter_600SemiBold' }} className='text-lg text-neutral-700'>Eventos</Text>
+                                <Text style={{ fontFamily: 'Inter_600SemiBold' }} className='text-lg text-neutral-700'>Minicursos</Text>
                             </View>
 
                             <View className='w-14 h-full ml-2 items-center justify-center'>
                                 <FontAwesome6 name="chevron-right" size={18} color="#a3a3a3" />
                             </View>
                         </View>
-                    </TouchableOpacity> */}
+                    </TouchableOpacity>
 
                     <TouchableOpacity onPress={signOut}>
                         <View className='grow h-16 flex-row items-center space-x-1 rounded-lg bg-neutral-200/20'>
