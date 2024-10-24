@@ -2,10 +2,11 @@ import React, { useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, Alert, AppState } from 'react-native';
 import { ParamListBase, useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-// import { CameraView } from "expo-camera";
+import { CameraView } from "expo-camera";
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRoute } from '@react-navigation/native';
 import { checkIn } from "../services/checkIn";
+import { getActivityId, subscribeToActivity } from '../services/activities';
 
 export default function QRCode() {
     const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
@@ -38,17 +39,38 @@ export default function QRCode() {
                 console.log(userId);
                 console.log(activityId);
 
+                const activity: Activity | undefined = await getActivityId(activityId);
+                if (!activity) {
+                    console.log('Atividade não encontrada');
+                    return;
+                }
+                console.log(activity);
+                
                 if (userId && activityId) {
-                    const response = await checkIn(userId, activityId);
 
-                    // Verificado resultado do checkIn
-                    console.log(response);
+                    if (activity.categoriaId == '1') {
+                        const response = await checkIn(userId, activityId);
 
-                    Alert.alert(
-                        'Check-In',
-                        `Check-in realizado com sucesso! \nUsuário marcado como presente.`,
-                        [{ text: 'OK', onPress: () => navigation.goBack() }] 
-                    );
+                        // Verificado resultado do checkIn
+                        // console.log(response);
+
+                        Alert.alert(
+                            'Check-In',
+                            `Check-in realizado com sucesso! \nUsuário marcado como presente.`,
+                            [{ text: 'OK', onPress: () => navigation.goBack() }]
+                        );
+                    }
+                    else {
+                        const data = await subscribeToActivity(userId, activityId);
+                        const response = await checkIn(userId, activityId);
+
+                        Alert.alert(
+                            'Check-In',
+                            `Check-in realizado com sucesso! \nUsuário marcado como presente.`,
+                            [{ text: 'OK', onPress: () => navigation.goBack() }]
+                        );
+
+                    }
                 } else {
                     Alert.alert(
                         'Erro',
@@ -57,14 +79,14 @@ export default function QRCode() {
                     );
                 }
             } catch (error) {
-                const err = error as any; 
+                const err = error as any;
 
                 const errorMessage = err.response?.data?.message || 'Falha ao processar o check-in.';
 
                 // Imprime o erro no console para depuração
 
                 //console.error('Erro ao processar o check-in:', err.response.data);
-             
+
                 Alert.alert(
                     'Erro',
                     errorMessage,
@@ -77,7 +99,7 @@ export default function QRCode() {
 
     return (
         <SafeAreaView style={StyleSheet.absoluteFillObject}>
-            {/* <CameraView
+            <CameraView
                 style={StyleSheet.absoluteFillObject}
                 facing="back"
                 onBarcodeScanned={handleBarCodeScanned}
@@ -85,7 +107,7 @@ export default function QRCode() {
                 <View style={styles.overlay}>
                     <View style={styles.square} />
                 </View>
-            </CameraView> */}
+            </CameraView>
         </SafeAreaView>
     );
 }

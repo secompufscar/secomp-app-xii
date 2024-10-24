@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 import { useAuth } from "../../hooks/AuthContext";
 import { getActivities } from '../../services/activities';
 
-export default function Credenciamento() {
+export default function SECOMP() {
     const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
     const { user: { user } }: any = useAuth();
 

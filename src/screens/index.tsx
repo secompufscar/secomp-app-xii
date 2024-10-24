@@ -18,7 +18,7 @@ import Minicursos from './atividades/atividadesMinicursos'
 import Palestras from './atividades/atividadesPalestra'
 import Competições from './atividades/atividadesCompeticoes'
 import Workshops from './atividades/atividadesWorkshops'
-import Credenciamento from './atividades/atividadesCredenciamento'
+import SECOMP from './atividades/atividadesSECOMP'
 
 import QRCode from './qrCodeReaderScreen'
 import Welcome from './WelcomeScreen'
@@ -44,5 +44,5 @@ export {
     Workshops,
     QRCode,
     Welcome,
-    Credenciamento
+    SECOMP
 }

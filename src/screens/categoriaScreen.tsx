@@ -41,7 +41,7 @@ export default function Categorias() {
             case 'Workshops':
                 return 'people-group';
 
-            case 'Credenciamento':
+            case 'SECOMP':
                 return 'id-badge';
 
             default:

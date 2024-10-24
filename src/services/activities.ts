@@ -19,6 +19,12 @@ export const getActivities = async (): Promise<Activity[]> => {
     return response.data
 }
 
+export const getActivityId = async (id: string): Promise<Activity> => {
+    const response = await api.get(`/activities/${id}`)
+ 
+     return response.data
+ }
+
 export const getUserSubscribedActivities = async (userId: string): Promise<UserAtActivity[]> => {
     const response = await api.get(`/userAtActivities/all-activities/${userId}`)
 

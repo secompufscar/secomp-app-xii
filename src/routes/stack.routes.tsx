@@ -16,7 +16,7 @@ import {
     Competições,
     QRCode,
     Welcome,
-    Credenciamento
+    SECOMP
 } from '../screens'
 
 import { ScheduleItemProps } from '../entities/schedule-item';
@@ -54,7 +54,7 @@ export default function StackRoutes() {
             <Stack.Screen name="Competições" component={Competições} />
             <Stack.Screen name="Workshops" component={Workshops} />
             <Stack.Screen name="QRCode" component={QRCode} />
-            <Stack.Screen name="Credenciamento" component={Credenciamento} />
+            <Stack.Screen name="SECOMP" component={SECOMP} />
             <Stack.Screen name="Welcome" component={Welcome} />
         </Stack.Navigator>
     );

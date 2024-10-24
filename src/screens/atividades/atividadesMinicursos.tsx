@@ -15,7 +15,7 @@ export default function Minicursos() {
 
     const [activities, setActivities] = useState<Activity[]>([]);
 
-    // Id da cateogira minicurso
+    // Id da categoria minicurso
     const categoriaId = "1";
 
     useEffect(() => {
@@ -46,7 +46,6 @@ export default function Minicursos() {
             </View>
         </TouchableOpacity>
     );
-    
 
     // Filtra as atividades pelo `categoriaId`
     const filteredActivities = activities.filter(activity => activity.categoriaId === categoriaId);
@@ -63,7 +62,7 @@ export default function Minicursos() {
 
             <FlatList
                 style={{ marginTop: 28, paddingHorizontal: 10}}
-                data={activities}
+                data={filteredActivities}
                 renderItem={renderActivity}
                 keyExtractor={(item) => item.id.toString()}
             />
