@@ -9,7 +9,11 @@ const getApi = () => {
   
     api.interceptors.request.use(async config => {
         try {
-            const user = JSON.parse(await AsyncStorage.getItem("user"))
+            // Obtém os dados do usuário armazenados no AsyncStorage
+            const userData = await AsyncStorage.getItem("user");
+
+            // Verifica se há dados armazenados. Se houver, os parseia, caso contrário, define como null
+            const user = userData ? JSON.parse(userData) : null;
 
             if (user) {
                 config.headers['Authorization'] = `bearer ${user.token}`
