@@ -25,4 +25,3 @@ dist-ssr
 *.sw?
 
 # Ignorando configuração da API para evitar que informações sensíveis sejam versionadas
-src/services/api.ts
