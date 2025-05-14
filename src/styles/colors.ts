@@ -11,7 +11,7 @@ export const colors = {
     900: "#171717",
   },
 
-  green: {
+  "green-old": {
     50: "#EEFCF7",
     100: "#E1F9F2",
     200: "#C4F3E5",
@@ -27,7 +27,7 @@ export const colors = {
     1050: "#0A241A"
   },
 
-  blue: "#445BE6",
+  "blue-old": "#445BE6",
 }
 
 

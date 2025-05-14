@@ -17,12 +17,12 @@ export default function Credential() {
         <SafeAreaView className='items-center bg-white flex-1'>
             <View className='w-96 max-w-[90%] h-screen flex-col items-center '>
                 <View className='w-full h-[20%] items-center relative'>
-                    <View className='w-24 h-[130%] absolute -bottom-10 bg-blue' />
+                    <View className='w-24 h-[130%] absolute -bottom-10 bg-blue-old' />
                 </View>
 
                 <View className='w-full h-[68%] items-center flex-col rounded-3xl relative overflow-hidden'>
                     <View className='w-full h-[100%]'>
-                        <View className='w-full h-full bg-gradient-to-b from-black to-blue'>
+                        <View className='w-full h-full bg-gradient-to-b from-black to-blue-old'>
 
                             <View className='w-full h-20 px-10 py-7 flex-row' />
                             <View className='mt-2 mb-5'>
@@ -43,14 +43,14 @@ export default function Credential() {
 
                     </View>
 
-                    <View className='w-24 h-10 absolute top-0 bg-blue' />
+                    <View className='w-24 h-10 absolute top-0 bg-blue-old' />
                     <View className='w-28 h-3 rounded-full absolute top-[5%] bg-black' />
                 </View>
 
                 <View className='w-full h-[15%] items-center pt-8'>
                     <TouchableOpacity onPress={() => { setModalVisible(true) }}>
                         <View className='w-44 h-12 items-center justify-center'>
-                            <Text className='text-base font-medium text-blue' allowFontScaling={false}>Ampliar QRCode</Text>
+                            <Text className='text-base font-medium text-blue-old' allowFontScaling={false}>Ampliar QRCode</Text>
                         </View>
                     </TouchableOpacity>
                 </View>

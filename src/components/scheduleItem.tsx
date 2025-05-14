@@ -18,7 +18,7 @@ export default function ScheduleItemComponent({ scheduleItem, onClick }: Schedul
                     </View>
 
                     <View className='pl-4 pr-8 max-w-[80%]'>
-                        <Text className='text-blue font-bold min-w-full'>{scheduleItem.nome}</Text>
+                        <Text className='text-blue-old font-bold min-w-full'>{scheduleItem.nome}</Text>
                         <Text className='text-black mt-1'>{scheduleItem.palestranteNome}</Text>
                         {/* <Text className='text-white'>{scheduleItem.detalhes}</Text> */}
                     </View>

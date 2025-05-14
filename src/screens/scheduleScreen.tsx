@@ -102,7 +102,7 @@ export default function Schedule() {
                                     <Text
                                         style={{
                                             fontFamily: 'Inter_600SemiBold',
-                                            color: !isSelected ? 'rgba(107, 114, 128, 0.7)' : '#445BE6', // text-blue ou text-neutral-500/70
+                                            color: !isSelected ? 'rgba(107, 114, 128, 0.7)' : '#445BE6', // text-blue-old ou text-neutral-500/70
                                             fontSize: 16,
                                         }}
                                     >
@@ -112,7 +112,7 @@ export default function Schedule() {
                                     <Text
                                         style={{
                                             fontFamily: 'Inter_400Regular',
-                                            color: !isSelected ? 'rgba(107, 114, 128, 0.7)' : '#445BE6', // text-blue ou text-neutral-500/70
+                                            color: !isSelected ? 'rgba(107, 114, 128, 0.7)' : '#445BE6', // text-blue-old ou text-neutral-500/70
                                             fontSize: 14,
                                         }}
                                     >

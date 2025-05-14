@@ -60,8 +60,8 @@ export default function UserHome() {
                     <Text style={{ fontFamily: 'Inter_600SemiBold' }} className='text-2xl mt-0.5'>{new BeautifulName(user.nome).beautifulName}</Text>
 
                     {/* <View className="flex-row">
-                        <Text style={{ fontFamily: 'Inter_400Regular' }} className='text-sm text-white mt-5 mr-2 py-2 px-3 rounded-lg bg-blue border-0'>Participante</Text>
-                        <Text style={{ fontFamily: 'Inter_400Regular' }} className='text-sm text-white mt-5 py-2 px-3 rounded-lg bg-blue border-0'>Pontos: {user.points}</Text>
+                        <Text style={{ fontFamily: 'Inter_400Regular' }} className='text-sm text-white mt-5 mr-2 py-2 px-3 rounded-lg bg-blue-old border-0'>Participante</Text>
+                        <Text style={{ fontFamily: 'Inter_400Regular' }} className='text-sm text-white mt-5 py-2 px-3 rounded-lg bg-blue-old border-0'>Pontos: {user.points}</Text>
                     </View>  */}
                 </View>
 

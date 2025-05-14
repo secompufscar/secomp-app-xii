@@ -193,14 +193,14 @@ export default function Registration() {
                         <TouchableOpacity className='w-[47%]' onPress={() => setRegistered(false)}>
                             <View
                                 style={{
-                                    backgroundColor: !registered ? 'rgba(68, 91, 230, 0.1)' : 'rgba(229, 231, 235, 0.4)', // bg-blue/10 ou bg-neutral-200/40
+                                    backgroundColor: !registered ? 'rgba(68, 91, 230, 0.1)' : 'rgba(229, 231, 235, 0.4)', // bg-blue-old/10 ou bg-neutral-200/40
                                     borderRadius: 10,
                                 }}
                             >
                                 <Text
                                     style={{
                                         fontFamily: 'Inter_600SemiBold',
-                                        color: !registered ? '#445BE6' : 'rgba(107, 114, 128, 0.7)', // text-blue ou text-neutral-500/70
+                                        color: !registered ? '#445BE6' : 'rgba(107, 114, 128, 0.7)', // text-blue-old ou text-neutral-500/70
                                         fontSize: 18, // text-lg
                                         paddingHorizontal: 4,
                                         paddingVertical: 10,
@@ -215,14 +215,14 @@ export default function Registration() {
                         <TouchableOpacity className='w-[47%]' onPress={() => setRegistered(true)}>
                             <View
                                 style={{
-                                    backgroundColor: registered ? 'rgba(68, 91, 230, 0.1)' : 'rgba(229, 231, 235, 0.4)', // bg-blue/10 ou bg-neutral-200/40
+                                    backgroundColor: registered ? 'rgba(68, 91, 230, 0.1)' : 'rgba(229, 231, 235, 0.4)', // bg-blue-old/10 ou bg-neutral-200/40
                                     borderRadius: 10,
                                 }}
                             >
                                 <Text
                                     style={{
                                         fontFamily: 'Inter_600SemiBold',
-                                        color: registered ? '#445BE6' : 'rgba(107, 114, 128, 0.7)', // text-blue ou text-neutral-500/70
+                                        color: registered ? '#445BE6' : 'rgba(107, 114, 128, 0.7)', // text-blue-old ou text-neutral-500/70
                                         fontSize: 18, // text-lg
                                         paddingHorizontal: 4,
                                         paddingVertical: 10,

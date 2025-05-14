@@ -11,11 +11,11 @@ export function ButtonHome ({title, isLoading = false, ...rest}: Props){
         <TouchableOpacity 
             disabled={isLoading}
             activeOpacity={0.7}
-            className="w-5/6 h-14 bg-blue items-center justify-center rounded-lg"
+            className="w-5/6 h-14 bg-blue-old items-center justify-center rounded-lg"
             {...rest}
         >
 
-            {isLoading?(<ActivityIndicator className= "text-green-800"/>):(
+            {isLoading?(<ActivityIndicator className= "text-green-old-800"/>):(
             <Text className="text-white text-base font-bold uppercase"> 
                 {title}
             </Text>)

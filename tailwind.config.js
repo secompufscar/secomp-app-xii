@@ -4,11 +4,12 @@ module.exports = {
         "./src/**/*.{js,jsx,ts,tsx}"
     ],
     theme: {
-        extend:{
+        extend: {
             colors: {
                 white: "#FFFFFF",
                 black: "#000000",
 
+                // Versão antiga do app, remover quando finalizar nova versão
                 "neutral": {
                     200: "#E5E5E5",
                     300: "#D4D4D4",
@@ -19,7 +20,7 @@ module.exports = {
                     900: "#171717",
                 },
 
-                "green": {
+                "green-old": {
                     50: "#F7FDFA",
                     100: "#EFFBF6",
                     200: "#DBF6EB",
@@ -27,17 +28,40 @@ module.exports = {
                     400: "#B6ECD6",
                     500: "#9FE6CA",
                     600: "#69D8AC",
-                    700: "#51B68D", //Verde utilizado no figma
+                    700: "#51B68D",
                 },
 
-                "blue": "#445BE6",
+                "blue-old": "#445BE6",
+
+                // Versão nova do app
+                // Accent
+                "blue": {
+                    100: "#C5CCF7",
+                    200: "#A9B4F4",
+                    500: "#A9B4F4",
+                    700: "#3141A3",
+                    900: "#1C212C",
+                },
+
+                green: "#4CEDB9",
+
+                // Feedback
+                warning: "#F1C21B",
+                danger: "#F05D6C",
+                success: "#0FB842",
+
+                // Text color
+                default: "#E0E0E0",
+
+                // Text input, elements bg
+                border: "#536080",
+                background: "#212735",
+
             },
             fontFamily: {
-                inter: ['Inter_400Regular', 'sans-serif'],
-                'inter-bold': ['Inter_700Bold', 'sans-serif'],
-                poppins: ['Poppins_400Regular', 'sans-serif'],
-                'poppins-semibold': ['Poppins_600SemiBold', 'sans-serif'],
-              },
+                inter: 'Inter_400Regular',
+                poppins: 'Poppins_400Regular',
+            }
         }
     },
     plugins: [],

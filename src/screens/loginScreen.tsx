@@ -93,7 +93,7 @@ export default function Login() {
 
 
     return (
-        <SafeAreaView className="flex-1 bg-blue">
+        <SafeAreaView className="flex-1 bg-blue-old">
 
             <ScrollView contentContainerStyle={{
                 flexGrow: 1,

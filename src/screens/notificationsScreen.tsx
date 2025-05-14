@@ -13,7 +13,7 @@ export default function Notifications() {
 		<SafeAreaView className='bg-white flex-1'>
 
 			<View className='flex-row justify-start items-center pt-16 pb-2 px-6 gap-4'>
-				<Text className='text-3xl font-bold text-blue'>Notficações</Text>
+				<Text className='text-3xl font-bold text-blue-old'>Notficações</Text>
 			</View>
 
 			<View className='mt-8 flex-col items-center justify-center px-6 space-y-4'>

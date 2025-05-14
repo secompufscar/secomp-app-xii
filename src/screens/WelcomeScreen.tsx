@@ -34,7 +34,7 @@ export default function UserHome() {
 
                 <TouchableOpacity
                     onPress={handleUnderstandPress}
-                    className="bg-blue"
+                    className="bg-blue-old"
                     style={{
                         paddingVertical: 14,
                         paddingHorizontal: 36,

@@ -95,7 +95,7 @@ export default function MyEvents() {
                 <TouchableOpacity>
                     <AntDesign name="arrowleft" size={24} color="#445BE6" onPress={() => navigation.goBack()} />
                 </TouchableOpacity>
-                <Text className='text-3xl font-bold text-blue'>Eventos inscritos</Text>
+                <Text className='text-3xl font-bold text-blue-old'>Eventos inscritos</Text>
                 <TouchableOpacity className='pl-10'>
                     <AntDesign name="search1" size={24} color="#445BE6" onPress={handleSearching} />
                 </TouchableOpacity>
@@ -119,10 +119,10 @@ export default function MyEvents() {
             )}
             <View className="flex-row justify-around mx-12">
                 <TouchableOpacity onPress={() => setFuture(true)}>
-                    <Text className={`text-xl font-bold text-blue ${(future) && "underline"}`}>Futuros</Text>
+                    <Text className={`text-xl font-bold text-blue-old ${(future) && "underline"}`}>Futuros</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => setFuture(false)}>
-                    <Text className={`text-xl font-bold text-blue ${(!future) && "underline"}`}>Completados</Text>
+                    <Text className={`text-xl font-bold text-blue-old ${(!future) && "underline"}`}>Completados</Text>
                 </TouchableOpacity>
             </View>
 

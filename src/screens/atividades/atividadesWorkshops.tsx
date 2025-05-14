@@ -35,7 +35,7 @@ export default function Workshops() {
                         {item.nome}
                     </Text>
 
-                    <Text style={{ fontFamily: 'Inter_400Regular' }} className='text-base text-blue truncate'>
+                    <Text style={{ fontFamily: 'Inter_400Regular' }} className='text-base text-blue-old truncate'>
                         {item.palestranteNome}
                     </Text>
                 </View>
