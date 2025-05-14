@@ -1,7 +1,9 @@
 import { ActivityIndicator, View } from 'react-native';
 import Routes from './routes';
 import './styles/global.css';
+import '@expo/metro-runtime';
 import { useFonts } from 'expo-font';
+
 
 import { AuthProvider } from './hooks/AuthContext';
 
