@@ -1,10 +1,9 @@
-// babel.config.js
 module.exports = function (api) {
   api.cache(true);
   return {
-    presets: ["babel-preset-expo"],
+    presets: ['babel-preset-expo'],
     plugins: [
-      "nativewind/babel",
-    ],
+      ['nativewind/babel', { mode: 'transformOnly' }] // Modo essencial para RN
+    ]
   };
 };
