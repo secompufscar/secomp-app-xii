@@ -3,13 +3,12 @@ import { Image, SafeAreaView, Text, TouchableOpacity, View } from 'react-native'
 import { ParamListBase, useNavigation } from "@react-navigation/native"
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { FontAwesome6, MaterialIcons } from '@expo/vector-icons';
-import { useAuth } from "../hooks/AuthContext";
+import { useAuth } from "../../hooks/AuthContext";
 
-
-// Página para equipe
-export default function AdminProfile() {
+// Página para usuário
+export default function UserProfile() {
 	const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
-	const { signOut, user: { user } }: any = useAuth()
+	const { signOut, user:{user}}: any = useAuth()
 
 	return (
 		<SafeAreaView className='bg-white flex-1'>
@@ -35,30 +34,30 @@ export default function AdminProfile() {
 			</View>
 
 			<View className='h-full m-6 flex-col justify-start space-y-4'>
-				{/* <TouchableOpacity onPress={() => { navigation.navigate('') }}>
+				<TouchableOpacity onPress={() => { navigation.navigate('Credential') }}>
 					<View className='grow h-16 flex-row items-center space-x-1 rounded-lg bg-neutral-200/20'>
 						<View className='w-14 h-full ml-2 items-center justify-center'>
 							<FontAwesome6 name="id-badge" size={24} color="#445BE6" />
 						</View>
 
 						<View className='grow'>
-							<Text className='text-xl font-semibold text-neutral-700'>Credenciamento</Text>
+							<Text className='text-xl font-semibold text-neutral-700'>Credencial</Text>
 						</View>
 
 						<View className='w-14 h-full ml-2 items-center justify-center'>
 							<FontAwesome6 name="chevron-right" size={18} color="#a3a3a3" />
 						</View>
 					</View>
-				</TouchableOpacity> */}
+				</TouchableOpacity>
 
-				<TouchableOpacity onPress={() => { navigation.navigate('Categorias') }}>
+				<TouchableOpacity onPress={() => { navigation.navigate('MyEvents') }}>
 					<View className='grow h-16 flex-row items-center space-x-1 rounded-lg bg-neutral-200/20'>
 						<View className='w-14 h-full ml-2 items-center justify-center'>
-							<MaterialIcons name="qr-code" size={24} color="#445BE6" />
+							<MaterialIcons name="event" size={24} color="#445BE6" />
 						</View>
 
 						<View className='grow'>
-							<Text className='text-xl font-semibold text-neutral-700'>Leitura de Presença</Text>
+							<Text className='text-xl font-semibold text-neutral-700'>Eventos Inscritos</Text>
 						</View>
 
 						<View className='w-14 h-full ml-2 items-center justify-center'>
@@ -86,7 +85,6 @@ export default function AdminProfile() {
 
 			<StatusBar style="auto" />
 		</SafeAreaView>
-
 	);
 }
 

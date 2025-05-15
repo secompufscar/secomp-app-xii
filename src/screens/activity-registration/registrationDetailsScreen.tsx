@@ -1,15 +1,15 @@
 import React from "react";
 import { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Alert } from "react-native";
-import { ScheduleItemProps } from "../entities/schedule-item";
+import { ScheduleItemProps } from "../../entities/schedule-item";
 import { useRoute } from "@react-navigation/native";
 import { AntDesign, Ionicons, FontAwesome6 } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 import { Platform, StyleSheet } from "react-native";
-import { useAuth } from "../hooks/AuthContext";
-import { subscribeToActivity, unsubscribeToActivity } from "../services/activities";
-import { userSubscription } from "../services/userAtActivities";
-import { ButtonHome } from "../components/buttonHome";
+import { useAuth } from "../../hooks/AuthContext";
+import { subscribeToActivity, unsubscribeToActivity } from "../../services/activities";
+import { userSubscription } from "../../services/userAtActivities";
+import { ButtonHome } from "../../components/buttonHome";
 
 const isIos: Boolean = Platform.OS === 'ios'
 

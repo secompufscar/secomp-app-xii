@@ -3,17 +3,17 @@ import { View, Image, StatusBar, Alert, TouchableOpacity, Text, Platform, Scroll
 import { FontAwesome5, Entypo, MaterialIcons, Ionicons } from "@expo/vector-icons"
 
 import { useNavigation } from "@react-navigation/native"
-import { StackTypes } from '../routes/stack.routes';
+import { StackTypes } from '../../routes/stack.routes';
 
-import { colors } from "../styles/colors"
+import { colors } from "../../styles/colors"
 
-import { Input } from "../components/input"
-import { Button } from "../components/button"
-import { useAuth } from "../hooks/AuthContext";
+import { Input } from "../../components/input"
+import { Button } from "../../components/button"
+import { useAuth } from "../../hooks/AuthContext";
 
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import {signup} from "../services/users";
+import {signup} from "../../services/users";
 
 const validateEmail = (email: string) => {
     return String(email)

@@ -2,10 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, TextInput, Animated } from 'react-native';
 import { AntDesign, Ionicons } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
-import { ScheduleItemProps } from '../entities/schedule-item';
-import MyEvent from '../components/myEvent';
-import { getUserSubscribedActivities } from '../services/activities';
-import { useAuth } from '../hooks/AuthContext';
+import { ScheduleItemProps } from '../../entities/schedule-item';
+import MyEvent from '../../components/myEvent';
+import { getUserSubscribedActivities } from '../../services/activities';
+import { useAuth } from '../../hooks/AuthContext';
 
 const formatDate = (date: Date) => {
     const day = date.getDate().toString().padStart(2,);

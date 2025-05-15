@@ -1,36 +1,32 @@
-import Login from './loginScreen'
-import SignUp from './signupScreen'
+import Login from './login-signup/loginScreen'
+import SignUp from './login-signup/signupScreen'
 
-import UserHome from './homeScreenUser'
-import AdminHome from './homeScreenAdmin'
+import UserHome from './home/homeScreenUser'
+import AdminHome from './home/homeScreenAdmin'
 
-import Navigator from './navigatorScreen'
-import Schedule from './scheduleScreen'
-import ScheduleDetails from './scheduleDetailsScreen'
-import MyEvents from './myEvents'
-import Credential from './credentialScreen'
+import Schedule from './schedule/scheduleScreen'
+import ScheduleDetails from './schedule/scheduleDetailsScreen'
+import MyEvents from './user-activities/myEvents'
+import Credential from './credential/credentialScreen'
 
-import Registration from './registrationScreen'
-import RegistrationDetails from './registrationDetailsScreen'
+import Registration from './activity-registration/registrationScreen'
+import RegistrationDetails from './activity-registration/registrationDetailsScreen'
 
-import Categorias from './categoriaScreen'
-import Minicursos from './atividades/atividadesMinicursos'
-import Palestras from './atividades/atividadesPalestra'
-import Competições from './atividades/atividadesCompeticoes'
-import Workshops from './atividades/atividadesWorkshops'
-import SECOMP from './atividades/atividadesSECOMP'
+import Categorias from './activities/categoriaScreen'
+import Minicursos from './activities/atividadesMinicursos'
+import Palestras from './activities/atividadesPalestra'
+import Competições from './activities/atividadesCompeticoes'
+import Workshops from './activities/atividadesWorkshops'
+import SECOMP from './activities/atividadesSECOMP'
 
-import QRCode from './qrCodeReaderScreen'
+import QRCode from './credential/qrCodeReaderScreen'
 import Welcome from './WelcomeScreen'
-
-
 
 export {
     Login,
     SignUp,
     UserHome,
     AdminHome,
-    Navigator,
     Schedule,
     ScheduleDetails,
     MyEvents,

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, ScrollView, SafeAreaView, TouchableOpacity, ActivityIndicator } from 'react-native';
-import ScheduleItemComponent from '../components/scheduleItem';
+import ScheduleItemComponent from '../../components/scheduleItem';
 import { useNavigation } from "@react-navigation/native";
-import { ScheduleItemProps } from '../entities/schedule-item';
+import { ScheduleItemProps } from '../../entities/schedule-item';
 import { AntDesign } from '@expo/vector-icons';
-import WeekCalendar from '../components/calendar';
-import { getActivities } from '../services/activities';
+import WeekCalendar from '../../components/calendar';
+import { getActivities } from '../../services/activities';
 
 const formatDate = (date: Date) => {
     const year = date.getFullYear();

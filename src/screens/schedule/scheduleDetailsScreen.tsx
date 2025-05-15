@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { ScheduleItemProps } from "../entities/schedule-item";
+import { ScheduleItemProps } from "../../entities/schedule-item";
 import { useRoute } from "@react-navigation/native";
 import { FontAwesome6, AntDesign, Ionicons} from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";

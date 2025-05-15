@@ -5,15 +5,15 @@ import { useNavigation } from "@react-navigation/native"
 import Entypo from '@expo/vector-icons/Entypo';
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { StackTypes } from '../routes/stack.routes';
+import { StackTypes } from '../../routes/stack.routes';
 
-import { Input } from "../components/input";
-import { Button } from "../components/button";
+import { Input } from "../../components/input";
+import { Button } from "../../components/button";
 
-import { colors } from "../styles/colors"
-import { useAuth } from "../hooks/AuthContext";
+import { colors } from "../../styles/colors"
+import { useAuth } from "../../hooks/AuthContext";
 
-import { login } from "../services/users";
+import { login } from "../../services/users";
 
 const validateEmail = (email: string) => {
     return String(email)

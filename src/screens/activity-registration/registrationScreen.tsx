@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, ScrollView, SafeAreaView, TouchableOpacity, Animated, TextInput, ActivityIndicator } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
-import { ScheduleItemProps } from '../entities/schedule-item';
-import MyEvent from '../components/myEvent';
-import { getActivities, getUserSubscribedActivities } from '../services/activities';
-import { useAuth } from '../hooks/AuthContext';
+import { ScheduleItemProps } from '../../entities/schedule-item';
+import MyEvent from '../../components/myEvent';
+import { getActivities, getUserSubscribedActivities } from '../../services/activities';
+import { useAuth } from '../../hooks/AuthContext';
 
 
 import { FontAwesome6, MaterialIcons } from '@expo/vector-icons';

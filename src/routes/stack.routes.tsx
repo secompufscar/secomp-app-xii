@@ -27,7 +27,6 @@ type StackNavigation = {
     Home: undefined;
     Login: undefined;
     SignUp: undefined;
-    Navigator: undefined;
     ScheduleDetails: { item: ScheduleItemProps };
     RegistrationDetails: { item: ScheduleItemProps };
     MyEvents: undefined;

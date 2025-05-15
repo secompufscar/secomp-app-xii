@@ -7,8 +7,8 @@ import { FontAwesome6 } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 
 import { useEffect, useState } from 'react';
-import { useAuth } from "../hooks/AuthContext";
-import { getCategories } from "../services/categories";
+import { useAuth } from "../../hooks/AuthContext";
+import { getCategories } from "../../services/categories";
 
 
 export default function Categorias() {

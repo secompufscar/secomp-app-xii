@@ -5,8 +5,8 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { CameraView } from "expo-camera";
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRoute } from '@react-navigation/native';
-import { checkIn } from "../services/checkIn";
-import { getActivityId, subscribeToActivity } from '../services/activities';
+import { checkIn } from "../../services/checkIn";
+import { getActivityId, subscribeToActivity } from '../../services/activities';
 
 export default function QRCode() {
     const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();

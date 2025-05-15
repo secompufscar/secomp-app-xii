@@ -6,9 +6,9 @@ import { BeautifulName } from "beautiful-name"
 
 import { ParamListBase, useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { StackTypes } from '../routes/stack.routes';
+import { StackTypes } from '../../routes/stack.routes';
 
-import { useAuth } from "../hooks/AuthContext";
+import { useAuth } from "../../hooks/AuthContext";
 import { FontAwesome6, MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function UserHome() {

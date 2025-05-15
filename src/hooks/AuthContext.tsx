@@ -32,10 +32,14 @@ export const AuthProvider = ({ children }: any) => {
     const handle = async () => {
       try {
         const data = await AsyncStorage.getItem("user")
-        setUser(JSON.parse(data))
-        setLoading(false)
+        if (data !== null) {
+          setUser(JSON.parse(data))
+        } else {
+          setUser(null)
+        }
       } catch(error) {
         setUser(null)
+      } finally {
         setLoading(false)
       }
     }
