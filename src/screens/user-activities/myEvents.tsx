@@ -4,7 +4,7 @@ import { AntDesign, Ionicons } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 import { ScheduleItemProps } from '../../entities/schedule-item';
 import MyEvent from '../../components/myEvent';
-import { getUserSubscribedActivities } from '../../services/activities';
+import { getActivityId, getUserSubscribedActivities } from '../../services/activities';
 import { useAuth } from '../../hooks/AuthContext';
 
 const formatDate = (date: Date) => {
@@ -45,9 +45,14 @@ export default function MyEvents() {
     useEffect(() => {
         const fetchItems = async () => {
 
-            const fetchedItemsSubscribed: Activity[] = await getUserSubscribedActivities(user.id);
+            const userActivities: UserAtActivity[] = await getUserSubscribedActivities(user.id);
+            
+            // Pega as atividades
+            const activityIds = userActivities.map(ua => ua.activityId);
+            const activityPromises = activityIds.map(id => getActivityId(id)); // retorna Promise<Activity>[]
+            const activities: Activity[] = await Promise.all(activityPromises);
 
-            const validFetchedItemsSubscribed = fetchedItemsSubscribed || [];
+            const validFetchedItemsSubscribed = activities || [];
             console.log(validFetchedItemsSubscribed);
 
             //Filtragem de eventos futuros ou passados
