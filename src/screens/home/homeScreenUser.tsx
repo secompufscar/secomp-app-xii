@@ -158,7 +158,7 @@ export default function UserHome() {
                             <TouchableOpacity className='h-full w-[60%]' onPress={() => Linking.openURL('https://tractian.com/sobre')}>
                                 <View className='h-full grow rounded-lg bg-neutral-200/50'>
                                     <Image
-                                        source={require('../../assets/empresas/tractian.png')}
+                                        source={require('../../../assets/empresas/tractian.png')}
                                         style={{
                                             width: '100%',
                                             height: '100%',
@@ -173,7 +173,7 @@ export default function UserHome() {
                             <TouchableOpacity className='h-full grow' onPress={() => Linking.openURL('https://www.tempest.com.br/sobre-nos/')}>
                                 <View className='h-full grow rounded-lg bg-neutral-200'>
                                     <Image
-                                        source={require('../../assets/empresas/tempest.png')}
+                                        source={require('../../../assets/empresas/tempest.png')}
                                         style={{
                                             width: '100%',
                                             height: '100%',
@@ -190,7 +190,7 @@ export default function UserHome() {
                             <TouchableOpacity className='h-full w-[40%]' onPress={() => Linking.openURL('https://visagio.com/quem-somos/')}>
                                 <View className='h-full grow rounded-lg bg-neutral-200 p-1'>
                                     <Image
-                                        source={require('../../assets/empresas/visagio.png')}
+                                        source={require('../../../assets/empresas/visagio.png')}
                                         style={{
                                             width: '100%',
                                             height: '100%',
@@ -205,7 +205,7 @@ export default function UserHome() {
                             <TouchableOpacity className='h-full grow' onPress={() => Linking.openURL('https://app.rocketseat.com.br/')}>
                                 <View className='h-full grow rounded-lg bg-neutral-200/50'>
                                     <Image
-                                        source={require('../../assets/empresas/rocketseat.png')}
+                                        source={require('../../../assets/empresas/rocketseat.png')}
                                         style={{
                                             width: '100%',
                                             height: '100%',
@@ -222,7 +222,7 @@ export default function UserHome() {
                             <TouchableOpacity className='h-full grow' onPress={() => Linking.openURL('https://magalu.cloud/sobre-nos/')}>
                                 <View className='h-full grow rounded-lg bg-neutral-200/30 p-8'>
                                     <Image
-                                        source={require('../../assets/empresas/magalu.png')}
+                                        source={require('../../../assets/empresas/magalu.png')}
                                         style={{
                                             width: '100%',
                                             height: '100%',
@@ -238,7 +238,7 @@ export default function UserHome() {
                             <TouchableOpacity className='h-full grow' onPress={() => Linking.openURL('https://qitech.com.br/')}>
                                 <View className='h-full grow rounded-lg bg-neutral-200'>
                                     <Image
-                                        source={require('../../assets/empresas/qitech.png')}
+                                        source={require('../../../assets/empresas/qitech.png')}
                                         style={{
                                             width: '100%',
                                             height: '100%',

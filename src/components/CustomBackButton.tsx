@@ -8,7 +8,7 @@ const CustomBackButton = () => {
     return(
         <TouchableOpacity onPress={() => navigation.goBack()} style={styles.button}>
             <Image
-            source={require('../../assets/arrow-left-line.png')}
+            source={require('../../../assets/arrow-left-line.png')}
             style={styles.image}
             />
         </TouchableOpacity>
