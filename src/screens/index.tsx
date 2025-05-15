@@ -1,12 +1,12 @@
 import Login from './login-signup/loginScreen'
 import SignUp from './login-signup/signupScreen'
 
-import UserHome from './home/homeScreenUser'
-import AdminHome from './home/homeScreenAdmin'
+import UserHome from './home/userHomeScreen'
+import AdminHome from './home/adminHomeScreen'
 
 import Schedule from './schedule/scheduleScreen'
 import ScheduleDetails from './schedule/scheduleDetailsScreen'
-import MyEvents from './user-activities/myEvents'
+import MyEvents from './user-activities/userActivitiesScreen'
 import Credential from './credential/credentialScreen'
 
 import Registration from './activity-registration/registrationScreen'
