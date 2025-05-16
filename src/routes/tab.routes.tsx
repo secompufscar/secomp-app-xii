@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Entypo, MaterialIcons, Ionicons, FontAwesome6, Feather } from '@expo/vector-icons';
 import { View, Text } from "react-native"
-import { Schedule, UserHome, AdminHome } from '../screens';
+import { Schedule, UserHome } from '../screens';
 
 import { colors } from "../styles/colors"
 import { useAuth } from "../hooks/AuthContext";
@@ -11,7 +11,9 @@ const Tab = createBottomTabNavigator();
 
 export default function TabRoutes() {
 
+    // Usa para diferenciar entre navegação de user e admin
     const { user: { user } }: any = useAuth()
+    const role = user.tipo;
 
     return (
         <Tab.Navigator
@@ -27,28 +29,18 @@ export default function TabRoutes() {
                 title: "SECOMP UFSCar 2024"
             }}>
 
-            {
-                user.tipo == 'USER' ? <Tab.Screen
-                    name="HOME"
-                    component={UserHome}
-                    options={{
-                        tabBarIcon: ({ focused }) => (
-                            <View className={`flex justify-center items-center ${focused ? "font-bold" : "font-normal"}`}>
-                                <Ionicons name={focused ? "home" : "home-outline"} size={28} color={colors.white} />
-                                <Text className='text-center text-white'>Home</Text>
-                            </View>
-                        ),
-                    }}
-                /> : <Tab.Screen
-                    name="PERFIL"
-                    component={AdminHome}
-                    options={{
-                        tabBarIcon: ({ focused }) => (
+            <Tab.Screen
+                name="HOME"
+                component={UserHome}
+                options={{
+                    tabBarIcon: ({ focused }) => (
+                        <View className={`flex justify-center items-center ${focused ? "font-bold" : "font-normal"}`}>
                             <Ionicons name={focused ? "home" : "home-outline"} size={28} color={colors.white} />
-                        ),
-                    }}
-                />
-            }
+                            <Text className='text-center text-white'>Home</Text>
+                        </View>
+                    ),
+                }}
+            /> 
 
             <Tab.Screen
                 name="CRONOGRAMA"
