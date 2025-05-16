@@ -11,7 +11,7 @@ import { StackTypes } from '../../routes/stack.routes';
 import { useAuth } from "../../hooks/AuthContext";
 import { FontAwesome6, MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 
-export default function UserHome() {
+export default function Home() {
     const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
     const { signOut, user: { user } }: any = useAuth()
 

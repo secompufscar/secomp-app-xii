@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Entypo, MaterialIcons, Ionicons, FontAwesome6, Feather } from '@expo/vector-icons';
 import { View, Text } from "react-native"
-import { Schedule, UserHome } from '../screens';
+import { Schedule, Home } from '../screens';
 
 import { colors } from "../styles/colors"
 import { useAuth } from "../hooks/AuthContext";
@@ -31,7 +31,7 @@ export default function TabRoutes() {
 
             <Tab.Screen
                 name="HOME"
-                component={UserHome}
+                component={Home}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <View className={`flex justify-center items-center ${focused ? "font-bold" : "font-normal"}`}>
