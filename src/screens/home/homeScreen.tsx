@@ -52,8 +52,8 @@ export default function Home() {
 
     return (
 
-        <SafeAreaView className='bg-white flex-1'>
-            <ScrollView className='flex-1 px-8'>
+        <SafeAreaView className='bg-blue-900 flex-1 items-center'>
+            <ScrollView showsVerticalScrollIndicator={false} className='flex-1 px-8 pb-12 w-full max-w-[1200px]'>
 
                 <View className='flex-col items-start mt-10 pb-2'>
                     <Text style={{ fontFamily: 'Inter_500Medium', color: color }} className='text-lg text-neutral-300'>{greeting}</Text>

@@ -2,6 +2,7 @@ import Login from './login-signup/loginScreen'
 import SignUp from './login-signup/signupScreen'
 
 import Home from './home/homeScreen'
+import UserProfile from './profile/userProfileScreen'
 
 import Schedule from './schedule/scheduleScreen'
 import ScheduleDetails from './schedule/scheduleDetailsScreen'
@@ -25,6 +26,7 @@ export {
     Login,
     SignUp,
     Home,
+    UserProfile,
     Schedule,
     ScheduleDetails,
     MyEvents,
