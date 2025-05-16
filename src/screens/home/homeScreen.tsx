@@ -1,46 +1,72 @@
 import { useEffect, useState } from "react";
-import { Text, View, TouchableOpacity, ScrollView, Image, Linking } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import { BeautifulName } from "beautiful-name"
-
+import { Text, View, Pressable, ScrollView, Linking, Image} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import AsyncStorage from "@react-native-async-storage/async-storage"
 import { ParamListBase, useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { StackTypes } from '../../routes/stack.routes';
-
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { BeautifulName } from "beautiful-name"
 import { useAuth } from "../../hooks/AuthContext";
-import { FontAwesome6, MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBell } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesome6, MaterialCommunityIcons } from "@expo/vector-icons";
+import { LinearGradient } from "expo-linear-gradient";
+import CompetitionsList from "../../components/home/competitionsList";
+
 
 export default function Home() {
     const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
     const { signOut, user: { user } }: any = useAuth()
 
-    // const [activities, setActivities] = useState<Activity[]>([]);
-
-    // useEffect(() => {
-    //     const getActivitiesData = async () => {
-    //         const data = await getActivities();
-    //         setActivities(data);
-    //     };
-
-    //     getActivitiesData();
-    //   }, []);
-
     // Mensagem baseada no horário do dia
     const getCurrentTime = () => {
         const hours = new Date().getHours();
         if (hours < 12) {
-            return { greeting: 'Bom dia 🌅', color: '#ffc573' }; // Cor laranja para manhã
+            return "Bom dia," ;
         } else if (hours >= 12 && hours < 18) {
-            return { greeting: 'Boa tarde 🌞', color: '#f0a148' }; // Cor dourada para tarde
+            return "Boa tarde," ; 
         } else {
-            return { greeting: 'Boa noite 🌛', color: '#6663bf' }; // Cor azul para noite
+            return "Boa noite," ;
         }
     };
 
-    const { greeting, color } = getCurrentTime();
+    // Mensagem baseada no dia do evento
+    const getCurrentDay = () => {
+        const day = new Date().toLocaleDateString();
+
+        switch (day){
+            case "29/09/2025":
+                return "Hoje é o 1° dia de evento";
+            case "30/09/2025":
+                return "Hoje é o 2° dia de evento";
+            case "01/10/2025":
+                return "Hoje é o 3° dia de evento";
+            case "02/10/2025":
+                return "Hoje é o 4° dia de evento";
+            case "03/10/2025":
+                return "Hoje é o último dia de evento";
+            default:
+                return `Hoje não é dia de evento`;
+        }
+    }
+
+    const greeting  = getCurrentTime();
+    const eventDay = getCurrentDay();
+
+    // Nome do usuário
+    const nomeCompleto = new BeautifulName(user.nome).beautifulName;
+    const nomes = nomeCompleto.trim().split(" ");
+
+    const primeiroNome = nomes[0];
+    const ultimoNome = nomes[nomes.length - 1];
+
+    // Inscrever-se no evento
+    const subscribe = () => {
+
+        console.log("Usuário inscrito nesta edição com suceso!");
+    }
 
     useEffect(() => {
+        // Caso seja a primeira vez do usuário acessando o app
         const handleWelcome = async () => {
             const isNotFirstTime = await AsyncStorage.getItem("isFirstTime")
 
@@ -51,211 +77,90 @@ export default function Home() {
     }, [])
 
     return (
-
-        <SafeAreaView className='bg-blue-900 flex-1 items-center'>
-            <ScrollView showsVerticalScrollIndicator={false} className='flex-1 px-8 pb-12 w-full max-w-[1200px]'>
-
-                <View className='flex-col items-start mt-10 pb-2'>
-                    <Text style={{ fontFamily: 'Inter_500Medium', color: color }} className='text-lg text-neutral-300'>{greeting}</Text>
-                    <Text style={{ fontFamily: 'Inter_600SemiBold' }} className='text-2xl mt-0.5'>{new BeautifulName(user.nome).beautifulName}</Text>
-
-                    {/* <View className="flex-row">
-                        <Text style={{ fontFamily: 'Inter_400Regular' }} className='text-sm text-white mt-5 mr-2 py-2 px-3 rounded-lg bg-blue-old border-0'>Participante</Text>
-                        <Text style={{ fontFamily: 'Inter_400Regular' }} className='text-sm text-white mt-5 py-2 px-3 rounded-lg bg-blue-old border-0'>Pontos: {user.points}</Text>
-                    </View>  */}
+        <SafeAreaView className="bg-blue-900 flex-1 items-center">
+            <ScrollView showsVerticalScrollIndicator={false} className="flex-1 px-6 pb-12 w-full max-w-[1000px]">
+                <View className="w-full flex-row items-center justify-between mt-8 mb-8 gap-4">
+                    <View className="flex-col h-full flex-1 ">
+                        <Text className="text-[13px] text-blue-100 font-inter">{eventDay}</Text>
+                        <View className="flex-row items-center justify-start mt-[7px]">
+                            <Text className="text-[16px] text-white font-poppinsSemiBold">{greeting} </Text>
+                            <Text className="text-[16px] text-green font-poppinsSemiBold">{`${primeiroNome} ${ultimoNome}`}</Text>
+                        </View>
+                    </View>
+                    
+                    {/* Notificações */}
+                    <Pressable onPress={() => { navigation.navigate("") }}>
+                        <View className="w-11 h-11 flex items-center justify-center rounded-[8px] p-2 bg-iconbg">
+                            <FontAwesomeIcon className="text-blue-200 text-xl" icon={faBell} />
+                        </View>
+                    </Pressable>
                 </View>
 
-                <View className='mb-8 py-1 flex-row items-center justify-start border-b border-neutral-200' />
+                {/* Inscrição no evento */}
+                <LinearGradient
+                    colors={["#29303F", "#2A3B5E"]}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 1 }}
+                    className="flex-col w-full rounded-[8px] justify-start gap-2 mb-8 px-6 py-4"
+                    >
+                        <Text className="text-white text-[13px] font-poppinsMedium">Inscreva-se na Secomp</Text>
+                        <Text className="text-default text-[12px] leading-[1.4]">Para participar do evento e de suas atividades, você deve se inscrever por aqui</Text>
+                        <Pressable onPress={subscribe} className="w-44 bg-blue-500 rounded-[6px] py-3 px-4 items-center mt-2 mb-1">
+                            <Text className="text-white text-[12px] font-poppinsMedium">Inscrever-se</Text>
+                        </Pressable>
+                </LinearGradient>
 
-                <View className='flex-col justify-start space-y-4 mb-10'>
-                    <Text style={{ fontFamily: 'Inter_600SemiBold' }} className='text-md text-neutral-700'>Menu Principal</Text>
+                <View className="w-full mb-8 gap-4">
+                    <Text className="text-xs text-green font-poppinsSemiBold">Guia do evento</Text>
 
-                    <TouchableOpacity onPress={() => { navigation.navigate('Credential') }}>
-                        <View className='grow h-16 flex-row items-center space-x-1 rounded-lg bg-neutral-200/20'>
-                            <View className='w-14 h-full ml-2 items-center justify-center'>
-                                <FontAwesome6 name="id-badge" size={24} color="#445BE6" />
-                            </View>
-
-                            <View className='grow'>
-                                <Text style={{ fontFamily: 'Inter_600SemiBold' }} className='text-lg text-neutral-700'>Credencial</Text>
-                            </View>
-
-                            <View className='w-14 h-full ml-2 items-center justify-center'>
-                                <FontAwesome6 name="chevron-right" size={18} color="#a3a3a3" />
-                            </View>
-                        </View>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity onPress={() => { navigation.navigate("Registration") }}>
-                        <View className='grow h-16 flex-row items-center space-x-1 rounded-lg bg-neutral-200/20'>
-                            <View className='w-14 h-full ml-2 items-center justify-center'>
-                                <MaterialIcons name="event" size={24} color="#445BE6" />
-                            </View>
-
-                            <View className='grow'>
-                                <Text style={{ fontFamily: 'Inter_600SemiBold' }} className='text-lg text-neutral-700'>Minicursos</Text>
-                            </View>
-
-                            <View className='w-14 h-full ml-2 items-center justify-center'>
-                                <FontAwesome6 name="chevron-right" size={18} color="#a3a3a3" />
+                    <Pressable onPress={() => { navigation.navigate("") }}>
+                        <View className="h-[80px] bg-background py-3 px-5 flex-row items-center gap-4 rounded-[8px]">
+                            <Image source={require('../../../assets/home/guidebook.png')} style={{ width: 54, height: 54 }}/>
+                            <View className="flex-col w-full justify-start gap-1">
+                                <Text className="text-white text-[13px] font-poppinsMedium">Como participar da Secomp?</Text>
+                                <Text className="hidden text-default text-[12px] font-inter leading-[1.4] xxs:block">Um guia com tudo o que você precisa!</Text>
+                                <Text className="block text-default text-[12px] font-inter leading-[1.4] xxs:hidden">Um guia contendo tudo!</Text>
                             </View>
                         </View>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity onPress={signOut}>
-                        <View className='grow h-16 flex-row items-center space-x-1 rounded-lg bg-neutral-200/20'>
-                            <View className='w-14 h-full ml-2 items-center justify-center'>
-                                <MaterialIcons name="logout" size={24} color="#445BE6" />
-                            </View>
-
-                            <View className='grow'>
-                                <Text style={{ fontFamily: 'Inter_600SemiBold' }} className='text-lg text-neutral-700'>Sair</Text>
-                            </View>
-
-                            <View className='w-14 h-full ml-2 items-center justify-center'>
-                                <FontAwesome6 name="chevron-right" size={18} color="#a3a3a3" />
-                            </View>
-                        </View>
-                    </TouchableOpacity>
-
+                    </Pressable>
                 </View>
 
-                <View className='mb-10 flex justify-center'>
-                    <Text style={{ fontFamily: 'Inter_600SemiBold' }} className='text-md text-neutral-700 mb-4'>Redes Sociais</Text>
+                <View className="w-full mb-8 gap-1">
+                    <Text className="text-xs text-green font-poppinsSemiBold">Competições</Text>
+
+                    <CompetitionsList />
+                </View>
+
+                <View className="mb-10 flex justify-center">
+                    <Text style={{ fontFamily: "Inter_600SemiBold" }} className="text-md text-neutral-700 mb-4">Redes Sociais</Text>
 
                     <View className="flex-row justify-between items-center space-x-3">
-                        <TouchableOpacity className='h-20 grow' onPress={() => Linking.openURL('https://www.instagram.com/secompufscar/')}>
+                        <Pressable className="h-20 grow" onPress={() => Linking.openURL("https://www.instagram.com/secompufscar/")}>
                             <View className="h-full w-full rounded-lg bg-neutral-200/30 flex items-center justify-center">
                                 <FontAwesome6 name="instagram" size={42} color="#E1306C" />
                             </View>
-                        </TouchableOpacity>
+                        </Pressable>
 
-                        <TouchableOpacity className='h-20 grow' onPress={() => Linking.openURL('https://www.linkedin.com/company/secomp-ufscar/posts')}>
+                        <Pressable className="h-20 grow" onPress={() => Linking.openURL("https://www.linkedin.com/company/secomp-ufscar/posts")}>
                             <View className="h-full w-full rounded-lg bg-neutral-200/30 flex items-center justify-center">
                                 <FontAwesome6 name="linkedin" size={42} color="#0077B5" />
                             </View>
-                        </TouchableOpacity>
+                        </Pressable>
 
-                        <TouchableOpacity className='h-20 grow' onPress={() => Linking.openURL('https://www.facebook.com/secompufscar')}>
+                        <Pressable className="h-20 grow" onPress={() => Linking.openURL("https://www.facebook.com/secompufscar")}>
                             <View className="h-full w-full rounded-lg bg-neutral-200/30  flex items-center justify-center">
                                 <FontAwesome6 name="square-facebook" size={42} color="#1877F2" />
                             </View>
-                        </TouchableOpacity>
+                        </Pressable>
 
-                        <TouchableOpacity className='h-20 grow' onPress={() => Linking.openURL('https://www.secompufscar.com.br/')}>
+                        <Pressable className="h-20 grow" onPress={() => Linking.openURL("https://www.secompufscar.com.br/")}>
                             <View className="h-full w-full rounded-lg bg-neutral-200/30 flex items-center justify-center">
                                 <MaterialCommunityIcons name="web" size={42} color="#333333" />
                             </View>
-                        </TouchableOpacity>
+                        </Pressable>
                     </View>
-                </View>
-
-                <View className='mb-10 flex justify-center'>
-                    <Text style={{ fontFamily: 'Inter_600SemiBold' }} className='text-md text-neutral-700 mb-4'>Patrocinadores</Text>
-
-                    <View className='flex-col justify-center items-center space-y-3'>
-                        <View className='h-32 w-full flex-row space-x-3 xl:h-48'>
-                            <TouchableOpacity className='h-full w-[60%]' onPress={() => Linking.openURL('https://tractian.com/sobre')}>
-                                <View className='h-full grow rounded-lg bg-neutral-200/50'>
-                                    <Image
-                                        source={require('../../../assets/empresas/tractian.png')}
-                                        style={{
-                                            width: '100%',
-                                            height: '100%',
-                                            resizeMode: 'contain',
-                                            maxWidth: '100%',
-                                            maxHeight: '100%',
-                                        }}
-                                    />
-                                </View>
-                            </TouchableOpacity>
-
-                            <TouchableOpacity className='h-full grow' onPress={() => Linking.openURL('https://www.tempest.com.br/sobre-nos/')}>
-                                <View className='h-full grow rounded-lg bg-neutral-200'>
-                                    <Image
-                                        source={require('../../../assets/empresas/tempest.png')}
-                                        style={{
-                                            width: '100%',
-                                            height: '100%',
-                                            resizeMode: 'contain',
-                                            maxWidth: '100%',
-                                            maxHeight: '100%',
-                                        }}
-                                    />
-                                </View>
-                            </TouchableOpacity>
-                        </View>
-
-                        <View className='h-32 w-full flex-row space-x-3 xl:h-48'>
-                            <TouchableOpacity className='h-full w-[40%]' onPress={() => Linking.openURL('https://visagio.com/quem-somos/')}>
-                                <View className='h-full grow rounded-lg bg-neutral-200 p-1'>
-                                    <Image
-                                        source={require('../../../assets/empresas/visagio.png')}
-                                        style={{
-                                            width: '100%',
-                                            height: '100%',
-                                            resizeMode: 'contain',
-                                            maxWidth: '100%',
-                                            maxHeight: '100%',
-                                        }}
-                                    />
-                                </View>
-                            </TouchableOpacity>
-
-                            <TouchableOpacity className='h-full grow' onPress={() => Linking.openURL('https://app.rocketseat.com.br/')}>
-                                <View className='h-full grow rounded-lg bg-neutral-200/50'>
-                                    <Image
-                                        source={require('../../../assets/empresas/rocketseat.png')}
-                                        style={{
-                                            width: '100%',
-                                            height: '100%',
-                                            resizeMode: 'contain',
-                                            maxWidth: '100%',
-                                            maxHeight: '100%',
-                                        }}
-                                    />
-                                </View>
-                            </TouchableOpacity>
-                        </View>
-
-                        <View className='h-32 w-full flex-row space-x-3 xl:h-48'>
-                            <TouchableOpacity className='h-full grow' onPress={() => Linking.openURL('https://magalu.cloud/sobre-nos/')}>
-                                <View className='h-full grow rounded-lg bg-neutral-200/30 p-8'>
-                                    <Image
-                                        source={require('../../../assets/empresas/magalu.png')}
-                                        style={{
-                                            width: '100%',
-                                            height: '100%',
-                                            resizeMode: 'contain',
-                                            maxWidth: '100%',
-                                            maxHeight: '100%',
-                                        }}
-                                    />
-                                </View>
-                            </TouchableOpacity>
-
-
-                            <TouchableOpacity className='h-full grow' onPress={() => Linking.openURL('https://qitech.com.br/')}>
-                                <View className='h-full grow rounded-lg bg-neutral-200'>
-                                    <Image
-                                        source={require('../../../assets/empresas/qitech.png')}
-                                        style={{
-                                            width: '100%',
-                                            height: '100%',
-                                            resizeMode: 'contain',
-                                            maxWidth: '100%',
-                                            maxHeight: '100%',
-                                        }}
-                                    />
-                                </View>
-                            </TouchableOpacity>
-                        </View>
-
-                    </View>
-                </View>
-
+                </View>              
             </ScrollView>
-
         </SafeAreaView>
     );
 }

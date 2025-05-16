@@ -26,7 +26,7 @@ export default function TabRoutes() {
                     borderTopWidth: 1,
                     borderTopColor: '#212735',
                     height: 66,
-                    maxWidth: 1200, 
+                    maxWidth: 1000, 
                     width: '100%',  
                     position: 'absolute', 
                     bottom: 0, 
