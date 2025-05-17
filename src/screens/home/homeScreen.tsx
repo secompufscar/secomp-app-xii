@@ -7,7 +7,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { BeautifulName } from "beautiful-name"
 import { useAuth } from "../../hooks/AuthContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBell } from "@fortawesome/free-solid-svg-icons";
+import { faBell, faStar, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesome6, MaterialCommunityIcons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import CompetitionsList from "../../components/home/competitionsList";
@@ -16,6 +16,7 @@ import CompetitionsList from "../../components/home/competitionsList";
 export default function Home() {
     const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
     const { signOut, user: { user } }: any = useAuth()
+    const [pressed, setPressed] = useState(false);
 
     // Mensagem baseada no horário do dia
     const getCurrentTime = () => {
@@ -110,6 +111,7 @@ export default function Home() {
                         </Pressable>
                 </LinearGradient>
 
+                {/* Guia do evento */}
                 <View className="w-full mb-8 gap-4">
                     <Text className="text-xs text-green font-poppinsSemiBold">Guia do evento</Text>
 
@@ -125,41 +127,70 @@ export default function Home() {
                     </Pressable>
                 </View>
 
+                {/* Competições */}
                 <View className="w-full mb-8 gap-1">
                     <Text className="text-xs text-green font-poppinsSemiBold">Competições</Text>
 
                     <CompetitionsList />
                 </View>
 
-                <View className="mb-10 flex justify-center">
-                    <Text style={{ fontFamily: "Inter_600SemiBold" }} className="text-md text-neutral-700 mb-4">Redes Sociais</Text>
+                {/* Patrocinadores */}
+                <View className="w-full mb-8 gap-4">
+                    <Text className="text-xs text-green font-poppinsSemiBold">Nossos apoiadores</Text>
+
+                    <Pressable 
+                        onPress={() => { navigation.navigate("") }}
+                        onPressIn={() => setPressed(true)}
+                        onPressOut={() => setPressed(false)}
+                        className={`w-full h-[62px] p-2 gap-3 flex-row items-center border border-border rounded-[8px] transition-all duration-50 
+                            ${pressed ? 'bg-background' : ''
+                        }`}>
+                        <View className="w-11 h-full flex items-center justify-center bg-background rounded-[5px]">
+                            <FontAwesomeIcon className="text-blue-500 text-xl" icon={faStar} />
+                        </View>
+
+                        <Text className="flex-1 text-white text-[13px] font-inter font-medium">Patrocinadores</Text>
+
+                        <View className="w-8 h-full flex items-center justify-center">
+                            <FontAwesomeIcon className="text-white text-md" icon={faChevronRight} />
+                        </View>
+                    </Pressable>
+                </View>
+
+                {/* Redes sociais */}
+                <View className="w-full mb-8 gap-4">
+                    <Text className="text-xs text-green font-poppinsSemiBold">Redes sociais</Text>
 
                     <View className="flex-row justify-between items-center space-x-3">
-                        <Pressable className="h-20 grow" onPress={() => Linking.openURL("https://www.instagram.com/secompufscar/")}>
-                            <View className="h-full w-full rounded-lg bg-neutral-200/30 flex items-center justify-center">
-                                <FontAwesome6 name="instagram" size={42} color="#E1306C" />
-                            </View>
+                        <Pressable 
+                            className="h-20 grow rounded-lg bg-neutral-200/30 flex items-center justify-center" 
+                            onPress={() => Linking.openURL("https://www.instagram.com/secompufscar/")}
+                        >
+                                <FontAwesome6 name="instagram" size={42} color="#E1306C" />                       
                         </Pressable>
 
-                        <Pressable className="h-20 grow" onPress={() => Linking.openURL("https://www.linkedin.com/company/secomp-ufscar/posts")}>
-                            <View className="h-full w-full rounded-lg bg-neutral-200/30 flex items-center justify-center">
-                                <FontAwesome6 name="linkedin" size={42} color="#0077B5" />
-                            </View>
+                        <Pressable 
+                            className="h-20 grow rounded-lg bg-neutral-200/30 flex items-center justify-center" 
+                            onPress={() => Linking.openURL("https://www.linkedin.com/company/secomp-ufscar/posts")}
+                        >
+                            <FontAwesome6 name="linkedin" size={42} color="#0077B5" />
                         </Pressable>
 
-                        <Pressable className="h-20 grow" onPress={() => Linking.openURL("https://www.facebook.com/secompufscar")}>
-                            <View className="h-full w-full rounded-lg bg-neutral-200/30  flex items-center justify-center">
-                                <FontAwesome6 name="square-facebook" size={42} color="#1877F2" />
-                            </View>
+                        <Pressable 
+                            className="h-20 grow rounded-lg bg-neutral-200/30 flex items-center justify-center" 
+                            onPress={() => Linking.openURL("https://www.facebook.com/secompufscar")}
+                        >
+                            <FontAwesome6 name="square-facebook" size={42} color="#1877F2" />
                         </Pressable>
 
-                        <Pressable className="h-20 grow" onPress={() => Linking.openURL("https://www.secompufscar.com.br/")}>
-                            <View className="h-full w-full rounded-lg bg-neutral-200/30 flex items-center justify-center">
-                                <MaterialCommunityIcons name="web" size={42} color="#333333" />
-                            </View>
+                        <Pressable 
+                            className="h-20 grow rounded-lg bg-neutral-200/30 flex items-center justify-center" 
+                            onPress={() => Linking.openURL("https://www.secompufscar.com.br/")}
+                        >
+                            <MaterialCommunityIcons name="web" size={42} color="#333333" />
                         </Pressable>
                     </View>
-                </View>              
+                </View>            
             </ScrollView>
         </SafeAreaView>
     );
