@@ -4,7 +4,7 @@ import { Pressable, View, Text, FlatList, Image } from 'react-native';
 import { ParamListBase, useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-export default function CompetitionsList(){
+export default function HomeCompetitions(){
     const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
     const [activities, setActivities] = useState<Activity[]>([]);
     const categoriaId = "4";
