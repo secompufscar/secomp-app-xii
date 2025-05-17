@@ -1,0 +1,113 @@
+import React, { useState } from "react";
+import {
+  SafeAreaView,
+  View,
+  ScrollView,
+  Image,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Pressable
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { AuthTypes } from "../../routes/auth.routes";
+import { sendForgotPasswordEmail } from "../../services/users";
+
+export default function PasswordReset() {
+  const [email, setEmail] = useState("");
+  const navigation = useNavigation<AuthTypes>();
+
+  const validateEmail = (email: string) => {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+  };
+
+  async function replacePass() {
+    if (validateEmail(email)) {
+      navigation.navigate("VerifyEmail");
+    } else {
+      alert("É preciso informar um e-mail válido para redefinir a senha.");
+      return;
+    }
+    try {
+      await sendForgotPasswordEmail({ email }); // Assumindo que o body esperado é um objeto { email }
+      navigation.navigate("VerifyEmail");
+    } catch (error: any) {
+      console.error("Erro ao enviar email de recuperação:", error);
+      alert(
+        error?.response?.data?.message ||
+        "Ocorreu um erro ao tentar enviar o e-mail de redefinição. Insira outro e-mail ou tente novamente mais tarde."
+      );
+    }
+  }
+
+  return (
+    <SafeAreaView className="flex-1 bg-white">
+      <ScrollView
+        className="flex-1 bg-blue-900 rounded-3xl max-w-[1000px]"
+        contentContainerStyle={{ paddingBottom: 40 }}
+      >
+        <Pressable
+          className="mt-20 mb-12 ml-6"
+          onPress={() => navigation.goBack()}
+        >
+          <Image
+            source={{
+              uri: "https://storage.googleapis.com/tagjs-prod.appspot.com/v1/HPv9vJILG7/i9nrpmot_expires_30_days.png"
+            }}
+            resizeMode="stretch"
+            className="w-7 h-7 rounded-3xl"
+          />
+        </Pressable>
+
+        <View className="mb-7 ml-6">
+          <Text className="text-white text-2xl font-bold mb-3">
+            Recuperar senha
+          </Text>
+          <Text className="text-gray-400 text-xs">
+            Por favor, insira seu e-mail para redefinir sua senha
+          </Text>
+        </View>
+
+        <View className="flex-row items-center bg-background border border-border rounded-lg pl-[18px] py-3.5 px-4.5 mb-4 mx-6">
+          <Image
+            source={{
+              uri: "https://storage.googleapis.com/tagjs-prod.appspot.com/v1/HPv9vJILG7/hvrzhk90_expires_30_days.png"
+            }}
+            resizeMode="stretch"
+            className="w-3 h-2.5 rounded-lg mr-3.5"
+          />
+          <TextInput
+            placeholder="Digite seu e-mail"
+            placeholderTextColor="#536080"
+            onChangeText={setEmail}
+            value={email}
+            keyboardType="email-address"
+            autoCapitalize="none"
+            className="flex-1 text-xs text-border"
+          />
+        </View>
+
+        <TouchableOpacity
+          className="items-center bg-[#4153DF] rounded-lg py-3.5 mb-4 mx-6"
+          onPress={replacePass}
+        >
+          <Text className="text-white text-sm font-bold">
+            Enviar
+          </Text>
+        </TouchableOpacity>
+
+        <View className="items-center mb-10">
+          <Pressable onPress={() => navigation.navigate("Login")}>
+            <Text className="text-white text-xs font-bold">
+              Voltar
+            </Text>
+          </Pressable>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
+}

@@ -7,6 +7,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { StackTypes } from '../../routes/stack.routes';
 
+
 import { Input } from "../../components/input";
 import { Button } from "../../components/button";
 
@@ -14,6 +15,7 @@ import { colors } from "../../styles/colors"
 import { useAuth } from "../../hooks/AuthContext";
 
 import { login } from "../../services/users";
+
 
 const validateEmail = (email: string) => {
     return String(email)
@@ -104,7 +106,7 @@ export default function Login() {
 
                 <View className="items-center">
                     <Image
-                        source={require("../../../assets/logo.png")}
+                        source={require("/home/laysson/SECOMP/secomp-app-xii/assets/logo.png")}
                         className="h-24"
                         resizeMode="contain"
                     />
@@ -150,11 +152,11 @@ export default function Login() {
 
                     <Button className="mt-2" title="Entrar" onPress={handleLogin} isLoading={isLoading} />
 
-                    {/* <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
-                    <Text className="text-white text-base font-bold text-center mt-4">
-                        Esqueceu a senha?
-                    </Text>
-                </TouchableOpacity> */}
+                    <TouchableOpacity onPress={() => navigation.navigate("PasswordReset")}>
+                        <Text className="text-white text-base font-bold text-center mt-4 underline">
+                            Esqueceu a senha?
+                        </Text>
+                    </TouchableOpacity>
 
                     <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
                         <Text className="text-white text-base font-bold text-center mt-4">

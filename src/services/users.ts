@@ -29,5 +29,16 @@ export const signup = async (data: SignUp): Promise<boolean> => {
     return response.data
 }
 
+export async function sendForgotPasswordEmail(data: { email: string }) {
+  // chama POST /sendForgotPasswordEmail
+  await api.post("/sendForgotPasswordEmail", data);
+}
+
+export async function updatePassword(token: string, newPassword: string) {
+  // chama PATCH /updatePassword/:token
+  const response = await api.patch(`/updatePassword/${token}`, { newPassword });
+  return response.data; // { message: "Senha atualizada com sucesso" }
+}
+
 
   
