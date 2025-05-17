@@ -122,7 +122,7 @@ export default function SetNewPasswordScreen() {
         <View className="flex-1 justify-center items-center bg-[rgba(0,0,0,0.5)]">
           <View className="w-[300px] p-6 bg-blue-900 rounded-2xl justify-center items-center">
             <LottieView
-              source={require("/home/laysson/SECOMP/secomp-app-xii/assets/animacao/check-success.json")}
+              source={require("../../../assets/animacao/check-success.json")}
               autoPlay
               loop={false}
               style={{ width: 150, height: 150 }}

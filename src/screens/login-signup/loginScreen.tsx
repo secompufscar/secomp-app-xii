@@ -106,7 +106,7 @@ export default function Login() {
 
                 <View className="items-center">
                     <Image
-                        source={require("/home/laysson/SECOMP/secomp-app-xii/assets/logo.png")}
+                        source={require("../../../assets/logo.png")}
                         className="h-24"
                         resizeMode="contain"
                     />
