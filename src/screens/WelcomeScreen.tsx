@@ -8,7 +8,7 @@ import { MaterialIcons, AntDesign  } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { BeautifulName } from "beautiful-name"
 
-export default function UserHome() {
+export default function Welcome() {
     const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
     const { signOut, user: { user } }: any = useAuth();
 

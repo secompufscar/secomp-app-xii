@@ -28,6 +28,28 @@ export const colors = {
   },
 
   "blue-old": "#445BE6",
+
+  "blue": {
+    100: "#C5CCF7",
+    200: "#A9B4F4",
+    500: "#A9B4F4",
+    700: "#3141A3",
+    900: "#1C212C",
+  },
+
+  green: "#4CEDB9",
+
+  // Feedback
+  warning: "#F1C21B",
+  danger: "#F05D6C",
+  success: "#0FB842",
+
+  // Text color
+  default: "#E0E0E0",
+
+  // Text input, elements bg
+  border: "#536080",
+  background: "#212735",
 }
 
 

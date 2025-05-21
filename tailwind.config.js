@@ -38,7 +38,7 @@ module.exports = {
                 "blue": {
                     100: "#C5CCF7",
                     200: "#A9B4F4",
-                    500: "#A9B4F4",
+                    500: "#4153DF",
                     700: "#3141A3",
                     900: "#1C212C",
                 },
@@ -56,12 +56,17 @@ module.exports = {
                 // Text input, elements bg
                 border: "#536080",
                 background: "#212735",
-
+                iconbg: "#29303F",
             },
             fontFamily: {
                 inter: 'Inter_400Regular',
                 poppins: 'Poppins_400Regular',
-            }
+                poppinsMedium: 'Poppins_500Medium',
+                poppinsSemiBold: 'Poppins_600SemiBold',
+            },
+            screens: {
+                'xxs': '420px',
+            },
         }
     },
     plugins: [],
