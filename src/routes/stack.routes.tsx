@@ -23,6 +23,7 @@ import { ScheduleItemProps } from '../entities/schedule-item';
 
 const Stack = createNativeStackNavigator();
 
+// Rotas para usuários logados
 type StackNavigation = {
     Home: undefined;
     Login: undefined;
@@ -33,6 +34,7 @@ type StackNavigation = {
     Credential: undefined;
     Notifications: undefined;
     QRCode: { id: string };
+    PasswordReset: undefined;
 };
 
 export type StackTypes = NativeStackNavigationProp<StackNavigation>;

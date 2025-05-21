@@ -1,7 +1,11 @@
 import Login from './login-signup/loginScreen'
 import SignUp from './login-signup/signupScreen'
 
-import Home from './home/homeScreen'
+import PasswordReset from './password-reset/passwordResetScreen';
+import VerifyEmail from './password-reset/verifyEmailScreen';
+import SetNewPassword from './password-reset/setNewPasswordScreen';
+
+import Home from './home/homeScreen';
 import UserProfile from './profile/userProfileScreen'
 
 import Schedule from './schedule/scheduleScreen'
@@ -40,5 +44,8 @@ export {
     Workshops,
     QRCode,
     Welcome,
-    SECOMP
+    SECOMP,
+    PasswordReset,
+    VerifyEmail,
+    SetNewPassword
 }
