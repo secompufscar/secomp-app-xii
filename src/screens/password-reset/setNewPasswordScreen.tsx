@@ -119,7 +119,7 @@ export default function SetNewPassword() {
         <Button className="mt-4" title="Atualizar senha" onPress={handleUpdatePassword}/>
       </ScrollView>
       
-      <Modal visible={!successVisible} transparent animationType="fade">
+      <Modal visible={successVisible} transparent animationType="fade">
         <View className="flex-1 justify-center items-center bg-[rgba(0,0,0,0.6)]">
           <View className="w-[80%] px-6 py-8 gap-4 bg-blue-900 rounded-xl justify-center items-center xxs:w-[300px]">
             <Image
