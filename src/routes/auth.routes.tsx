@@ -17,7 +17,7 @@ type StackNavigation = {
     Credential: undefined;
     Notifications: undefined;
     PasswordReset: undefined;
-    VerifyEmail: undefined;
+    VerifyEmail: { email: string };
     SetNewPassword: undefined;
 };
 
@@ -31,7 +31,7 @@ export default function AuthRoutes() {
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="PasswordReset" component={PasswordReset} />
             <Stack.Screen name="VerifyEmail" component={VerifyEmail} />
-            <Stack.Screen name="SetNewPassword" component={SetNewPassword} />
+            <Stack.Screen name="SetNewPassword" component={SetNewPassword}/>
         </Stack.Navigator>
     );
 }

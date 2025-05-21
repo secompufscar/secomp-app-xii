@@ -15,28 +15,35 @@ import { useNavigation } from "@react-navigation/native";
 import { AuthTypes } from "../../routes/auth.routes";
 import { useRoute } from "@react-navigation/native";
 import { updatePassword } from "../../services/users";
+import { colors } from "../../styles/colors";
+import { Input } from "../../components/input/input";
+import BackButton from "../../components/button/backButton";
+import Button from "../../components/button/button";
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
-export default function SetNewPasswordScreen() {
-  const [senha, setSenha] = useState("");
-  const [confirmSenha, setConfirmSenha] = useState("");
+export default function SetNewPassword() {
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState(false);  
   const [successVisible, setSuccessVisible] = useState(false);
   const navigation = useNavigation<AuthTypes>();
   const route = useRoute();
-  const { token } = route.params as { token: string };
+  //const { token } = route.params as { token: string };
 
   const handleUpdatePassword = async () => {
-    if (!senha || !confirmSenha) {
+    if (!password || !confirmPassword) {
       Alert.alert("Erro", "Preencha ambos os campos de senha.");
       return;
     }
-    if (senha !== confirmSenha) {
+    if (password !== confirmPassword) {
       Alert.alert("Erro", "As senhas não coincidem.");
       return;
     }
 
-
     try {
-      await updatePassword(token, senha); // Chamada real à API
+      // await updatePassword(token, senha); 
       setSuccessVisible(true);
     } catch (error: any) {
       console.error(error);
@@ -53,80 +60,75 @@ export default function SetNewPasswordScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-white">
-      <ScrollView className="flex-1 bg-blue-900 rounded-3xl max-w-[1000px]" contentContainerStyle={{ paddingTop: 82, paddingBottom: 40 }}>
-        <Pressable onPress={() => navigation.goBack()}>
-          <Image
-            source={{ uri: "https://storage.googleapis.com/tagjs-prod.appspot.com/v1/HPv9vJILG7/qeowg0dd_expires_30_days.png" }}
-            resizeMode="stretch"
-            className="w-[28px] h-[28px] rounded-3xl ml-6 mb-[46px]"
-          />
-        </Pressable>
+    <SafeAreaView className="flex-1 bg-blue-900 items-center">
+      <ScrollView showsVerticalScrollIndicator={false} className="flex-1 px-6 pb-12 pt-6 w-full max-w-[1000px]">
+        <BackButton/>
 
-        <View className="mb-8 ml-6">
-          <Text className="text-white text-2xl font-bold mb-4">Defina uma nova senha</Text>
-          <Text className="text-[#B4B4B4] text-xs">Crie a sua nova senha</Text>
+        <View className="mb-8">
+          <Text className="text-white text-2xl font-poppinsSemiBold mb-3">
+            Defina uma nova senha
+          </Text>
+
+          <Text className="text-gray-400 font-inter text-sm">
+            Estamos quase lá! Digite e confirme sua nova senha.
+          </Text>
         </View>
 
-        {/* Campo: Senha */}
-        <View className="flex-row items-center bg-background border border-border rounded-lg py-[14px] pl-[18px] pr-[18px] mb-4 mx-6">
-          <Image
-            source={{ uri: "https://storage.googleapis.com/tagjs-prod.appspot.com/v1/HPv9vJILG7/u7nk39y1_expires_30_days.png" }}
-            resizeMode="stretch"
-            className="w-[11px] h-[12px] rounded-md mr-[15px]"
-          />
-          <TextInput
-            placeholder="Senha"
-            placeholderTextColor="#52607F"
-            secureTextEntry
-            value={senha}
-            onChangeText={setSenha}
-            className="text-white text-xs flex-1"
-          />
-          <Image
-            source={{ uri: "https://storage.googleapis.com/tagjs-prod.appspot.com/v1/HPv9vJILG7/xhlvto9n_expires_30_days.png" }}
-            resizeMode="stretch"
-            className="w-[13px] h-[13px] rounded-md"
-          />
+        {/* Senha */}
+        <View className="gap-2">
+          <Input>
+            <MaterialIcons name="lock" size={20} color={colors.border} />
+
+            <Input.Field
+              placeholder="Senha"
+              onChangeText={setPassword}
+              value={password}
+              secureTextEntry={!isPasswordVisible}
+            />
+
+            <TouchableOpacity onPress={() => setIsPasswordVisible(!isPasswordVisible)}>
+              <Ionicons
+                name={isPasswordVisible ? 'eye' : 'eye-off'}
+                size={20}
+                color={colors.border}
+              />
+            </TouchableOpacity>
+          </Input>
+
+          {/* Confirmar senha */}
+          <Input>
+            <MaterialIcons name="lock" size={20} color={colors.border} />
+
+            <Input.Field
+              placeholder="Confirmar senha"
+              onChangeText={setConfirmPassword}
+              value={confirmPassword}
+              secureTextEntry={!isConfirmPasswordVisible}
+            />
+
+            <TouchableOpacity onPress={() => setIsConfirmPasswordVisible(!isConfirmPasswordVisible)}>
+              <Ionicons
+                name={isConfirmPasswordVisible ? 'eye' : 'eye-off'}
+                size={20}
+                color={colors.border}
+              />
+            </TouchableOpacity>
+          </Input>
         </View>
 
-        {/* Campo: Confirmar senha */}
-        <View className="flex-row items-center bg-background border border-border rounded-lg py-[14px] pl-[18px] pr-[18px] mb-8 mx-6">
-          <Image
-            source={{ uri: "https://storage.googleapis.com/tagjs-prod.appspot.com/v1/HPv9vJILG7/eu0cg9es_expires_30_days.png" }}
-            resizeMode="stretch"
-            className="w-[11px] h-[12px] rounded-md mr-[15px]"
-          />
-          <TextInput
-            placeholder="Confirmar senha"
-            placeholderTextColor="#52607F"
-            secureTextEntry
-            value={confirmSenha}
-            onChangeText={setConfirmSenha}
-            className="text-white text-xs flex-1"
-          />
-          <Image
-            source={{ uri: "https://storage.googleapis.com/tagjs-prod.appspot.com/v1/HPv9vJILG7/6kmb69ux_expires_30_days.png" }}
-            resizeMode="stretch"
-            className="w-[13px] h-[13px] rounded-md"
-          />
-        </View>
-
-        <TouchableOpacity className="items-center bg-blue-old rounded-lg py-[13px] mx-6" onPress={handleUpdatePassword}>
-          <Text className="text-white text-sm font-bold">Atualizar senha</Text>
-        </TouchableOpacity>
+        <Button className="mt-4" title="Atualizar senha" onPress={handleUpdatePassword}/>
       </ScrollView>
-
-      <Modal visible={successVisible} transparent animationType="fade">
-        <View className="flex-1 justify-center items-center bg-[rgba(0,0,0,0.5)]">
-          <View className="w-[300px] p-6 bg-blue-900 rounded-2xl justify-center items-center">
+      
+      <Modal visible={!successVisible} transparent animationType="fade">
+        <View className="flex-1 justify-center items-center bg-[rgba(0,0,0,0.6)]">
+          <View className="w-[80%] px-6 py-8 gap-4 bg-blue-900 rounded-xl justify-center items-center xxs:w-[300px]">
             <Image
               source={require("../../../assets/animacoes/check-success.gif")}
-              style={{ width: 150, height: 150 }}
+              style={{ width: 130, height: 130 }}
               resizeMode="contain"
             />
-            <Text className="text-white text-lg font-bold text-center mb-4">Senha redefinida com sucesso!</Text>
-            <Pressable onPress={onSuccessClose} className="bg-blue-old py-2.5 px-5 rounded-lg">
+            <Text className="text-white text-md font-inter font-medium text-center">Senha redefinida com sucesso!</Text>
+            <Pressable onPress={onSuccessClose} className="bg-blue-500 mt-2 py-2.5 px-8 rounded-[5px]">
               <Text className="text-white font-bold">OK</Text>
             </Pressable>
           </View>

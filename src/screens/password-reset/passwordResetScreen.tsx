@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import {
-  SafeAreaView,
-  View,
-  ScrollView,
-  Image,
-  Text,
-  TextInput,
-} from "react-native";
+import { SafeAreaView, View, ScrollView, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { AuthTypes } from "../../routes/auth.routes";
 import { sendForgotPasswordEmail } from "../../services/users";
@@ -20,24 +13,23 @@ export default function PasswordReset() {
   const [email, setEmail] = useState("");
   const navigation = useNavigation<AuthTypes>();
 
-  const validateEmail = (email: string) => {
-    return String(email)
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
+  const validateEmail = (email: string): boolean => {
+    const normalizedEmail = email.trim().toLowerCase();
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    return regex.test(normalizedEmail);
   };
 
   async function replacePass() {
-    if (validateEmail(email)) {
-      navigation.navigate("VerifyEmail");
-    } else {
+    if (!validateEmail(email)) {
       alert("É preciso informar um e-mail válido para redefinir a senha.");
       return;
     }
+
+    navigation.navigate("VerifyEmail", { email });
+  
     try {
-      await sendForgotPasswordEmail({ email }); // Assumindo que o body esperado é um objeto { email }
-      navigation.navigate("VerifyEmail");
+      await sendForgotPasswordEmail({ email }); // Assumindo que o body esperado é { email }
+      
     } catch (error: any) {
       console.error("Erro ao enviar email de recuperação:", error);
       alert(
@@ -49,15 +41,15 @@ export default function PasswordReset() {
 
   return (
     <SafeAreaView className="flex-1 bg-blue-900 items-center">
-      <ScrollView showsVerticalScrollIndicator={false} className="flex-1 px-6 pb-12 w-full max-w-[1000px]">
+      <ScrollView showsVerticalScrollIndicator={false} className="flex-1 px-6 pb-12 pt-6 w-full max-w-[1000px]">
         <BackButton/>
 
-        <View className="mb-7">
+        <View className="mb-8">
           <Text className="text-white text-2xl font-poppinsSemiBold mb-3">
             Recuperar senha
           </Text>
 
-          <Text className="text-gray-400 text-sm">
+          <Text className="text-gray-400 font-inter text-sm">
             Por favor, insira seu e-mail para redefinir sua senha
           </Text>
         </View>
