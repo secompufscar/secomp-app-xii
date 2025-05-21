@@ -6,14 +6,15 @@ import {
   Image,
   Text,
   TextInput,
-  TouchableOpacity,
-  Pressable
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { AuthTypes } from "../../routes/auth.routes";
 import { sendForgotPasswordEmail } from "../../services/users";
+import { colors } from "../../styles/colors";
+import { Input } from "../../components/input/input";
 import BackButton from "../../components/button/backButton";
 import Button  from "../../components/button/button";
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 export default function PasswordReset() {
   const [email, setEmail] = useState("");
@@ -52,34 +53,28 @@ export default function PasswordReset() {
         <BackButton/>
 
         <View className="mb-7">
-          <Text className="text-white text-2xl font-bold mb-3">
+          <Text className="text-white text-2xl font-poppinsSemiBold mb-3">
             Recuperar senha
           </Text>
-          <Text className="text-gray-400 text-xs">
+
+          <Text className="text-gray-400 text-sm">
             Por favor, insira seu e-mail para redefinir sua senha
           </Text>
         </View>
 
-        <View className="flex-row items-center bg-background border border-border rounded-lg pl-[18px] py-3.5 px-4.5 mb-4">
-          <Image
-            source={{
-              uri: "https://storage.googleapis.com/tagjs-prod.appspot.com/v1/HPv9vJILG7/hvrzhk90_expires_30_days.png"
-            }}
-            resizeMode="stretch"
-            className="w-3 h-2.5 rounded-lg mr-3.5"
-          />
-          <TextInput
-            placeholder="Digite seu e-mail"
-            placeholderTextColor="#536080"
+        <Input>
+          <MaterialIcons name="email" size={20} color={colors.border} />
+
+          <Input.Field
+            placeholder="E-mail"
             onChangeText={setEmail}
             value={email}
             keyboardType="email-address"
             autoCapitalize="none"
-            className="flex-1 text-xs text-border"
           />
-        </View>
+        </Input>
 
-        <Button title="Enviar" onPress={replacePass}/>
+        <Button className="mt-4" title="Enviar" onPress={replacePass}/>
 
       </ScrollView>
     </SafeAreaView>

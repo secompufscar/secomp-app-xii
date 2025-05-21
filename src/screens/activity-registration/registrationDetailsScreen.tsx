@@ -9,7 +9,7 @@ import { Platform, StyleSheet } from "react-native";
 import { useAuth } from "../../hooks/AuthContext";
 import { subscribeToActivity, unsubscribeToActivity } from "../../services/activities";
 import { userSubscription } from "../../services/userAtActivities";
-import { ButtonHome } from "../../components/buttonHome";
+import Button from "../../components/button/button";
 
 const isIos: Boolean = Platform.OS === 'ios'
 
@@ -178,10 +178,10 @@ export default function RegistrationDetails() {
 
                 <View className="flex items-center pt-10">
                     {subscriptionData ? (
-                        <ButtonHome title="DESINSCREVA-SE" onPress={requestUnSubscription} />
+                        <Button title="DESINSCREVA-SE" onPress={requestUnSubscription} />
 
                     ) : (
-                        <ButtonHome title="INSCREVA-SE" onPress={requestSubscription} />
+                        <Button title="INSCREVA-SE" onPress={requestSubscription} />
                     )}
                 </View>
             </View>

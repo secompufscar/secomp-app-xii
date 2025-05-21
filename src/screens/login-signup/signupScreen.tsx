@@ -7,7 +7,7 @@ import { StackTypes } from '../../routes/stack.routes';
 
 import { colors } from "../../styles/colors"
 
-import { Input } from "../../components/input"
+import { Input } from "../../components/input/input"
 import Button from "../../components/button/button"
 import { useAuth } from "../../hooks/AuthContext";
 
@@ -113,7 +113,7 @@ export default function SignUp() {
 	}
 
 	return (
-        <SafeAreaView className="flex-1 bg-blue-old">
+        <SafeAreaView className="flex-1 bg-blue-900">
 
             <ScrollView contentContainerStyle={{
                 flexGrow: 1,

@@ -8,7 +8,7 @@ type Props = PressableProps & {
 export default function Button({ title, ...rest }: Props) {
     return (
         <Pressable
-            className="w-full py-4 bg-blue-500 items-center justify-center rounded-lg outline-none"
+            className="w-full p-4 bg-blue-500 items-center justify-center rounded-lg outline-none"
             {...rest}
         >
             <Text className="text-white text-sm font-inter font-semibold">

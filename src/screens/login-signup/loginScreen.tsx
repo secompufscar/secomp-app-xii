@@ -8,7 +8,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { StackTypes } from '../../routes/stack.routes';
 
 
-import { Input } from "../../components/input";
+import { Input } from "../../components/input/input";
 import Button from "../../components/button/button";
 
 import { colors } from "../../styles/colors"
@@ -95,7 +95,7 @@ export default function Login() {
 
 
     return (
-        <SafeAreaView className="flex-1 bg-blue-old">
+        <SafeAreaView className="flex-1 bg-blue-900">
 
             <ScrollView contentContainerStyle={{
                 flexGrow: 1,
