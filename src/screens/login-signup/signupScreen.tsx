@@ -8,7 +8,7 @@ import { StackTypes } from '../../routes/stack.routes';
 import { colors } from "../../styles/colors"
 
 import { Input } from "../../components/input"
-import { Button } from "../../components/button"
+import Button from "../../components/button/button"
 import { useAuth } from "../../hooks/AuthContext";
 
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -174,7 +174,7 @@ export default function SignUp() {
                     </TouchableOpacity>
 				</Input>
 
-				<Button className="mt-2" title="Inscreva-se" onPress={handleRegister} isLoading={isLoading} />
+				<Button className="mt-2" title="Inscreva-se" onPress={handleRegister}/>
 
 				<TouchableOpacity onPress={() => navigation.navigate("Login")}>
 					<Text className="text-white text-base font-bold text-center mt-4">

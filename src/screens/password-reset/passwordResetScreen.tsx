@@ -13,6 +13,7 @@ import { useNavigation } from "@react-navigation/native";
 import { AuthTypes } from "../../routes/auth.routes";
 import { sendForgotPasswordEmail } from "../../services/users";
 import BackButton from "../../components/button/backButton";
+import Button  from "../../components/button/button";
 
 export default function PasswordReset() {
   const [email, setEmail] = useState("");
@@ -78,22 +79,8 @@ export default function PasswordReset() {
           />
         </View>
 
-        <TouchableOpacity
-          className="items-center bg-[#4153DF] rounded-lg py-3.5 mb-4"
-          onPress={replacePass}
-        >
-          <Text className="text-white text-sm font-bold">
-            Enviar
-          </Text>
-        </TouchableOpacity>
+        <Button title="Enviar" onPress={replacePass}/>
 
-        <View className="items-center mb-10">
-          <Pressable onPress={() => navigation.navigate("Login")}>
-            <Text className="text-white text-xs font-bold">
-              Voltar
-            </Text>
-          </Pressable>
-        </View>
       </ScrollView>
     </SafeAreaView>
   );

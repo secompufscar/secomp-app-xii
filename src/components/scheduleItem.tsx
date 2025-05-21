@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button, SafeAreaView, TouchableOpacity } from 'react-native';
+import { View, Text, SafeAreaView, TouchableOpacity } from 'react-native';
 import { ScheduleItemProps } from '../entities/schedule-item';
 
 type ScheduleItemComponentProps = {

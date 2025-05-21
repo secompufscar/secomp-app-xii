@@ -9,7 +9,7 @@ import { StackTypes } from '../../routes/stack.routes';
 
 
 import { Input } from "../../components/input";
-import { Button } from "../../components/button";
+import Button from "../../components/button/button";
 
 import { colors } from "../../styles/colors"
 import { useAuth } from "../../hooks/AuthContext";
@@ -150,7 +150,7 @@ export default function Login() {
 
                     </Input>
 
-                    <Button className="mt-2" title="Entrar" onPress={handleLogin} isLoading={isLoading} />
+                    <Button className="mt-2" title="Entrar" onPress={handleLogin}/>
 
                     <TouchableOpacity onPress={() => navigation.navigate("PasswordReset")}>
                         <Text className="text-white text-base font-bold text-center mt-4 underline">
