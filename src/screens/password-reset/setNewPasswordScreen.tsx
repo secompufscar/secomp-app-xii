@@ -11,7 +11,6 @@ import {
   Alert,
   TextInput,
 } from "react-native";
-import LottieView from "lottie-react-native";
 import { useNavigation } from "@react-navigation/native";
 import { AuthTypes } from "../../routes/auth.routes";
 import { useRoute } from "@react-navigation/native";
@@ -121,11 +120,10 @@ export default function SetNewPasswordScreen() {
       <Modal visible={successVisible} transparent animationType="fade">
         <View className="flex-1 justify-center items-center bg-[rgba(0,0,0,0.5)]">
           <View className="w-[300px] p-6 bg-blue-900 rounded-2xl justify-center items-center">
-            <LottieView
-              source={require("../../../assets/animacao/check-success.json")}
-              autoPlay
-              loop={false}
+            <Image
+              source={require("../../../assets/animacoes/check-success.gif")}
               style={{ width: 150, height: 150 }}
+              resizeMode="contain"
             />
             <Text className="text-white text-lg font-bold text-center mb-4">Senha redefinida com sucesso!</Text>
             <Pressable onPress={onSuccessClose} className="bg-blue-old py-2.5 px-5 rounded-lg">

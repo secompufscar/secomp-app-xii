@@ -12,6 +12,7 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { AuthTypes } from "../../routes/auth.routes";
 import { sendForgotPasswordEmail } from "../../services/users";
+import BackButton from "../../components/button/backButton";
 
 export default function PasswordReset() {
   const [email, setEmail] = useState("");
@@ -45,25 +46,11 @@ export default function PasswordReset() {
   }
 
   return (
-    <SafeAreaView className="flex-1 bg-white">
-      <ScrollView
-        className="flex-1 bg-blue-900 rounded-3xl max-w-[1000px]"
-        contentContainerStyle={{ paddingBottom: 40 }}
-      >
-        <Pressable
-          className="mt-20 mb-12 ml-6"
-          onPress={() => navigation.goBack()}
-        >
-          <Image
-            source={{
-              uri: "https://storage.googleapis.com/tagjs-prod.appspot.com/v1/HPv9vJILG7/i9nrpmot_expires_30_days.png"
-            }}
-            resizeMode="stretch"
-            className="w-7 h-7 rounded-3xl"
-          />
-        </Pressable>
+    <SafeAreaView className="flex-1 bg-blue-900 items-center">
+      <ScrollView showsVerticalScrollIndicator={false} className="flex-1 px-6 pb-12 w-full max-w-[1000px]">
+        <BackButton/>
 
-        <View className="mb-7 ml-6">
+        <View className="mb-7">
           <Text className="text-white text-2xl font-bold mb-3">
             Recuperar senha
           </Text>
@@ -72,7 +59,7 @@ export default function PasswordReset() {
           </Text>
         </View>
 
-        <View className="flex-row items-center bg-background border border-border rounded-lg pl-[18px] py-3.5 px-4.5 mb-4 mx-6">
+        <View className="flex-row items-center bg-background border border-border rounded-lg pl-[18px] py-3.5 px-4.5 mb-4">
           <Image
             source={{
               uri: "https://storage.googleapis.com/tagjs-prod.appspot.com/v1/HPv9vJILG7/hvrzhk90_expires_30_days.png"
@@ -92,7 +79,7 @@ export default function PasswordReset() {
         </View>
 
         <TouchableOpacity
-          className="items-center bg-[#4153DF] rounded-lg py-3.5 mb-4 mx-6"
+          className="items-center bg-[#4153DF] rounded-lg py-3.5 mb-4"
           onPress={replacePass}
         >
           <Text className="text-white text-sm font-bold">
