@@ -9,7 +9,6 @@ import {
   Modal,
   Pressable,
   Alert,
-  TextInput,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { AuthTypes } from "../../routes/auth.routes";
@@ -30,7 +29,7 @@ export default function SetNewPassword() {
   const [successVisible, setSuccessVisible] = useState(false);
   const navigation = useNavigation<AuthTypes>();
   const route = useRoute();
-  //const { token } = route.params as { token: string };
+  const { token } = route.params as { token: string };
 
   const handleUpdatePassword = async () => {
     if (!password || !confirmPassword) {
@@ -43,7 +42,7 @@ export default function SetNewPassword() {
     }
 
     try {
-      // await updatePassword(token, senha); 
+      await updatePassword(token, password); 
       setSuccessVisible(true);
     } catch (error: any) {
       console.error(error);

@@ -28,7 +28,7 @@ export default function PasswordReset() {
     navigation.navigate("VerifyEmail", { email });
   
     try {
-      await sendForgotPasswordEmail({ email }); // Assumindo que o body esperado é { email }
+      await sendForgotPasswordEmail({ email }); 
       
     } catch (error: any) {
       console.error("Erro ao enviar email de recuperação:", error);

@@ -12,7 +12,6 @@ import { sendForgotPasswordEmail } from "../../services/users";
 import BackButton from "../../components/button/backButton";
 import Button from "../../components/button/button";
 
-
 export default function VerifyEmail() {
     const navigation = useNavigation<AuthTypes>();
     const route = useRoute();
@@ -47,7 +46,7 @@ export default function VerifyEmail() {
                     </Text>
                 </View>
 
-                <Button title="Enviar novamente" onPress={() => {navigation.navigate("SetNewPassword")}}/>
+                <Button title="Enviar novamente" onPress={() => {resendEmail}}/>
 
                 <Pressable
                     className="w-full mt-4 p-4 border border-gray-400 items-center justify-center rounded-lg outline-none"
