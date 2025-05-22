@@ -30,13 +30,13 @@ export const signup = async (data: SignUp): Promise<boolean> => {
 }
 
 export async function sendForgotPasswordEmail(data: { email: string }) {
-  const response = await api.post("/sendForgotPasswordEmail", data);
+  const response = await api.post("/users/sendForgotPasswordEmail", data);
 
   return response.data;
 }
 
 export async function updatePassword(token: string, newPassword: string) {
-  const response = await api.patch(`/updatePassword/${token}`, { newPassword });
+  const response = await api.patch(`/users/updatePassword/${token}`, { newPassword });
   
   return response.data; 
 }
