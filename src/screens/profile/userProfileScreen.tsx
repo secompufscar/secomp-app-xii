@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
 import { Image, SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
 import { ParamListBase, useNavigation } from "@react-navigation/native"
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -82,8 +81,6 @@ export default function UserProfile() {
 					</View>
 				</TouchableOpacity>
 			</View>
-
-			<StatusBar style="auto" />
 		</SafeAreaView>
 	);
 }

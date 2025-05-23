@@ -1,27 +1,18 @@
 import { useState } from "react"
-import { View, Image, StatusBar, Alert, TouchableOpacity, Text, Platform, ScrollView } from "react-native"
+import { View, Alert, TouchableOpacity, Text, Platform } from "react-native"
 import { FontAwesome5, Entypo, MaterialIcons, Ionicons } from "@expo/vector-icons"
-
 import { useNavigation } from "@react-navigation/native"
 import { StackTypes } from '../../routes/stack.routes';
-
 import { colors } from "../../styles/colors"
-
 import { Input } from "../../components/input/input"
 import Button from "../../components/button/button"
 import { useAuth } from "../../hooks/AuthContext";
-
 import { SafeAreaView } from "react-native-safe-area-context";
-
 import {signup} from "../../services/users";
+import validator from 'validator';
+import AppLayout from "../../components/appLayout";
+import BackButton from "../../components/button/backButton";
 
-const validateEmail = (email: string) => {
-    return String(email)
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
-  };
 
 function capitalizeFirstLetter(string: string) {
 	const words = string.toLocaleLowerCase().split(" ");
@@ -34,7 +25,6 @@ function capitalizeFirstLetter(string: string) {
 }
 
 export default function SignUp() {
-
 	const navigation = useNavigation<StackTypes>();
 	const [nome, setNome] = useState("")
 	const [email, setEmail] = useState("")
@@ -42,7 +32,11 @@ export default function SignUp() {
 	const [isLoading, setIsLoading] = useState(false)
 	const [senhaVisivel, setSenhaVisivel] = useState(false);
 	
-	const { signUp }: any = useAuth()
+	// const { signUp }: any = useAuth()
+	
+	const validateEmail = (email: string): boolean => {
+        return validator.isEmail(email);
+    };
 
 	const handleRegister = async () =>  {
         if (!email.trim() || !senha.trim() || !nome.trim()) {
@@ -113,77 +107,72 @@ export default function SignUp() {
 	}
 
 	return (
-        <SafeAreaView className="flex-1 bg-blue-900">
+        <SafeAreaView className="flex-1 bg-blue-900 items-center">
+			<AppLayout>
+				<BackButton/>
 
-            <ScrollView contentContainerStyle={{
-                flexGrow: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-            }} scrollEnabled={false}>
-			<StatusBar barStyle="light-content" />
+				<View className={`mt-10`}>
+                    <Text className="text-white text-[24px] font-poppinsSemiBold">
+                        Olá,
+                    </Text>
 
-            <View className="items-center">
-			<Image
-                    source={require("../../../assets/logo.png")}
-                    className="h-24"
-                    resizeMode="contain"
-                />
-            </View>
-			
+                    <Text className="text-white text-[24px] font-poppinsSemiBold">
+                        Bem-vindo de volta
+                    </Text>
+                </View>
 
+				<View className="w-full gap-2 text-center justify-center">
+					<Input>
+						<FontAwesome5
+							name="user-alt"
+							color={colors.white}
+							size={20}
+						/>
+						<Input.Field placeholder="Nome completo" value={nome} onChangeText={(text) => setNome(capitalizeFirstLetter(text))} />
+					</Input>
 
-			<View className="w-full gap-2 text-center justify-center p-8">
-				<Input>
-					<FontAwesome5
-						name="user-alt"
-						color={colors.white}
-						size={20}
-					/>
-					<Input.Field placeholder="Nome completo" value={nome} onChangeText={(text) => setNome(capitalizeFirstLetter(text))} />
-				</Input>
+					<Input>
+						<Entypo name="email"
+							color={colors.white}
+							size={20}
+						/>
+						<Input.Field
+							placeholder="E-mail"
+							keyboardType="email-address"
+							onChangeText={setEmail}
+						/>
+					</Input>
 
-				<Input>
-					<Entypo name="email"
-						color={colors.white}
-						size={20}
-					/>
-					<Input.Field
-						placeholder="E-mail"
-						keyboardType="email-address"
-						onChangeText={setEmail}
-					/>
-				</Input>
+					<Input>
+						<Entypo name="lock"
+							color={colors.white}
+							size={20}
+						/>
+						<Input.Field
+							placeholder="Senha"
+							onChangeText={setSenha}
+							secureTextEntry={!senhaVisivel}
+						/>
 
-				<Input>
-					<Entypo name="lock"
-						color={colors.white}
-						size={20}
-					/>
-					<Input.Field
-						placeholder="Senha"
-						onChangeText={setSenha}
-						secureTextEntry={!senhaVisivel}
-					/>
+						<TouchableOpacity onPress={() => setSenhaVisivel(!senhaVisivel)}>
+							<Entypo
+								name={senhaVisivel ? 'eye-with-line' : 'eye'} // Alterna o ícone do olho
+								size={20}
+								color={'#fff'}
+							/>
+						</TouchableOpacity>
+					</Input>
 
-					<TouchableOpacity onPress={() => setSenhaVisivel(!senhaVisivel)}>
-                        <Entypo
-                            name={senhaVisivel ? 'eye-with-line' : 'eye'} // Alterna o ícone do olho
-                            size={20}
-                            color={'#fff'}
-                        />
-                    </TouchableOpacity>
-				</Input>
+					<Button className="mt-2" title="Inscreva-se" onPress={handleRegister}/>
 
-				<Button className="mt-2" title="Inscreva-se" onPress={handleRegister}/>
+					<TouchableOpacity onPress={() => navigation.navigate("Login")}>
+						<Text className="text-white text-base font-bold text-center mt-4">
+							Já possui inscrição?
+						</Text>
+					</TouchableOpacity>
 
-				<TouchableOpacity onPress={() => navigation.navigate("Login")}>
-					<Text className="text-white text-base font-bold text-center mt-4">
-						Já possui inscrição?
-					</Text>
-				</TouchableOpacity>
-
-			</View>
-            </ScrollView>
+				</View>
+            </AppLayout>
         </SafeAreaView>
 	)
 }

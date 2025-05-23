@@ -1,5 +1,5 @@
 // components/AppLayout.tsx
-import { ScrollView, View } from "react-native";
+import { ScrollView, View, StatusBar, Platform } from "react-native";
 import { ReactNode } from "react";
 
 interface AppLayoutProps {
@@ -9,13 +9,21 @@ interface AppLayoutProps {
 // Wrapper do ScrollView para as páginas
 export default function AppLayout({ children }: AppLayoutProps) {
     return (
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        className="flex-1 w-full"
-      >
-        <View className="w-full px-6 max-w-[1000px] mx-auto min-h-screen">
-          {children}
-        </View>
-      </ScrollView>
+      <>
+        <StatusBar
+          barStyle="light-content"
+          backgroundColor={Platform.OS === 'android' ? '#0f172a' : 'transparent'}
+          translucent={Platform.OS === 'android'}
+        />
+        
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          className="flex-1 w-full"
+        >
+          <View className="w-full px-6 max-w-[1000px] mx-auto min-h-screen">
+            {children}
+          </View>
+        </ScrollView>
+      </>
     );
 }

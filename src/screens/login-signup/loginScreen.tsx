@@ -1,4 +1,4 @@
-import { View, StatusBar, Alert, Text, Platform, Pressable, ActivityIndicator } from "react-native"
+import { View, Alert, Text, Platform, Pressable, ActivityIndicator } from "react-native"
 import { useState } from "react"
 import { useNavigation } from "@react-navigation/native"
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -80,7 +80,6 @@ export default function Login() {
     return (
         <SafeAreaView className="flex-1 bg-blue-900 items-center">
             <AppLayout>
-                <StatusBar barStyle="light-content" />
                 <BackButton/>
 
                 <View className={`mt-10`}>
