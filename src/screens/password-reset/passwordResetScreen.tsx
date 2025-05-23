@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { SafeAreaView, View, ScrollView, Text } from "react-native";
+import { SafeAreaView, View, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { AuthTypes } from "../../routes/auth.routes";
 import { sendForgotPasswordEmail } from "../../services/users";
 import { colors } from "../../styles/colors";
 import { Input } from "../../components/input/input";
+import validator from 'validator';
 import AppLayout from "../../components/appLayout";
 import BackButton from "../../components/button/backButton";
 import Button  from "../../components/button/button";
@@ -15,9 +16,7 @@ export default function PasswordReset() {
   const navigation = useNavigation<AuthTypes>();
 
   const validateEmail = (email: string): boolean => {
-    const normalizedEmail = email.trim().toLowerCase();
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-    return regex.test(normalizedEmail);
+    return validator.isEmail(email);
   };
 
   async function replacePass() {

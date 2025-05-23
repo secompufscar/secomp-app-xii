@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Text, View, Pressable, ScrollView, Linking, Image} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import AsyncStorage from "@react-native-async-storage/async-storage"
 import { ParamListBase, useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { BeautifulName } from "beautiful-name"
@@ -16,7 +15,7 @@ import HomeSocials from "../../components/home/homeSocials";
 
 export default function Home() {
     const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
-    const { signOut, user: { user } }: any = useAuth()
+    const { user } : any = useAuth();
     const [pressed, setPressed] = useState(false);
 
     // Mensagem baseada no horário do dia
@@ -66,18 +65,7 @@ export default function Home() {
 
         console.log("Usuário inscrito nesta edição com suceso!");
     }
-
-    useEffect(() => {
-        // Caso seja a primeira vez do usuário acessando o app
-        const handleWelcome = async () => {
-            const isNotFirstTime = await AsyncStorage.getItem("isFirstTime")
-
-            if (!isNotFirstTime) navigation.navigate("Welcome")
-        }
-
-        handleWelcome()
-    }, [])
-
+    
     return (
         <SafeAreaView className="bg-blue-900 flex-1 items-center">
             <AppLayout>
@@ -158,7 +146,7 @@ export default function Home() {
                 </View>
 
                 {/* Redes sociais */}
-                <View className="w-full mb-8 gap-4">
+                <View className="w-full mb-20 gap-4">
                     <Text className="text-xs text-green font-poppinsSemiBold">Redes sociais</Text>
                     <HomeSocials />
                 </View>            
