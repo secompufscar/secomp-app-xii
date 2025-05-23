@@ -4,14 +4,13 @@ import { MaterialIcons, Ionicons } from "@expo/vector-icons"
 import { useNavigation } from "@react-navigation/native"
 import { StackTypes } from '../../routes/stack.routes';
 import { colors } from "../../styles/colors"
-import { Input } from "../../components/input/input"
-import Button from "../../components/button/button"
-import { useAuth } from "../../hooks/AuthContext";
 import { SafeAreaView } from "react-native-safe-area-context";
-import {signup} from "../../services/users";
-import validator from 'validator';
+import { signup } from "../../services/users";
+import { Input } from "../../components/input/input"
 import AppLayout from "../../components/appLayout";
 import BackButton from "../../components/button/backButton";
+import Button from "../../components/button/button"
+import validator from 'validator';
 
 
 function capitalizeFirstLetter(string: string) {
@@ -44,8 +43,6 @@ export default function SignUp() {
 
 	// Load animation
 	const [isLoading, setIsLoading] = useState(false)
-	
-	// const { signUp }: any = useAuth()
 	
 	const validateEmail = (email: string): boolean => {
         return validator.isEmail(email);
@@ -112,13 +109,17 @@ export default function SignUp() {
 			<AppLayout>
 				<BackButton/>
 
-				<View className={`mt-8`}>
+				<View className={`mt-8 gap-1`}>
                     <Text className="text-white text-[24px] font-poppinsSemiBold">
                         Criar conta
                     </Text>
+
+					<Text className="text-gray-400 text-sm font-inter">
+						Você está próximo de participar do evento!
+                    </Text>
                 </View>
 
-				<View className="flex-col w-full gap-2 py-6 text-center justify-center">
+				<View className="flex-col w-full gap-2 py-8 text-center justify-center">
 					{/* Nome */}
 					<View className="w-full">
                         <Input>
@@ -210,9 +211,9 @@ export default function SignUp() {
                     </View>
 
 					{isLoading ? (
-                        <ActivityIndicator size="large" color={colors.blue[500]} className="mt-6" />
+                        <ActivityIndicator size="large" color={colors.blue[500]} className="mt-8" />
                     ) : (
-                        <Button className="mt-6" title="Entrar" onPress={handleRegister} />
+                        <Button className="mt-8" title="Criar" onPress={handleRegister} />
                     )}
 
 					<View className="flex-row mt-10 items-center justify-center gap-1">
