@@ -15,7 +15,7 @@ import HomeSocials from "../../components/home/homeSocials";
 
 export default function Home() {
     const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
-    const { signOut, user: { user } }: any = useAuth()
+    const { user } : any = useAuth();
     const [pressed, setPressed] = useState(false);
 
     // Mensagem baseada no horário do dia
@@ -146,7 +146,7 @@ export default function Home() {
                 </View>
 
                 {/* Redes sociais */}
-                <View className="w-full mb-8 gap-4">
+                <View className="w-full mb-20 gap-4">
                     <Text className="text-xs text-green font-poppinsSemiBold">Redes sociais</Text>
                     <HomeSocials />
                 </View>            

@@ -28,9 +28,11 @@ export default function SignUp() {
 	const navigation = useNavigation<StackTypes>();
 	const [nome, setNome] = useState("")
 	const [email, setEmail] = useState("")
+	const [isEmailValid, setIsEmailValid] = useState(true);
 	const [senha, setSenha] = useState("")
+	const [isPasswordValid, setIsPasswordValid] = useState(true);
 	const [isLoading, setIsLoading] = useState(false)
-	const [senhaVisivel, setSenhaVisivel] = useState(false);
+	const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 	
 	// const { signUp }: any = useAuth()
 	
@@ -49,34 +51,28 @@ export default function SignUp() {
             return
         }
 
-        if (!validateEmail(email)) {
-            if (Platform.OS === 'web') {
-                window.alert("Por favor, digite um email válido!");
-            } else {
-                Alert.alert("Inscrição", "Por favor, digite um email válido!");
-            }
-
-            return 
+        // Verifica a validade do e-mail
+        if (validateEmail(email)) {
+            setIsEmailValid(true);
+        } else {
+            setIsEmailValid(false);
+            return;
         }
-
+        
+        // Verifica a validade da senha
         if (senha.length < 6) {
-            if (Platform.OS === 'web') {
-                window.alert("Por favor, digite uma senha com mais de 6 caracteres!");
-            } else {
-                Alert.alert("Inscrição", "Por favor, digite uma senha com mais de 6 caracteres!");
-            }
-
-            return
+            setIsPasswordValid(false);
+            return;
+        } else {
+            setIsPasswordValid(true);
         }
-
-		//navigation.navigate("Home")
 
 		setIsLoading(true)
 
 		try {
 			const data = await signup({ nome, email, senha })
 
-			if (data === true) {
+			if (data.emailEnviado) {
 				if (Platform.OS === 'web') {
 					alert("Um e-mail de confirmação foi enviado para seu e-mail!");
 					navigation.navigate('Login'); 
@@ -111,17 +107,13 @@ export default function SignUp() {
 			<AppLayout>
 				<BackButton/>
 
-				<View className={`mt-10`}>
+				<View className={`mt-8`}>
                     <Text className="text-white text-[24px] font-poppinsSemiBold">
-                        Olá,
-                    </Text>
-
-                    <Text className="text-white text-[24px] font-poppinsSemiBold">
-                        Bem-vindo de volta
+                        Criar conta
                     </Text>
                 </View>
 
-				<View className="w-full gap-2 text-center justify-center">
+				<View className="flex-col w-full gap-2 py-6 text-center justify-center">
 					<Input>
 						<FontAwesome5
 							name="user-alt"
@@ -151,12 +143,12 @@ export default function SignUp() {
 						<Input.Field
 							placeholder="Senha"
 							onChangeText={setSenha}
-							secureTextEntry={!senhaVisivel}
+							secureTextEntry={!isPasswordVisible}
 						/>
 
-						<TouchableOpacity onPress={() => setSenhaVisivel(!senhaVisivel)}>
+						<TouchableOpacity onPress={() => setIsPasswordVisible(!isPasswordVisible)}>
 							<Entypo
-								name={senhaVisivel ? 'eye-with-line' : 'eye'} // Alterna o ícone do olho
+								name={isPasswordVisible ? 'eye-with-line' : 'eye'} // Alterna o ícone do olho
 								size={20}
 								color={'#fff'}
 							/>

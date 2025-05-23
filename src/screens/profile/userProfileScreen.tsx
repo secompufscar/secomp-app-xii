@@ -7,7 +7,7 @@ import { useAuth } from "../../hooks/AuthContext";
 // Página para usuário
 export default function UserProfile() {
 	const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
-	const { signOut, user:{user}}: any = useAuth()
+	const { signOut, user}: any = useAuth()
 
 	return (
 		<SafeAreaView className='bg-white flex-1'>

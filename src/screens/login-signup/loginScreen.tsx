@@ -82,7 +82,7 @@ export default function Login() {
             <AppLayout>
                 <BackButton/>
 
-                <View className={`mt-10`}>
+                <View className={`mt-8`}>
                     <Text className="text-white text-[24px] font-poppinsSemiBold">
                         Olá,
                     </Text>

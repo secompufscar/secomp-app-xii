@@ -1,4 +1,4 @@
-export interface UserAtActivity {
+interface UserAtActivity {
     id: string
     userId: string
     activityId: string
