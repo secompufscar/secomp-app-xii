@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import {
   SafeAreaView,
   View,
-  ScrollView,
   Image,
   Text,
-  TouchableOpacity,
   Modal,
   Pressable,
   Alert,
@@ -86,13 +84,13 @@ export default function SetNewPassword() {
               secureTextEntry={!isPasswordVisible}
             />
 
-            <TouchableOpacity onPress={() => setIsPasswordVisible(!isPasswordVisible)}>
+            <Pressable onPress={() => setIsPasswordVisible(!isPasswordVisible)}>
               <Ionicons
                 name={isPasswordVisible ? 'eye' : 'eye-off'}
                 size={20}
                 color={colors.border}
               />
-            </TouchableOpacity>
+            </Pressable>
           </Input>
 
           {/* Confirmar senha */}
@@ -106,13 +104,13 @@ export default function SetNewPassword() {
               secureTextEntry={!isConfirmPasswordVisible}
             />
 
-            <TouchableOpacity onPress={() => setIsConfirmPasswordVisible(!isConfirmPasswordVisible)}>
+            <Pressable onPress={() => setIsConfirmPasswordVisible(!isConfirmPasswordVisible)}>
               <Ionicons
                 name={isConfirmPasswordVisible ? 'eye' : 'eye-off'}
                 size={20}
                 color={colors.border}
               />
-            </TouchableOpacity>
+            </Pressable>
           </Input>
         </View>
 

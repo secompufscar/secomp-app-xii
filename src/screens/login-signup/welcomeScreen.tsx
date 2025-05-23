@@ -2,8 +2,6 @@ import { Text, View, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from "@react-navigation/native";
 import { AuthTypes } from '../../routes/auth.routes';
-import { useAuth } from "../../hooks/AuthContext";
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import AppLayout from "../../components/appLayout";
 import Button from '../../components/button/button';
 
