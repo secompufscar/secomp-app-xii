@@ -25,6 +25,7 @@ import SECOMP from './activities/atividadesSECOMP'
 
 import QRCode from './credential/qrCodeReaderScreen'
 import Welcome from './WelcomeScreen'
+import Sponsors from './sponsors/sponsorsScreen';
 
 export {
     Login,
@@ -43,6 +44,7 @@ export {
     Competições,
     Workshops,
     QRCode,
+    Sponsors,
     Welcome,
     SECOMP,
     PasswordReset,
