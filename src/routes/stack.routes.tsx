@@ -15,7 +15,6 @@ import {
     Workshops,
     Competições,
     QRCode,
-    Welcome,
     SECOMP
 } from '../screens'
 
@@ -41,7 +40,9 @@ export type StackTypes = NativeStackNavigationProp<StackNavigation>;
 
 export default function StackRoutes() {
     return (
-        <Stack.Navigator screenOptions={{ headerShown: false, title: "SECOMP UFScar 2024" }}>
+        <Stack.Navigator 
+            screenOptions={{ headerShown: false, title: "SECOMP UFScar 2024" }}
+        >
             <Stack.Screen name="Home" component={TabRoutes} />
             <Stack.Screen name="Schedule" component={Schedule} />
             <Stack.Screen name="ScheduleDetails" component={ScheduleDetails} />
@@ -56,7 +57,6 @@ export default function StackRoutes() {
             <Stack.Screen name="Workshops" component={Workshops} />
             <Stack.Screen name="QRCode" component={QRCode} />
             <Stack.Screen name="SECOMP" component={SECOMP} />
-            <Stack.Screen name="Welcome" component={Welcome} />
         </Stack.Navigator>
     );
 }

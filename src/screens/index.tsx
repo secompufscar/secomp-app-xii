@@ -24,7 +24,7 @@ import Workshops from './activities/atividadesWorkshops'
 import SECOMP from './activities/atividadesSECOMP'
 
 import QRCode from './credential/qrCodeReaderScreen'
-import Welcome from './WelcomeScreen'
+import Welcome from './login-signup/welcomeScreen'
 
 export {
     Login,
