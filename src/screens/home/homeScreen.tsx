@@ -10,9 +10,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell, faStar, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { LinearGradient } from "expo-linear-gradient";
 
+import AppLayout from "../../components/appLayout";
 import HomeCompetitions from "../../components/home/homeCompetitions";
 import HomeSocials from "../../components/home/homeSocials";
-
 
 export default function Home() {
     const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>();
@@ -80,7 +80,7 @@ export default function Home() {
 
     return (
         <SafeAreaView className="bg-blue-900 flex-1 items-center">
-            <ScrollView showsVerticalScrollIndicator={false} className="flex-1 px-6 pb-12 w-full max-w-[1000px]">
+            <AppLayout>
                 <View className="w-full flex-row items-center justify-between mt-8 mb-8 gap-4">
                     <View className="flex-col h-full flex-1 ">
                         <Text className="text-[13px] text-blue-100 font-inter">{eventDay}</Text>
@@ -162,7 +162,7 @@ export default function Home() {
                     <Text className="text-xs text-green font-poppinsSemiBold">Redes sociais</Text>
                     <HomeSocials />
                 </View>            
-            </ScrollView>
+            </AppLayout>
         </SafeAreaView>
     );
 }
