@@ -24,6 +24,7 @@
     "@types/react-native-snap-carousel": "^3.8.11",
     "axios": "^1.7.3",
     "beautiful-name": "^1.0.1",
+    "clsx": "^2.1.1",
     "expo": "^53.0.9",
     "expo-barcode-scanner": "~13.0.1",
     "expo-camera": "~16.1.6",

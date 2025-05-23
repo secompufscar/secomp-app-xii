@@ -1,20 +1,27 @@
 import { PressableProps } from "@react-native-material/core";
 import { Text, Pressable } from "react-native";
+import clsx from "clsx";
 
 type Props = PressableProps & {
-    title: string
-}
+  title: string;
+};
 
 export default function Button({ title, ...rest }: Props) {
     return (
         <Pressable
-            className="w-full p-4 bg-blue-500 items-center justify-center rounded-lg outline-none"
             {...rest}
         >
-            <Text className="text-white text-sm font-inter font-semibold">
+            {({ pressed }) => (
+                <Text
+                className={clsx(
+                    "w-full p-4 items-center justify-center rounded-lg text-white text-sm font-inter font-semibold text-center",
+                    "transition-transform duration-100",
+                    pressed ? "bg-blue-500 opacity-90" : "bg-blue-500"
+                )}
+                >
                 {title}
-            </Text>
-            
+                </Text>
+            )}
         </Pressable>
-    )
+    );
 }
