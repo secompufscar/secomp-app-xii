@@ -9,7 +9,7 @@ interface AppLayoutProps {
 // Wrapper do ScrollView para as páginas
 export default function AppLayout({ children }: AppLayoutProps) {
     return (
-      <>
+      <View className="flex-1 w-full">
         <StatusBar
           barStyle="light-content"
           backgroundColor={Platform.OS === 'android' ? '#0f172a' : 'transparent'}
@@ -24,6 +24,6 @@ export default function AppLayout({ children }: AppLayoutProps) {
             {children}
           </View>
         </ScrollView>
-      </>
+      </View>
     );
 }
