@@ -1,4 +1,4 @@
-interface Activity {
+export interface Activity {
     id: string
     nome: string
     palestranteNome: string
