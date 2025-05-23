@@ -42,12 +42,9 @@ export default function Login() {
         }
         
         // Verifica a validade do e-mail
-        if (validateEmail(email)) {
-            setIsEmailValid(true);
-        } else {
-            setIsEmailValid(false);
-            return;
-        }
+        const emailValido = validateEmail(email);
+		setIsEmailValid(emailValido);
+		if (!emailValido) return;
         
         // Verifica a validade da senha
         if (senha.length < 6) {
@@ -113,7 +110,7 @@ export default function Login() {
                         )}
                     </View>
                         
-                    <View>
+                    <View className="w-full">
                         <Input>
                             <MaterialIcons name="lock" size={20} color={colors.border} />
 
